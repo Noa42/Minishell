@@ -2,12 +2,14 @@
 
 void execution (t_data *data)
 {
-    printf("Resultado de nuestros builtins:\n");
-    builtins(data);
+    printf("\n---------EJECUCION---------\n\n");
+    //printf("Resultado de nuestros builtins:\n");
+    // if (builtins(data) == 1)
+    //     return;
     //Esto ejecuta un comando y por tanto acaba el proceso!!!
-    // char *path = get_path(data->array_input[0], data->env);
-    // printf("\nResultado con execve:\n");
-    // execve(path, data->array_input, data->env);
+    char *path = get_path(data->array_input[0], data->env);
+    printf("Resultado con execve:\n");
+    execve(path, data->array_input, data->env);
     //Solo funciona si solo le pasamos un comando. Si le pasamos un comando con argumentos no funciona.
 }
 //!!!!!!!!!!!!!!!!!!Hay que hacer que devulevan los mismos errores!!!!!!!!!!!!!!!!!!!

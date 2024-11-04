@@ -28,6 +28,7 @@ void	init_data(t_data *data, char **env)
 	data->array_var = copy_alloc_array(env);
 	sort_strings(data->array_var, array_len(data->array_var));
 	data->input = NULL;
+	data->cmd_list = NULL;
 	data->array_input = NULL;
 	data-> exit_status = 0;
 	data->token_list = NULL;
@@ -49,15 +50,13 @@ int	main(int argc, char** argv, char **env)
 		data.input = readline("MiniShell> ");
 		if (data.input == NULL || ft_strcmp(data.input, "exit") == 0)
 			break ;
-		if(strcmp(data.input, "listas") == 0)
-			listas(&data);
-		if(strcmp(data.input, "arrays") == 0)
-			arrays(&data);
 		history(data.input);
-		printf("---------------------\n");
-		printf("Leído: %s\n", data.input);
-		parsing(&data);
-		execution(&data);
+		if(strcmp(data.input, "noa") == 0)
+			nuevo_intento_listas(&data);
+		printf("\n---------INPUT------------\n");
+		printf("Input: %s\n", data.input);
+		//parsing(&data);
+		//execution(&data);
 	}
     free_data(&data);
 	printf("Saliendo de MiniShell\n");

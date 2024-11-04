@@ -19,7 +19,7 @@ END = \033[0m
 
 # Minishell
 NAME = minishell
-SRC = src/main.c src/list_utils.c src/arrays_utils.c src/signals.c src/parsing.c src/utils.c src/execution.c src/path.c src/ft_echo.c src/ft_cd.c src/ft_env.c src/ft_export.c src/ft_pwd.c src/builtins_utils.c src/ft_unset.c
+SRC = src/main.c src/list_utils.c src/signals.c src/parsing.c src/utils.c src/execution.c src/path.c src/ft_echo.c src/ft_cd.c src/ft_env.c src/ft_export.c src/ft_pwd.c src/builtins_utils.c src/ft_unset.c
 OBJ_DIR = obj
 OBJT = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 

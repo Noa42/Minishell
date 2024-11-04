@@ -5,7 +5,7 @@ void print_array(char **array)
     int i = 0;
     while (array[i])
     {
-        printf("%s\n", array[i]);
+        printf("[%i]: %s\n", i, array[i]);
         i++;
     }
 }

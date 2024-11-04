@@ -22,46 +22,47 @@ typedef struct s_cmd	t_cmd;
 typedef struct s_pipe	t_pipe;
 typedef struct s_redir	t_redir;
 
-// typedef enum e_token_type
-// {
-// 	CMD,
-// 	PIPE,
-// 	REDIR
-// }t_token_type;
+typedef enum e_token_type
+{
+    CMD,
+    PIPE,
+    REDIR
+}   t_token_type;
+
+typedef enum e_redir_type
+{
+	INPUT,
+	OUTPUT,
+	APPEND,
+	HERE_DOC
+}   t_redir_type;
 
 typedef struct s_cmd
 {
-	char				**array_cmds;
-	// flag args?
+	int					index;
+	char				**array_cmd;
 	int					fd_in;
 	int					fd_out;
+	t_redir				*redir_list;
 	t_data				*data;
+	struct s_cmd		*next;
 }						t_cmd;
-
-typedef struct s_pipe
-{
-	int					fd_in;
-    int					fd_out;
-	t_data				*data;
-}						t_pipe;
 
 typedef struct s_redir
 {
-	int					type;
+	t_redir_type		type;
 	char				*in_name;
 	char				*out_name;
 	int					fd_in;
 	int					fd_out;
+	t_redir				*next;
 	t_data				*data;
 }						t_redir;
 
 typedef struct s_token
 {
 	int					index;
-	char*		token_type;
-	t_cmd				*cmd;
-	t_pipe				*pipe;
-	t_redir				*redir;
+	t_token_type		token_type;
 	struct s_token		*next;
 }						t_token;
 
@@ -72,13 +73,31 @@ typedef struct s_data
 	char				**array_input;
 	char				**array_var;
 	int					exit_status;
-	t_token				*token_list;//Borrar si al final usamos arrays xD
-    t_token             **token_array;
+	t_token				*token_list;
+    t_cmd         	    *cmd_list;
 }						t_data;
-//PRUEBAS
-void					listas(t_data *data);
-void					arrays(t_data *data);
+//LIST_UTILS
+void					nuevo_intento_listas(t_data *data);
+void					print_cmd(t_cmd *cmd);
+void					print_cmd_list(t_cmd *cmd_list);
+void					free_cmd(t_cmd *cmd);
+t_cmd					*free_cmd_list(t_cmd *cmd_list);
+t_token					*free_token_list(t_token *token_list);
+void					print_token_list(t_token *token_list);
+int						cmd_list_len(t_cmd *cmd_list);
+t_cmd					*new_cmd(char **array_cmds);
+void					add_redir(t_cmd *cmd, t_redir *redir);
+t_redir					*new_redir(t_redir_type type, char *in_name, char *out_name);
+void					print_redir_list(t_redir *redir_list);
+char					*redir_type_to_string(t_redir_type type);
+t_cmd					*add_cmd(t_cmd *cmd_list, t_cmd *new_cmd);
+t_cmd					*get_last_cmd(t_cmd *cmd_list);
+t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
+char					*token_type_to_string(t_token_type token_type);
 
+
+
+//PRUEBAS EJECTUCION
 // SIGNALS
 void					signals(void);
 void					handle_ctrl_c(int signal);

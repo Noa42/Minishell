@@ -284,7 +284,7 @@ void print_redir_list(t_redir *redir_list)
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
 
-void nuevo_intento_listas(t_data *data)
+void instrucciones_ejemplo_listas(t_data *data)
 {
 	//INSTRUCCIONES DE COMO USAR LAS LISTAS
 

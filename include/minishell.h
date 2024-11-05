@@ -75,9 +75,10 @@ typedef struct s_data
 	int					exit_status;
 	t_token				*token_list;
     t_cmd         	    *cmd_list;
+	int					*pipe;
 }						t_data;
 //LIST_UTILS
-void					nuevo_intento_listas(t_data *data);
+void					instrucciones_ejemplo_listas(t_data *data);
 void					print_cmd(t_cmd *cmd);
 void					print_cmd_list(t_cmd *cmd_list);
 void					free_cmd(t_cmd *cmd);
@@ -98,6 +99,9 @@ char					*token_type_to_string(t_token_type token_type);
 
 
 //PRUEBAS EJECTUCION
+void					prueba_ejecucion(t_data *data);
+void					one_cmd_case(t_data *data);
+//void					multiple_cmd_case(t_data *data);
 // SIGNALS
 void					signals(void);
 void					handle_ctrl_c(int signal);

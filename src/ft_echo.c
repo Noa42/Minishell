@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-int has_variable(char *input)
+int has_variable(char *input)//Mira si hay un $ en la cadena
 {
     int i = 0;
     while (input[i] != '\0')
@@ -11,7 +11,7 @@ int has_variable(char *input)
     }
     return (0);
 }
-char *get_exp_var(char *s, int i)
+char *get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el nombre de la variable (es decir lo que hay después de $ lo que llamamos var_name)
 {
     unsigned int start;
     char *var;
@@ -22,10 +22,10 @@ char *get_exp_var(char *s, int i)
     var = ft_substr(s, start, i-start);
     return (var);
 }
-void print_expanded(char *input, char **env)
+void print_expanded(char *input, char **env)//Imprime una palabra con una variable expandida
 {
     int i;
-    char *var;
+    char *var_name;
 
     i = 0;
     while (input[i] != '\0')
@@ -33,9 +33,10 @@ void print_expanded(char *input, char **env)
         if (input[i] == '$')
         {
             i++;
-            var = get_exp_var(input, i);//aloca una subcadena desde despues de $ hasta el siquiente espacio o \0 por lo que devuelve el nombre de la variable a imprimir
-            printf("%s", ft_getenv(var, env));
-            free (var);
+            var_name = get_exp_var(input, i);//aloca una subcadena desde despues de $ hasta el siquiente espacio o \0 por lo que devuelve el nombre de la variable a imprimir
+            //if(ft_getenv(var_name, env) != NULL)
+            printf("%s", ft_getenv(var_name, env));//imprime el valor de la variable
+            free(var_name);
             return;
         }
         else

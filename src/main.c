@@ -17,9 +17,7 @@ int	only_spaces(char *input)
 void	history(char *input)
 {
 	if (input != NULL && ft_strlen(input) != 0 && only_spaces(input) == 0)
-	{
 		add_history(input);
-	}
 }
 
 void	init_data(t_data *data, char **env)
@@ -30,11 +28,13 @@ void	init_data(t_data *data, char **env)
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->array_input = NULL;
-	data-> exit_status = 0;
+	data-> exit_status = -1;
 	data->token_list = NULL;
+	data-> pipe = NULL;
 }
 void    free_data(t_data *data)
 {
+	//Está por rellenar
     free(data->input);
 }
 
@@ -51,12 +51,12 @@ int	main(int argc, char** argv, char **env)
 		if (data.input == NULL || ft_strcmp(data.input, "exit") == 0)
 			break ;
 		history(data.input);
-		if(strcmp(data.input, "noa") == 0)
-			nuevo_intento_listas(&data);
+		if(strcmp(data.input, "noa") == 0) //Esto es para mis pruebas
+			instrucciones_ejemplo_listas(&data);
 		printf("\n---------INPUT------------\n");
 		printf("Input: %s\n", data.input);
-		//parsing(&data);
-		//execution(&data);
+		parsing(&data);
+		execution(&data);
 	}
     free_data(&data);
 	printf("Saliendo de MiniShell\n");

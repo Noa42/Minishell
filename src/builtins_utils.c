@@ -2,29 +2,35 @@
 
 char *ft_var_name(char *name_value)
 {
-    int i = 0;
+    int i;
+    
+    i = 0;
     while (name_value[i] != '=')
         i++;
     return (ft_substr(name_value, 0, i));
 }
-char *ft_var_value(char *name_value)
+char *ft_var_value(char *name_value)//Obtiene el var_value de una var_name en una cadena del array env concreto
 {
-    int i = 0;
+    int i;
+
+    i = 0;
     while (name_value[i] != '=')
         i++;
     return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
 
-char *ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entorno
+char *ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
 {
-    int i = 0;
+    int i;
+    
+    i = 0;
     while (env[i])
     {
-        if (ft_strncmp(env[i], var_name, ft_strlen(var_name)+1) == 0) //el +1 es para que compare el = también y no encuentre otras variables que empiezan por el mismo nimbre
+        if ((ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0) && env[i][ft_strlen(var_name)] == '=') //Si el nombre de la variable coincide con el principio de la cadena y el siguiente caracter es un = entonces es la variable que buscamos
             return (ft_var_value(env[i]));
         i++;
     }
-    return (NULL);
+    return ("\0");
 }
 
 char **insert_var(char **array, char *var_name, char *var_value)

@@ -25,15 +25,15 @@ void delete_var(char **array, char *var_name)
     }
 }
 
-void ft_unset(t_data *data)
+void ft_unset(t_cmd *cmd)
 {
     int i;
 
     i = 1;
-    while(data->array_input[i])
+    while(cmd->array_cmd[i])
     {
-        delete_var(data->env, data->array_input[i]);
-        delete_var(data->array_var, data->array_input[i]);
+        delete_var(cmd->data->env, cmd->array_cmd[i]);
+        delete_var(cmd->data->array_var, cmd->array_cmd[i]);
         i++;
     }
 }

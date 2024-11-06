@@ -70,12 +70,12 @@ typedef struct s_data
 {
 	char				**env;
 	char				*input;
-	char				**array_input;
 	char				**array_var;
 	int					exit_status;
 	t_token				*token_list;
     t_cmd         	    *cmd_list;
-	int					*pipe;
+	int					pipe[2];
+	int					parsing_error;
 }						t_data;
 //LIST_UTILS
 void					instrucciones_ejemplo_listas(t_data *data);
@@ -86,7 +86,7 @@ t_cmd					*free_cmd_list(t_cmd *cmd_list);
 t_token					*free_token_list(t_token *token_list);
 void					print_token_list(t_token *token_list);
 int						cmd_list_len(t_cmd *cmd_list);
-t_cmd					*new_cmd(char **array_cmds);
+t_cmd					*new_cmd(char **array_cmds, t_data *data);
 void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*new_redir(t_redir_type type, char *in_name, char *out_name);
 void					print_redir_list(t_redir *redir_list);
@@ -96,12 +96,16 @@ t_cmd					*get_last_cmd(t_cmd *cmd_list);
 t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
 char					*token_type_to_string(t_token_type token_type);
 
-
+//MAIN
+int						only_spaces(char *input);
+void					history(char *input);
+void					init_data(t_data *data, char **env);
+void					free_data(t_data *data);
 
 //PRUEBAS EJECTUCION
 void					prueba_ejecucion(t_data *data);
 void					one_cmd_case(t_data *data);
-//void					multiple_cmd_case(t_data *data);
+void					multiple_cmd_case(t_data *data);
 // SIGNALS
 void					signals(void);
 void					handle_ctrl_c(int signal);
@@ -121,27 +125,34 @@ char					**realloc_elonged_array(char **src_array);
 
 // EXECUTION
 void					execution(t_data *data);
-void					builtins(t_data *data);
+int						is_first_cmd(t_cmd *cmd);
+int						is_last_cmd(t_cmd *cmd);
+void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
+void					prueba_ejecucion(t_data *data);
+int						is_a_builtin(t_cmd *cmd);
+void					exec_builtin(t_cmd *cmd);
 
 // SRC //BUILTINS
 // FT_ECHO
 int						has_variable(char *input);
 char					*get_exp_var(char *s, int i);
 void					print_expanded(char *input, char **env);
-void					ft_echo(t_data *data);
+void					ft_echo(t_cmd *cmd);
 // FT_PWD
 void					ft_pwd(void);
 // FT_CD
 void					ft_cd_home(t_data *data, char *oldpwd, char *pwd);
-void					ft_cd(t_data *data);
+void					ft_cd(t_cmd *cmd);
 // FT_ENV
-void					ft_env(t_data *data);
+void					ft_env(t_cmd *cmd);
 // FT_EXPORT
 void					print_export(char **array_var);
-void					ft_export(t_data *data);
+void					ft_export(t_cmd *cmd);
 // FT_UNSET
-void					ft_unset(t_data *data);
+void					ft_unset(t_cmd *cmd);
 void					delete_var(char **array, char *var_name);
+// FT_EXIT
+void					ft_exit(t_cmd *cmd);
 // BUILDINS_UTILS
 char					*ft_var_name(char *name_value);
 char					*ft_var_value(char *name_value);

@@ -27,15 +27,36 @@ void	init_data(t_data *data, char **env)
 	sort_strings(data->array_var, array_len(data->array_var));
 	data->input = NULL;
 	data->cmd_list = NULL;
-	data->array_input = NULL;
-	data-> exit_status = -1;
+	data->exit_status = -1;
 	data->token_list = NULL;
-	data-> pipe = NULL;
+	data->parsing_error = 0;
+	//data-> pipe = NULL;
 }
 void    free_data(t_data *data)
 {
 	//Está por rellenar
+	if(data->env)
+		free_array(data->env);
+	if(data->array_var)
+		free_array(data->array_var);
+	if(data->cmd_list)
+		free_cmd_list(data->cmd_list);
+	if(data->token_list)
+		free_token_list(data->token_list);
     free(data->input);
+}
+void reboot_data(t_data *data)
+{
+	if(data->input)
+		free(data->input);
+	if(data->cmd_list)
+		free_cmd_list(data->cmd_list);
+	if(data->token_list)
+		free_token_list(data->token_list);
+	data->input = NULL;
+	data->cmd_list = NULL;
+	data->token_list = NULL;
+	data->parsing_error = 0;
 }
 
 int	main(int argc, char** argv, char **env)
@@ -48,15 +69,13 @@ int	main(int argc, char** argv, char **env)
 	while (1)
 	{
 		data.input = readline("MiniShell> ");
-		if (data.input == NULL || ft_strcmp(data.input, "exit") == 0)
+		if (data.input == NULL)
 			break ;
 		history(data.input);
-		if(strcmp(data.input, "noa") == 0) //Esto es para mis pruebas
-			instrucciones_ejemplo_listas(&data);
-		printf("\n---------INPUT------------\n");
-		printf("Input: %s\n", data.input);
-		parsing(&data);
-		execution(&data);
+		//parsing(&data);
+		if(data.parsing_error == 0)
+			prueba_ejecucion(&data);
+		reboot_data(&data);
 	}
     free_data(&data);
 	printf("Saliendo de MiniShell\n");

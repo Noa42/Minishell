@@ -5,7 +5,7 @@ char *ft_var_name(char *name_value)
     int i;
     
     i = 0;
-    while (name_value[i] != '=')
+    while (name_value[i] != '=' && name_value[i] != '\0')
         i++;
     return (ft_substr(name_value, 0, i));
 }
@@ -14,7 +14,7 @@ char *ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
     int i;
 
     i = 0;
-    while (name_value[i] != '=')
+    while (name_value[i] != '=' && name_value[i] != '\0')
         i++;
     return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
@@ -22,7 +22,6 @@ char *ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
 char *ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
 {
     int i;
-    
     i = 0;
     while (env[i])
     {

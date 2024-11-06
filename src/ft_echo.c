@@ -45,27 +45,27 @@ void print_expanded(char *input, char **env)//Imprime una palabra con una variab
     }
 }
 
-void ft_echo(t_data *data)
+void ft_echo(t_cmd *cmd)
 {
     //Esta función está hecha para que reciba un ** en el que [0]echo [1]palabra/-n [2]palabra ... [x]:NULL
     int n_flag;
     int i = 1;
     n_flag = 0;
-    if (ft_strcmp(data->array_input[1], "-n") == 0)
+    if (ft_strcmp(cmd->array_cmd[1], "-n") == 0)
     {
         n_flag = 1;
         i = 2;
     }
-    while(data->array_input[i] != NULL)
+    while(cmd->array_cmd[i] != NULL)
     {
-        if(ft_strcmp(data->array_input[i], "$?") == 0)
-            printf("Exit status: %i", data->exit_status);
+        if(ft_strcmp(cmd->array_cmd[i], "$?") == 0)
+            printf("Exit status: %i", cmd->data->exit_status);
         else
-        if(has_variable(data->array_input[i]) == 0) //si no tiene $
-            printf("%s", data->array_input[i]);//imprimimos la palabra tal cual
+        if(has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
+            printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
         else
-            print_expanded(data ->array_input[i], data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 
-        if (data->array_input[i + 1] != NULL) //pone los espacios entre las palabras a menos que sea el final
+            print_expanded(cmd->array_cmd[i], cmd->data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 
+        if (cmd->array_cmd[i + 1] != NULL) //pone los espacios entre las palabras a menos que sea el final
             printf(" ");
         i++;
     }

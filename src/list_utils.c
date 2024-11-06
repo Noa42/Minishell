@@ -84,7 +84,7 @@ int cmd_list_len(t_cmd *cmd_list)
 	}
 	return (len);
 }
-t_cmd *new_cmd(char **array_cmds)
+t_cmd *new_cmd(char **array_cmds, t_data *data)
 {
 	t_cmd *new_cmd;
 
@@ -93,7 +93,7 @@ t_cmd *new_cmd(char **array_cmds)
 	new_cmd->fd_in = STDIN_FILENO;
 	new_cmd->fd_out = STDOUT_FILENO;
 	new_cmd->redir_list = NULL;
-	new_cmd->data = NULL;
+	new_cmd->data = data;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
@@ -303,13 +303,15 @@ void instrucciones_ejemplo_listas(t_data *data)
 
 	//1ºOPCION.
 	////1.-. Crear un cmd* con new_cmd, que recibe un array de strings con el comando y sus argumentos, lo podemos modificar como queramos accediendo a sus campos
-	t_cmd *cmd = new_cmd(ft_split("ls -l", ' '));
+	////NUEVO!!!! -> Ahora new_cmd recibe también la data para enlazar su cmd->data con la data que le pasamos
+	t_cmd *cmd = new_cmd(ft_split("ls -l", ' '), data);
 	////Igualamos data->cmd_list a la función add_cmd, que recibe la lista de comandos y el comando que queremos añadir
 	data->cmd_list = add_cmd(data->cmd_list, cmd);
 
 	//2ºOPCION.
 	////Hacerlo todo a la vez del tirón, es decir igualar y usar el new_cmd en la misma línea
-	data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split("ls -l", ' ')));
+	////NUEVO!!!! -> Ahora new_cmd recibe también la data para enlazar su cmd->data con la data que le pasamos
+	data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split("ls -l", ' '), data));
 
 	//Modificar un comando de la lista. Para esto tenemos dos funciones
 	//GET_CMD_BY_INDEX: Para modificar un comando concreto de la lista usamos get_cmd_by_index, que recibe la lista de comandos y el índice del comando que queremos modificar

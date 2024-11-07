@@ -36,5 +36,4 @@ void ft_unset(t_cmd *cmd)
         delete_var(cmd->data->array_var, cmd->array_cmd[i]);
         i++;
     }
-    builtin_end(cmd->data, 0);
 }

@@ -1,5 +1,11 @@
 #include "../include/minishell.h"
 
+void exit_process(t_data *data, int exit_status)
+{
+    free_data(data);
+    exit(exit_status);
+}
+
 void print_array(char **array)
 {
     int i = 0;
@@ -20,6 +26,7 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+    array = NULL;
 }
 char **copy_alloc_array(char **array)
 {

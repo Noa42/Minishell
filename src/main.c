@@ -50,9 +50,9 @@ void reboot_data(t_data *data)
 	if(data->input)
 		free(data->input);
 	if(data->cmd_list)
-		free_cmd_list(data->cmd_list);
+		data->cmd_list = free_cmd_list(data->cmd_list);
 	if(data->token_list)
-		free_token_list(data->token_list);
+		data->token_list = free_token_list(data->token_list);
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->token_list = NULL;
@@ -73,8 +73,8 @@ int	main(int argc, char** argv, char **env)
 			break ;
 		history(data.input);
 		//parsing(&data);
-		if(data.parsing_error == 0)
-			prueba_ejecucion(&data);
+		//if(data.parsing_error == 0)
+		prueba_ejecucion(&data);
 		reboot_data(&data);
 	}
     free_data(&data);

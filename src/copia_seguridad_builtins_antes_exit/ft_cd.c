@@ -9,7 +9,7 @@ void ft_cd_home(t_data *data, char* oldpwd, char* pwd)
     {
         free(oldpwd);
         free(pwd);
-        builtin_end(data, errno);
+        printf("Error cambiando de dirección\n");
         return;
     }
     else
@@ -19,10 +19,8 @@ void ft_cd_home(t_data *data, char* oldpwd, char* pwd)
         getcwd(pwd, 1024);
         data->env = insert_var(data->env, "PWD", pwd);
         data->array_var = insert_var(data->array_var, "PWD", pwd);
-        free(home);
         free(pwd);
         free(oldpwd);
-        builtin_end(data, errno);
     }
 }
 void ft_cd(t_cmd *cmd)
@@ -30,11 +28,6 @@ void ft_cd(t_cmd *cmd)
     char *oldpwd;
     char *pwd;
     
-    if (array_len(cmd->array_cmd) > 2)
-    {
-        builtin_end(cmd->data, E2BIG); //E2BIG = Argument list too long
-        return;
-    }
     oldpwd = malloc(sizeof(char)* 1024);
     pwd = malloc(sizeof(char)* 1024);
     getcwd(oldpwd, 1024);
@@ -47,7 +40,8 @@ void ft_cd(t_cmd *cmd)
     {
         free(oldpwd);
         free (pwd);
-        builtin_end(cmd->data, errno);
+        printf("Error: %s\n", strerror(errno));//Esto hay que cambiarlo por un mensaje de error
+        cmd->data->exit_status = errno;
         return;
     }
     else
@@ -59,6 +53,6 @@ void ft_cd(t_cmd *cmd)
         cmd->data->array_var = insert_var(cmd->data->array_var, "PWD", pwd);
         free(pwd);
         free(oldpwd);
-        builtin_end(cmd->data, errno);
+        cmd->data->exit_status = 0;
     }
 }

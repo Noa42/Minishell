@@ -13,5 +13,4 @@ void print_env(char **array)
 void ft_env(t_cmd *cmd)
 {
     print_env(cmd->data->env);
-    builtin_end(cmd->data, 0);
 }

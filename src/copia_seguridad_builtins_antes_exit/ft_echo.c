@@ -47,6 +47,7 @@ void print_expanded(char *input, char **env)//Imprime una palabra con una variab
 
 void ft_echo(t_cmd *cmd)
 {
+    //Esta función está hecha para que reciba un ** en el que [0]echo [1]palabra/-n [2]palabra ... [x]:NULL
     int n_flag;
     int i = 1;
     n_flag = 0;
@@ -70,5 +71,4 @@ void ft_echo(t_cmd *cmd)
     }
     if(n_flag == 0) //Sin la flag no se ha cambiado imprime salto de linea
         printf("\n");
-    builtin_end(cmd->data, 0);
 }

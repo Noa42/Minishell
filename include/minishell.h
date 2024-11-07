@@ -95,12 +95,17 @@ t_cmd					*add_cmd(t_cmd *cmd_list, t_cmd *new_cmd);
 t_cmd					*get_last_cmd(t_cmd *cmd_list);
 t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
 char					*token_type_to_string(t_token_type token_type);
+t_token					*new_token(t_token_type token_type);
+t_token					*add_token(t_token *token_list, t_token_type token_type);
+t_redir					*free_redir_list(t_redir *redir_list);
+
 
 //MAIN
 int						only_spaces(char *input);
 void					history(char *input);
 void					init_data(t_data *data, char **env);
 void					free_data(t_data *data);
+void					reboot_data(t_data *data);
 
 //PRUEBAS EJECTUCION
 void					prueba_ejecucion(t_data *data);
@@ -122,9 +127,12 @@ void					sort_strings(char **array, int size);
 void					swap(char **a, char **b);
 int						ft_strcmp(const char *s1, const char *s2);
 char					**realloc_elonged_array(char **src_array);
+void					exit_process(t_data *data, int exit_status);
+
 
 // EXECUTION
-void					execution(t_data *data);
+void					multiple_cmd_case(t_data *data);
+void					one_cmd_case(t_data *data);
 int						is_first_cmd(t_cmd *cmd);
 int						is_last_cmd(t_cmd *cmd);
 void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
@@ -132,14 +140,14 @@ void					prueba_ejecucion(t_data *data);
 int						is_a_builtin(t_cmd *cmd);
 void					exec_builtin(t_cmd *cmd);
 
-// SRC //BUILTINS
+////BUILTINS
 // FT_ECHO
 int						has_variable(char *input);
 char					*get_exp_var(char *s, int i);
 void					print_expanded(char *input, char **env);
 void					ft_echo(t_cmd *cmd);
 // FT_PWD
-void					ft_pwd(void);
+void					ft_pwd(t_cmd *cmd);
 // FT_CD
 void					ft_cd_home(t_data *data, char *oldpwd, char *pwd);
 void					ft_cd(t_cmd *cmd);
@@ -157,8 +165,11 @@ void					ft_exit(t_cmd *cmd);
 char					*ft_var_name(char *name_value);
 char					*ft_var_value(char *name_value);
 char					*ft_getenv(char *var_name, char **env);
-char					**insert_var(char **array, char *var_name,
-							char *var_value);
+char					**insert_var(char **array, char *var_name, char *var_value);
+int						is_a_builtin(t_cmd *cmd);
+void					exec_builtin(t_cmd *cmd);
+void					builtin_end(t_data *data, int error);
+
 
 // PATH
 char					*get_path_line(char **env);

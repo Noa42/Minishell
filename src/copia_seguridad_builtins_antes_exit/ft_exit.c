@@ -42,7 +42,7 @@ void ft_exit(t_cmd *cmd)
             exit_status = i_to_exit_status(ft_atoi(cmd->array_cmd[1]));
     }else if (is_a_num(cmd->array_cmd[1]) == 1)
     {
-            builtin_end(cmd->data, E2BIG);
+            printf(": too many arguments\n");
             return ;
     }
     printf("\n");

@@ -143,10 +143,14 @@ void print_cmd_list(t_cmd *cmd_list)
 }
 void free_cmd(t_cmd *cmd)
 {
-	free_array(cmd->array_cmd);
+	if (cmd->array_cmd)
+		free_array(cmd->array_cmd);
+	if (cmd->redir_list)
+		free_redir_list(cmd->redir_list);
 	free(cmd);
+	cmd = NULL;
 }
-void free_redir_list(t_redir *redir_list)
+t_redir *free_redir_list(t_redir *redir_list)
 {
 	t_redir *p;
 	t_redir *tmp;
@@ -158,6 +162,7 @@ void free_redir_list(t_redir *redir_list)
 		free(p);
 		p = tmp;
 	}
+	return (NULL);
 }
 
 t_cmd *free_cmd_list(t_cmd *cmd_list)
@@ -170,7 +175,7 @@ t_cmd *free_cmd_list(t_cmd *cmd_list)
 	{
 		tmp = p->next;
 		if (p->redir_list)
-			free_redir_list(p->redir_list);
+			p->redir_list = free_redir_list(p->redir_list);
 		free_cmd(p);
 		p = tmp;
 	}

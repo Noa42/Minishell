@@ -1,12 +1,10 @@
 #include "../include/minishell.h"
 
-void ft_pwd(t_cmd *cmd)
+void ft_pwd(void)
 {
     char *dir;
 
     dir = malloc(sizeof(char)* 1024);
     getcwd(dir, 1024);
     printf("%s\n", dir);
-    free(dir);
-    builtin_end(cmd->data, 0);
 }

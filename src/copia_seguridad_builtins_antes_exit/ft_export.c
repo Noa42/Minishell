@@ -35,5 +35,4 @@ void ft_export(t_cmd *cmd)
     }
     free(var_name);
     free(var_value);
-    builtin_end(cmd->data, 0);
 }

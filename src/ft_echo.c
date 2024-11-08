@@ -50,7 +50,7 @@ void ft_echo(t_cmd *cmd)
     int n_flag;
     int i = 1;
     n_flag = 0;
-    if (ft_strcmp(cmd->array_cmd[1], "-n") == 0)
+    if (array_len(cmd->array_cmd) >= 2 && ft_strcmp(cmd->array_cmd[1], "-n") == 0)
     {
         n_flag = 1;
         i = 2;

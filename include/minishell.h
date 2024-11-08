@@ -53,8 +53,9 @@ typedef struct s_redir
 	t_redir_type		type;
 	char				*in_name;
 	char				*out_name;
-	int					fd_in;
-	int					fd_out;
+	int					fd_in;//comprobar porque creo que no los uso uso los de los cmd
+	int					fd_out;//comprobar porque creo que no los uso
+	char				*delim;
 	t_redir				*next;
 	t_data				*data;
 }						t_redir;
@@ -78,27 +79,34 @@ typedef struct s_data
 	int					parsing_error;
 }						t_data;
 //LIST_UTILS
-void					instrucciones_ejemplo_listas(t_data *data);
-void					print_cmd(t_cmd *cmd);
-void					print_cmd_list(t_cmd *cmd_list);
-void					free_cmd(t_cmd *cmd);
-t_cmd					*free_cmd_list(t_cmd *cmd_list);
+////TOKEN LIST UTILS
+//t_token					*new_token(t_token_type token_type);
+t_token					*add_token(t_token *token_list, t_token_type token_type);
+int						token_list_len(t_token *token_list);
 t_token					*free_token_list(t_token *token_list);
-void					print_token_list(t_token *token_list);
-int						cmd_list_len(t_cmd *cmd_list);
+
+////CMD LIST UTILS
 t_cmd					*new_cmd(char **array_cmds, t_data *data);
-void					add_redir(t_cmd *cmd, t_redir *redir);
-t_redir					*new_redir(t_redir_type type, char *in_name, char *out_name);
-void					print_redir_list(t_redir *redir_list);
-char					*redir_type_to_string(t_redir_type type);
 t_cmd					*add_cmd(t_cmd *cmd_list, t_cmd *new_cmd);
 t_cmd					*get_last_cmd(t_cmd *cmd_list);
 t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
-char					*token_type_to_string(t_token_type token_type);
-t_token					*new_token(t_token_type token_type);
-t_token					*add_token(t_token *token_list, t_token_type token_type);
+int						cmd_list_len(t_cmd *cmd_list);
+void					free_cmd(t_cmd *cmd);
+t_cmd					*free_cmd_list(t_cmd *cmd_list);
+////REDIR LIST UTILS
+t_redir					*new_redir(t_redir_type type, char *input);
+void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*free_redir_list(t_redir *redir_list);
 
+////PRINT LISTS
+void					print_token_list(t_token *token_list);
+char					*token_type_to_string(t_token_type token_type);
+void					print_cmd(t_cmd *cmd);
+void					print_cmd_list(t_cmd *cmd_list);
+void					print_redir_list(t_redir *redir_list);
+char					*redir_type_to_string(t_redir_type type);
+//tambien en el archivo print_lists.c
+void					instrucciones_ejemplo_listas(t_data *data);
 
 //MAIN
 int						only_spaces(char *input);

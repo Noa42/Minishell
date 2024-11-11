@@ -21,6 +21,23 @@ t_redir *new_redir(t_redir_type type, char *input) //la input es siempre un char
 	new_redir->next = NULL;
 	return (new_redir);
 }
+
+void update_index_redir_list(t_redir *redir_list)
+{
+	t_redir *p;
+	int i;
+
+	i = 0;
+	p = redir_list;
+	if (p == NULL)
+		return ;
+	while (p)
+	{
+		p->index = i;
+		i++;
+		p = p->next;
+	}
+}
 void add_redir(t_cmd *cmd, t_redir *redir)
 {
 	t_redir *p;
@@ -34,6 +51,7 @@ void add_redir(t_cmd *cmd, t_redir *redir)
 	while (p->next)
 		p = p->next;
 	p->next = redir;
+	update_index_redir_list(cmd->redir_list);
 }
 t_redir *free_redir_list(t_redir *redir_list)
 {

@@ -3,6 +3,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <signal.h>
@@ -51,6 +52,7 @@ typedef struct s_cmd
 typedef struct s_redir
 {
 	t_redir_type		type;
+	int					index;
 	char				*in_name;
 	char				*out_name;
 	int					fd_in;//comprobar porque creo que no los uso uso los de los cmd
@@ -95,6 +97,7 @@ void					free_cmd(t_cmd *cmd);
 t_cmd					*free_cmd_list(t_cmd *cmd_list);
 ////REDIR LIST UTILS
 t_redir					*new_redir(t_redir_type type, char *input);
+void					update_index_redir_list(t_redir *redir_list);
 void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*free_redir_list(t_redir *redir_list);
 
@@ -103,6 +106,7 @@ void					print_token_list(t_token *token_list);
 char					*token_type_to_string(t_token_type token_type);
 void					print_cmd(t_cmd *cmd);
 void					print_cmd_list(t_cmd *cmd_list);
+void					print_redir(t_redir *redir);
 void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
 //tambien en el archivo print_lists.c

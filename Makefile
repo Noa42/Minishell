@@ -1,5 +1,6 @@
 # Librerías
 LIBFT = libft/libft.a
+FT_PRINTF = ft_printf/libftprintf.a
 
 # Flags
 INC = -I /home/achacon-/.brew/Cellar/readline/8.2.13/include
@@ -34,18 +35,23 @@ $(NAME): ${OBJT}
 	@echo "$(YELLOW)Compiling Libft.$(END)"
 	@make -s -C libft
 	@echo "$(GREEN)Libft Compiled.$(END)"
+	@echo "$(YELLOW)Compiling Ft_printf.$(END)"
+	@make -s -C ft_printf
+	@echo "$(GREEN)Ft_printf Compiled.$(END)"
 	@echo "$(YELLOW)Compiling Minishell.$(END)"
-	@gcc ${CFLAGS} ${OBJT} ${INC} ${LFLAGS} -o ${NAME} ${LIBFT}
+	@gcc ${CFLAGS} ${OBJT} ${INC} ${LFLAGS} -o ${NAME} ${LIBFT} ${FT_PRINTF}
 	@echo "$(GREEN)Minishell Compiled.$(END)"
 
 clean:
 	@rm -rf ${OBJ_DIR}
 	@make clean -s -C libft
+	@make clean -s -C ft_printf
 	@echo "$(RED)Compiled objects have been removed.$(END)"
 
 fclean: clean
 	@rm -f ${NAME}
 	@make fclean -s -C libft
+	@make fclean -s -C ft_printf
 	@echo "$(RED)Executables objects have been removed.$(END)"
 
 re: fclean all
@@ -53,5 +59,7 @@ re: fclean all
 norminette:
 	@echo "$(YELLOW)Norminette libft.$(END)"
 	@norminette ./libft
+	@echo "$(YELLOW)Norminette ft_printf.$(END)"
+	@norminette ./ft_printf
 	@echo "$(YELLOW)Norminette minishell.$(END)"
 	@norminette ./src

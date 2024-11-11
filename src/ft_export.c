@@ -7,7 +7,10 @@ void print_export(char **array_var)
     i = 0;
     while (array_var[i])
     {
-        printf("declare -x %s\n", array_var[i]);
+        if(ft_strlen(ft_var_value(array_var[i])) == 0)
+            printf("declare -x %s\n", ft_var_name(array_var[i]));
+        else
+            printf("declare -x %s=\"%s\"\n", ft_var_name(array_var[i]), ft_var_value(array_var[i]));//el printf asi es para que imprima las comillas qque cuando ejecutas export se muestranb
         i++;
     }
 }

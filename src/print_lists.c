@@ -56,12 +56,26 @@ void print_cmd(t_cmd *cmd)
 	printf("\n");
 }
 
+void print_redir(t_redir *redir)
+{
+	if(redir==NULL)
+	{
+		printf("Empty redir\n");
+		return;
+	}
+	printf("[%i]Redir:\n", redir->index);
+	printf("-Type: %s\n", redir_type_to_string(redir->type));
+	printf("-In_name: %s\n", redir->in_name);
+	printf("-Out_name: %s\n", redir->out_name);
+	printf("-Delim: %s\n", redir->delim);
+	printf("-fd_in: %i\n", redir->fd_in);
+	printf("-fd_out: %i\n", redir->fd_out);
+}
+
 void print_redir_list(t_redir *redir_list)
 {
 	t_redir *p;
-	int i;
 
-	i = 0;
 	p = redir_list;
 	printf("+REDIR_LIST+\n");
 	if (!p)
@@ -71,13 +85,7 @@ void print_redir_list(t_redir *redir_list)
 	}
 	while (p)
 	{	
-		printf("[%i]Redir:\n", i);
-		printf("Type: %s\n", redir_type_to_string(p->type));
-		printf("In_name: %s\n", p->in_name);
-		printf("Out_name: %s\n", p->out_name);
-		printf("fd_in: %i\n", p->fd_in);
-		printf("fd_out: %i\n", p->fd_out);
-		i++;
+		print_redir(p);
 		p = p->next;
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");

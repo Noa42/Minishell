@@ -35,19 +35,20 @@ void print_expanded(char *input, char **env)//Imprime una palabra con una variab
             i++;
             var_name = get_exp_var(input, i);//aloca una subcadena desde despues de $ hasta el siquiente espacio o \0 por lo que devuelve el nombre de la variable a imprimir
             //if(ft_getenv(var_name, env) != NULL)
-            printf("%s", ft_getenv(var_name, env));//imprime el valor de la variable
+            ft_printf("%s", ft_getenv(var_name, env));//imprime el valor de la variable
             free(var_name);
             return;
         }
         else
-            printf("%c", input[i]);            
+            ft_printf("%c", input[i]);            
         i++;
     }
 }
 
-void ft_echo(t_cmd *cmd)
+void ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por problemas de como guarda el buffer printf no me hacia bien el -n
 {
     int n_flag;
+
     int i = 1;
     n_flag = 0;
     if (array_len(cmd->array_cmd) >= 2 && ft_strcmp(cmd->array_cmd[1], "-n") == 0)
@@ -61,14 +62,14 @@ void ft_echo(t_cmd *cmd)
             printf("Exit status: %i", cmd->data->exit_status);
         else
         if(has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
-            printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
+            ft_printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
         else
             print_expanded(cmd->array_cmd[i], cmd->data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 
         if (cmd->array_cmd[i + 1] != NULL) //pone los espacios entre las palabras a menos que sea el final
-            printf(" ");
+            ft_printf(" ");
         i++;
     }
-    if(n_flag == 0) //Sin la flag no se ha cambiado imprime salto de linea
-        printf("\n");
+    if(n_flag == 0) //Si la flag no se ha cambiado imprime salto de linea//
+        ft_printf("\n");
     builtin_end(cmd->data, 0);
 }

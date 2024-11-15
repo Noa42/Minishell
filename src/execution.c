@@ -1,29 +1,9 @@
 #include "../include/minishell.h"
 
-void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
+void exit_process(t_data *data, int exit_status)
 {
-    char *path;
-    // Configura la salida del proceso hijo
-    if (is_last_cmd(cmd) == 0) // Si hay un comando siguiente
-        *fd_out = data->pipe[1]; // Redirige la salida a la escritura de la tubería
-    else
-        *fd_out = STDOUT_FILENO; // Si es el último comando, redirige a la salida estándar
-    dup2(*fd_in, STDIN_FILENO); // Redirige la entrada estándar a la salida del comando anterior
-    dup2(*fd_out, STDOUT_FILENO); // Redirige la salida estándar al fd_out seleccionado
-    close(data->pipe[0]); // Cierra el extremo de lectura de la tubería en el hijo
-    if(is_a_builtin(cmd) == 1)
-    {
-        exec_builtin(cmd);
-        exit_process(data, data->exit_status);
-    }
-    
-    else
-    {
-        path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
-        execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
-        ft_printf("Comand not found\n", 2);
-        exit(127);
-    }
+    free_data(data);
+    exit(exit_status);
 }
 
 void multiple_cmd_case(t_data *data)
@@ -53,6 +33,69 @@ void multiple_cmd_case(t_data *data)
             cmd = cmd->next;
         }
     }
+}
+
+void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
+{
+    char *path;
+    // Configura la salida del proceso hijo
+    if (is_last_cmd(cmd) == 0) // Si hay un comando siguiente
+        *fd_out = data->pipe[1]; // Redirige la salida a la escritura de la tubería
+    else
+        *fd_out = STDOUT_FILENO; // Si es el último comando, redirige a la salida estándar
+    dup2(*fd_in, STDIN_FILENO); // Redirige la entrada estándar a la salida del comando anterior
+    dup2(*fd_out, STDOUT_FILENO); // Redirige la salida estándar al fd_out seleccionado
+    close(data->pipe[0]); // Cierra el extremo de lectura de la tubería en el hijo
+    if(is_a_builtin(cmd) == 1)
+    {
+        apply_redir_list(cmd);
+        if (cmd->fd_in == -1 || cmd->fd_out == -1)
+            exit_process(data, data->exit_status);
+        exec_builtin(cmd);
+        exit_process(data, data->exit_status);
+    }
+    else
+    {
+        apply_redir_list(cmd);
+        if (cmd->fd_in == -1 || cmd->fd_out == -1)
+            exit_process(data, data->exit_status);
+        path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
+        execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
+        ft_printf("Comand not found\n", 2);
+        exit_process(data, 127);
+    }
+}
+
+void basic_parsing(t_data *data)
+{
+    char **array_pipes;
+    int i = 0;
+    array_pipes = ft_split(data->input, '|');
+    while(array_pipes[i])
+    {
+        data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split(array_pipes[i], ' '), data));
+        i++;
+    }
+    free_array(array_pipes);
+}
+void prueba_ejecucion(t_data *data)
+{
+    basic_parsing(data);
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim"));
+    add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
+    if (cmd_list_len(data->cmd_list) == 2)
+    {
+        add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(INPUT, "in_file2.txt"));
+        add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(APPEND, "out_file1.txt"));
+    }
+    if (cmd_list_len(data->cmd_list) == 1)
+        one_cmd_case(data);
+    else
+        multiple_cmd_case(data);
 }
 
 void one_builtin_case(t_cmd *cmd)
@@ -91,8 +134,7 @@ void one_cmd_case(t_data *data)
         pid = fork();
         if(pid == 0)
         {
-            if(cmd->redir_list)
-                apply_redir_list(cmd);
+            apply_redir_list(cmd);
             if (cmd->fd_in == -1 || cmd->fd_out == -1)
                 exit(cmd->data->exit_status);
             path = get_path(cmd->array_cmd[0], data->env);
@@ -106,30 +148,4 @@ void one_cmd_case(t_data *data)
             data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
         }
     }
-}
-void basic_parsing(t_data *data)
-{
-    char **array_pipes;
-    int i = 0;
-    array_pipes = ft_split(data->input, '|');
-    while(array_pipes[i])
-    {
-        data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split(array_pipes[i], ' '), data));
-        i++;
-    }
-    free_array(array_pipes);
-}
-void prueba_ejecucion(t_data *data)
-{
-    basic_parsing(data);
-    // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file2.txt"));
-    // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
-    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
-    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
-    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim"));
-    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
-    if (cmd_list_len(data->cmd_list) == 1)
-        one_cmd_case(data);
-    else
-        multiple_cmd_case(data);
 }

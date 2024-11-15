@@ -131,6 +131,8 @@ void apply_last_in_redir(t_cmd *cmd)
 
 void apply_redir_list(t_cmd *cmd)
 {
+    if (cmd->redir_list == NULL)
+        return ;
     apply_last_in_redir(cmd);
     apply_last_out_redir(cmd);
     if (cmd->fd_in == -1 || cmd->fd_out == -1)

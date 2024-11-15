@@ -1,7 +1,1 @@
-hola
-prueba
-prueba
-prueba
-prueba
-prueba
-prueba
+Exit status: 0

@@ -1,11 +1,5 @@
 #include "../include/minishell.h"
 
-void exit_process(t_data *data, int exit_status)
-{
-    free_data(data);
-    exit(exit_status);
-}
-
 void print_array(char **array)
 {
     int i = 0;

@@ -6,7 +6,9 @@ void builtin_end(t_data *data, int error)
         data->exit_status = 0;
     else
     {
-        printf("Error: %s\n", strerror(error));
+        ft_printf("Error: ", 2);
+        ft_printf(strerror(error), 2);
+        ft_printf("\n", 2);
         data->exit_status = error;
     }
     //E2BIG = Argument list too long

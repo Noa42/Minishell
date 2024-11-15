@@ -59,7 +59,7 @@ void ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por proble
     while(cmd->array_cmd[i] != NULL)
     {
         if(ft_strcmp(cmd->array_cmd[i], "$?") == 0)
-            printf("Exit status: %i", cmd->data->exit_status);
+            ft_printf("Exit status: %i", cmd->data->exit_status);
         else
         if(has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
             ft_printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual

@@ -95,6 +95,8 @@ t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
 int						cmd_list_len(t_cmd *cmd_list);
 void					free_cmd(t_cmd *cmd);
 t_cmd					*free_cmd_list(t_cmd *cmd_list);
+int						is_first_cmd(t_cmd *cmd);
+int						is_last_cmd(t_cmd *cmd);
 ////REDIR LIST UTILS
 t_redir					*new_redir(t_redir_type type, char *input);
 void					update_index_redir_list(t_redir *redir_list);
@@ -111,6 +113,15 @@ void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
 //tambien en el archivo print_lists.c
 void					instrucciones_ejemplo_listas(t_data *data);
+
+//REDIRS
+void					apply_redir_list(t_cmd *cmd);
+void					apply_INPUT_redir(t_cmd *cmd, t_redir *redir);
+void					apply_OUTPUT_redir(t_cmd *cmd, t_redir *redir);
+void					apply_APPEND_redir(t_cmd *cmd, t_redir *redir);
+void					apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir);
+void					apply_last_out_redir(t_cmd *cmd);
+void					apply_last_in_redir(t_cmd *cmd);
 
 //MAIN
 int						only_spaces(char *input);

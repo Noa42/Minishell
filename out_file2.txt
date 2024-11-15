@@ -16,3 +16,16 @@ test2.txt
 prueba
 prueba
 prueba
+ft_printf
+include
+in_file1.txt
+in_file2.txt
+libft
+Makefile
+minishell
+obj
+out_file1.txt
+out_file2.txt
+src
+test2.txt
+nuevo

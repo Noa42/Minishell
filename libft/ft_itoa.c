@@ -37,7 +37,10 @@ static char	*positive(int n)
 	digs = digits(n);
 	s = malloc((digs + 1) * sizeof(char));
 	if (s == NULL)
+	{
+		free(s);
 		return (NULL);
+	}
 	s[digs] = '\0';
 	digs = digs - 1;
 	while (digs >= 0)

@@ -30,6 +30,7 @@ void	init_data(t_data *data, char **env)
 	data->exit_status = -1;
 	data->token_list = NULL;
 	data->parsing_error = 0;
+	data->here_doc_counter = 0;
 	//data-> pipe = NULL;
 }
 void    free_data(t_data *data)
@@ -57,6 +58,7 @@ void reboot_data(t_data *data)
 	data->cmd_list = NULL;
 	data->token_list = NULL;
 	data->parsing_error = 0;
+	data->here_doc_counter = 0;
 }
 
 int	main(int argc, char** argv, char **env)

@@ -79,6 +79,7 @@ typedef struct s_data
     t_cmd         	    *cmd_list;
 	int					pipe[2];
 	int					parsing_error;
+	int					here_doc_counter;
 }						t_data;
 //LIST_UTILS
 ////TOKEN LIST UTILS
@@ -124,6 +125,8 @@ void					apply_last_out_redir(t_cmd *cmd);
 void					apply_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);
+void					update_fds_redirs(t_cmd *cmd_list);
+void					dup_fds_redirs(t_cmd *cmd);
 
 //MAIN
 int						only_spaces(char *input);

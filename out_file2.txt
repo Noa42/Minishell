@@ -1,4 +1,2 @@
-adios1
-adios2
-4
-4
+bueno1
+bueno2

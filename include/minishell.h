@@ -122,6 +122,8 @@ void					apply_APPEND_redir(t_cmd *cmd, t_redir *redir);
 void					apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir);
 void					apply_last_out_redir(t_cmd *cmd);
 void					apply_last_in_redir(t_cmd *cmd);
+t_redir					*get_last_in_redir(t_cmd *cmd);
+t_redir					*get_last_out_redir(t_cmd *cmd);
 
 //MAIN
 int						only_spaces(char *input);

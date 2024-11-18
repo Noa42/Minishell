@@ -36,7 +36,7 @@ void apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
     char *line;
     char *temp_file;
     int here_doc_fd;
-    int i;
+    int i;//esto quitarlo?
 
     i = 0;
     temp_file = ".temp_file.txt"; //Usamos un archivo temporal para guardar la info del here_doc
@@ -50,6 +50,7 @@ void apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
         cmd->data->exit_status = 1;
         return ;
     }
+    // printf("Debug: delim: %s\n", redir->delim);
     while(1) //Leo las lineas hasta que encuentre el delimitador. va escribiendo lo que recibe readline en el archivo temporal
     {
         line = readline("heredoc> ");
@@ -63,7 +64,7 @@ void apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
         write(here_doc_fd, line, ft_strlen(line));
         write(here_doc_fd, "\n", 1);
         free(line);
-        i++;
+        i++;//esto quitarlo?
     }
     free(line);//hay que hacerlo otra vez porque cuando se sale del bucle no se libera la ultima linea
     close(here_doc_fd); // lo cerramos para volver a abrirlo pero en modo lectura
@@ -83,7 +84,7 @@ void apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
     //al final de apply_redir_list se hace el dup2 del fdin que tiene la info del here_doc
 }
 
-void apply_last_out_redir(t_cmd *cmd)
+t_redir *get_last_out_redir(t_cmd *cmd)
 {
     t_redir *redir;
     t_redir *last_out_redir;
@@ -96,6 +97,14 @@ void apply_last_out_redir(t_cmd *cmd)
             last_out_redir = redir;
         redir = redir->next;
     }
+    return (last_out_redir);
+}
+
+void apply_last_out_redir(t_cmd *cmd)
+{
+    t_redir *last_out_redir;
+
+    last_out_redir = get_last_out_redir(cmd);
     if (last_out_redir != NULL)
     {
         if (last_out_redir->type == OUTPUT)
@@ -106,7 +115,7 @@ void apply_last_out_redir(t_cmd *cmd)
         cmd->fd_out = 1;
 }
 
-void apply_last_in_redir(t_cmd *cmd)
+t_redir *get_last_in_redir(t_cmd *cmd)
 {
     t_redir *redir;
     t_redir *last_in_redir;
@@ -119,6 +128,14 @@ void apply_last_in_redir(t_cmd *cmd)
             last_in_redir = redir;
         redir = redir->next;
     }
+    return (last_in_redir);
+}
+
+void apply_last_in_redir(t_cmd *cmd)
+{
+    t_redir *last_in_redir;
+
+    last_in_redir = get_last_in_redir(cmd);
     if (last_in_redir != NULL)
     {
         if (last_in_redir->type == INPUT)

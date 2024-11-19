@@ -78,7 +78,6 @@ typedef struct s_data
 	t_token				*token_list;
     t_cmd         	    *cmd_list;
 	int					pipe[2];
-	int					parsing_error;
 	int					here_doc_counter;
 }						t_data;
 //LIST_UTILS

@@ -27,9 +27,8 @@ void	init_data(t_data *data, char **env)
 	sort_strings(data->array_var, array_len(data->array_var));
 	data->input = NULL;
 	data->cmd_list = NULL;
-	data->exit_status = -1;
+	data->exit_status = 0;
 	data->token_list = NULL;
-	data->parsing_error = 0;
 	data->here_doc_counter = 0;
 	//data-> pipe = NULL;
 }
@@ -44,7 +43,8 @@ void    free_data(t_data *data)
 		free_cmd_list(data->cmd_list);
 	if(data->token_list)
 		free_token_list(data->token_list);
-    free(data->input);
+    if (data->input)
+		free(data->input);
 }
 void reboot_data(t_data *data)
 {
@@ -57,15 +57,17 @@ void reboot_data(t_data *data)
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->token_list = NULL;
-	data->parsing_error = 0;
+	data->exit_status = 0;
 	data->here_doc_counter = 0;
 }
 
 int	main(int argc, char** argv, char **env)
 {
 	t_data	data;
-	argc ++; //esto es para que no me salte un warning de que argc y argv no se usa y el primer argumento siempre tiene que ser de tipo int. Es para coger el env.
-	argv[1] = "avoid warning";
+	int exit_status;
+
+	(void)argc; 
+	(void)argv;
 	init_data(&data, env);
 	signals();
 	while (1)
@@ -75,11 +77,12 @@ int	main(int argc, char** argv, char **env)
 			break ;
 		history(data.input);
 		//parsing(&data);
-		//if(data.parsing_error == 0)
-		prueba_ejecucion(&data);
+		if(data.exit_status == 0)
+			prueba_ejecucion(&data);
 		reboot_data(&data);
 	}
+	exit_status = data.exit_status; //esto es para que cuando hagamos ctrl+d el exit status sea el que corresponda
     free_data(&data);
-	printf("Saliendo de MiniShell\n");
-	return (0);
+	printf("exit\n");
+	return (exit_status);
 }

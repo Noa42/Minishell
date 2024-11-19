@@ -8,7 +8,7 @@ void exit_process(t_data *data, int exit_status)
 
 void multiple_cmd_case(t_data *data)
 {
-    t_cmd *cmd;
+    t_cmd *cmd;    
     int fd_in;
     int fd_out;
     pid_t pid;
@@ -83,13 +83,12 @@ void basic_parsing(t_data *data)
 }
 void prueba_ejecucion(t_data *data)
 {
-    basic_parsing(data);
+    //basic_parsing(data);
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
     // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
-    add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1"));
-
+    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1"));
     // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
     if (cmd_list_len(data->cmd_list) >= 2)
     {

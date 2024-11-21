@@ -45,6 +45,7 @@ void    free_data(t_data *data)
 		free_token_list(data->token_list);
     if (data->input)
 		free(data->input);
+	close_fds();
 }
 void reboot_data(t_data *data)
 {
@@ -59,6 +60,7 @@ void reboot_data(t_data *data)
 	data->token_list = NULL;
 	data->exit_status = 0;
 	data->here_doc_counter = 0;
+	close_fds();
 }
 
 int	main(int argc, char** argv, char **env)

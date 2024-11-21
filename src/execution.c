@@ -6,6 +6,18 @@ void exit_process(t_data *data, int exit_status)
     exit(exit_status);
 }
 
+void close_fds(void) 
+{
+    int i;
+
+    i = 3; //el primer fd no estandard es el 3
+    while (i <= 1024)//1024 es el maximo numero de fd que se pueden tener
+    {
+        close(i);
+        i++;
+    }
+}
+
 void multiple_cmd_case(t_data *data)
 {
     t_cmd *cmd;    
@@ -35,6 +47,7 @@ void multiple_cmd_case(t_data *data)
             cmd = cmd->next;
         }
     }
+    //close_fds();
 }
 
 void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
@@ -48,7 +61,7 @@ void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
     dup2(*fd_in, STDIN_FILENO); // Redirige la entrada estándar a la salida del comando anterior
     dup2(*fd_out, STDOUT_FILENO); // Redirige la salida estándar al fd_out seleccionado
     close(data->pipe[0]); // Cierra el extremo de lectura de la tubería en el hijo
-
+    close(data->pipe[1]); // Cierra el extremo de escritura de la tubería en el hijo
     dup_fds_redirs(cmd);
 
     if(is_a_builtin(cmd) == 1)
@@ -56,6 +69,7 @@ void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
         if (cmd->fd_in == -1 || cmd->fd_out == -1)
             exit_process(data, data->exit_status);
         exec_builtin(cmd);
+        //close_fds();
         exit_process(data, data->exit_status);
     }
     else
@@ -65,6 +79,7 @@ void child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
         path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
         execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
         ft_printf("Comand not found\n", 2);
+        //close_fds();
         exit_process(data, 127);
     }
 }
@@ -83,13 +98,13 @@ void basic_parsing(t_data *data)
 }
 void prueba_ejecucion(t_data *data)
 {
-    //basic_parsing(data);
+    basic_parsing(data);
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
     // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
-    //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1"));
-    // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
+    add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1"));
+    add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
     if (cmd_list_len(data->cmd_list) >= 2)
     {
         add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2"));

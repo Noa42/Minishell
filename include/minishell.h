@@ -166,7 +166,7 @@ void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
 void					prueba_ejecucion(t_data *data);
 int						is_a_builtin(t_cmd *cmd);
 void					exec_builtin(t_cmd *cmd);
-
+void					close_fds(void);
 ////BUILTINS
 // FT_ECHO
 int						has_variable(char *input);

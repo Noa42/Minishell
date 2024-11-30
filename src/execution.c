@@ -11,7 +11,7 @@ void close_fds(void)
     int i;
 
     i = 3; //el primer fd no estandard es el 3
-    while (i <= 1024)//1024 es el maximo numero de fd que se pueden tener
+    while (i < 1024)//1024 es el maximo numero de fd que se pueden tener
     {
         close(i);
         i++;
@@ -104,17 +104,17 @@ void prueba_ejecucion(t_data *data)
     //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
     // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
     add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1"));
-    add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
-    if (cmd_list_len(data->cmd_list) >= 2)
-    {
-        add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2"));
-        add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(OUTPUT, "out_file2.txt"));
-    }
-    if (cmd_list_len(data->cmd_list) >= 3)
-    {
-        add_redir(get_cmd_by_index(data->cmd_list, 2), new_redir(HERE_DOC, "delim3"));
-        add_redir(get_cmd_by_index(data->cmd_list, 2), new_redir(OUTPUT, "out_file3.txt"));
-    }
+    // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file1.txt"));
+    // if (cmd_list_len(data->cmd_list) >= 2)
+    // {
+    //     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2"));
+    //     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(OUTPUT, "out_file2.txt"));
+    // }
+    // if (cmd_list_len(data->cmd_list) >= 3)
+    // {
+    //     add_redir(get_cmd_by_index(data->cmd_list, 2), new_redir(HERE_DOC, "delim3"));
+    //     add_redir(get_cmd_by_index(data->cmd_list, 2), new_redir(OUTPUT, "out_file3.txt"));
+    // }
     // if (cmd_list_len(data->cmd_list) >= 4)
     // {
     //     add_redir(get_cmd_by_index(data->cmd_list, 3), new_redir(HERE_DOC, "delim4"));

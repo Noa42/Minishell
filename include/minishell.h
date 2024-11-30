@@ -18,6 +18,8 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
+#include "global.h"
+
 typedef struct s_data	t_data;
 typedef struct s_cmd	t_cmd;
 typedef struct s_pipe	t_pipe;

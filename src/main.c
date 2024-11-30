@@ -7,7 +7,7 @@ int	only_spaces(char *input)
 	i = 0;
 	while (input[i] != '\0')
 	{
-		if (input[i] != ' ')
+		if (input[i] != ' ' && input[i] != '\t')
 			return (0);
 		i++;
 	}
@@ -62,6 +62,8 @@ void reboot_data(t_data *data)
 	data->here_doc_counter = 0;
 	close_fds();
 }
+
+int	interact_mode = 0;
 
 int	main(int argc, char** argv, char **env)
 {

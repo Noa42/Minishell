@@ -3,15 +3,20 @@
 void print_export(char **array_var)
 {
     int i;
-
+    char* var_name;
+    char* var_value;
     i = 0;
     while (array_var[i])
     {
-        if(ft_strlen(ft_var_value(array_var[i])) == 0)
-            printf("declare -x %s\n", ft_var_name(array_var[i]));
+        var_name = ft_var_name(array_var[i]);
+        var_value = ft_var_value(array_var[i]);
+        if(ft_strlen(var_name) == 0)
+            printf("declare -x %s\n", var_name);
         else
-            printf("declare -x %s=\"%s\"\n", ft_var_name(array_var[i]), ft_var_value(array_var[i]));//el printf asi es para que imprima las comillas qque cuando ejecutas export se muestranb
+            printf("declare -x %s=\"%s\"\n", var_name, var_value);//el printf asi es para que imprima las comillas qque cuando ejecutas export se muestranb
         i++;
+        free(var_name);
+        free(var_value);
     }
 }
 
@@ -35,8 +40,8 @@ void ft_export(t_cmd *cmd)
         cmd->data->env = insert_var(cmd->data->env, var_name, var_value);
         cmd->data->array_var = insert_var(cmd->data->array_var, var_name, var_value);
         i++;
+        free(var_name);
+        free(var_value);
     }
-    free(var_name);
-    free(var_value);
     builtin_end(cmd->data, 0);
 }

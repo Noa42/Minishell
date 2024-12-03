@@ -222,7 +222,7 @@ void dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
     {
         if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
         {
-            ft_printf("Error duplicating file descriptor\n", 2);
+            ft_putstr_fd("Error duplicating file descriptor\n", 2);
             cmd->data->exit_status = 1;
             return;
         }
@@ -231,7 +231,7 @@ void dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
     {
         if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
         {
-            ft_printf("Error duplicating file descriptor\n", 2);
+            ft_putstr_fd("Error duplicating file descriptor\n", 2);
             cmd->data->exit_status = 1;
             return;
         }

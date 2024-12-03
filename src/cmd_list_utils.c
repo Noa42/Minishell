@@ -5,6 +5,11 @@ t_cmd *new_cmd(char **array_cmds, t_data *data)
 	t_cmd *new_cmd;
 
 	new_cmd = malloc(sizeof(t_cmd));
+	if (new_cmd == NULL)
+	{
+		ft_putstr_fd("Cannot allocate memory\n", 2);
+		exit_process(data, 1);
+	}
 	new_cmd->array_cmd = array_cmds;
 	new_cmd->fd_in = STDIN_FILENO;
 	new_cmd->fd_out = STDOUT_FILENO;

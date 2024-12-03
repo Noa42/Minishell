@@ -6,6 +6,8 @@ t_token *add_token(t_token *token_list, t_token_type token_type)
 	t_token *p;
 
 	new_token = malloc(sizeof(t_token));
+	if (new_token == NULL)
+		return (NULL);
     new_token->token_type = token_type;
     new_token->next = NULL;
     // Si la lista está vacía, el nuevo token es el primero
@@ -53,4 +55,4 @@ t_token *free_token_list(t_token *token_list)
 		p = tmp;
 	}
 	return (NULL);
-	}
+}

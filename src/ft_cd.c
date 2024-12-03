@@ -37,6 +37,11 @@ void ft_cd(t_cmd *cmd)
     }
     oldpwd = malloc(sizeof(char)* 1024);
     pwd = malloc(sizeof(char)* 1024);
+    if (oldpwd == NULL || pwd == NULL)
+    {
+        ft_putstr_fd("Cannot allocate memory\n", 2);
+        exit_process(cmd->data, 1);
+    }
     getcwd(oldpwd, 1024);
     if (cmd->array_cmd[1] == NULL || ft_strcmp(cmd->array_cmd[1], "~") == 0)
     {

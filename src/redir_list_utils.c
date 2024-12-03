@@ -5,6 +5,8 @@ t_redir *new_redir(t_redir_type type, char *input) //la input es siempre un char
 	t_redir *new_redir;
 
 	new_redir = malloc(sizeof(t_redir));
+	if (new_redir == NULL)
+		return (NULL);
 	new_redir->type = type;
 	new_redir->in_name = NULL;
 	new_redir->out_name = NULL;
@@ -42,6 +44,11 @@ void add_redir(t_cmd *cmd, t_redir *redir)
 {
 	t_redir *p;
 
+	if (redir == NULL)
+	{
+		ft_putstr_fd("Cannot allocate memory\n", 2);
+		exit_process(cmd->data, 1);
+	}
 	if (cmd->redir_list == NULL)
 	{
 		cmd->redir_list = redir;

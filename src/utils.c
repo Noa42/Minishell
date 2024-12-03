@@ -24,12 +24,15 @@ void	free_array(char **array)
 }
 char **copy_alloc_array(char **array)
 {
-	int i = 0;
+	int i;
 	char **new_array;
-	while (array[i])
-		i++;
-	new_array = malloc(sizeof(char *) * (i + 1));
-	i = 0;
+
+    i = 0;
+	new_array = malloc(sizeof(char *) * (array_len(array) + 1));
+    if(!new_array)
+    {
+        return (NULL);
+    }
 	while (array[i])
 	{
 		new_array[i] = ft_strdup(array[i]);

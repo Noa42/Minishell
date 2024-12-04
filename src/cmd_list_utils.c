@@ -1,8 +1,8 @@
 #include "../include/minishell.h"
 
-t_cmd *new_cmd(char **array_cmds, t_data *data)
+t_cmd	*new_cmd(char **array_cmds, t_data *data)
 {
-	t_cmd *new_cmd;
+	t_cmd	*new_cmd;
 
 	new_cmd = malloc(sizeof(t_cmd));
 	if (new_cmd == NULL)
@@ -19,9 +19,9 @@ t_cmd *new_cmd(char **array_cmds, t_data *data)
 	return (new_cmd);
 }
 
-t_cmd *add_cmd(t_cmd *cmd_list, t_cmd *new_cmd)
+t_cmd	*add_cmd(t_cmd *cmd_list, t_cmd *new_cmd)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
 	if (cmd_list == NULL)
 	{
@@ -35,9 +35,9 @@ t_cmd *add_cmd(t_cmd *cmd_list, t_cmd *new_cmd)
 	new_cmd->index = cmd_list_len(cmd_list)- 1;
 	return (cmd_list);
 }
-t_cmd *get_last_cmd(t_cmd *cmd_list)
+t_cmd	*get_last_cmd(t_cmd *cmd_list)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
 	p = cmd_list;
 	if (p == NULL)
@@ -47,9 +47,9 @@ t_cmd *get_last_cmd(t_cmd *cmd_list)
 	return (p);
 }
 
-t_cmd *get_cmd_by_index(t_cmd *cmd_list, int index)
+t_cmd	*get_cmd_by_index(t_cmd *cmd_list, int index)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
 	p = cmd_list;
 	if (p == NULL)
@@ -63,10 +63,10 @@ t_cmd *get_cmd_by_index(t_cmd *cmd_list, int index)
 	return (NULL);
 }
 
-int cmd_list_len(t_cmd *cmd_list)
+int	cmd_list_len(t_cmd *cmd_list)
 {
-	t_cmd *p;
-	int len;
+	t_cmd	*p;
+	int		len;
 
 	len = 0;
 	p = cmd_list;
@@ -79,10 +79,10 @@ int cmd_list_len(t_cmd *cmd_list)
 	}
 	return (len);
 }
-t_cmd *free_cmd_list(t_cmd *cmd_list)
+t_cmd	*free_cmd_list(t_cmd *cmd_list)
 {
-	t_cmd *p;
-	t_cmd *tmp;
+	t_cmd	*p;
+	t_cmd	*tmp;
 
 	p = cmd_list;
 	while (p)
@@ -95,7 +95,7 @@ t_cmd *free_cmd_list(t_cmd *cmd_list)
 	}
 	return (NULL);
 }
-void free_cmd(t_cmd *cmd)
+void	free_cmd(t_cmd *cmd)
 {
 	if (cmd->array_cmd)
 		free_array(cmd->array_cmd);
@@ -108,15 +108,15 @@ void free_cmd(t_cmd *cmd)
 	free(cmd);
 	cmd = NULL;
 }
-int is_last_cmd(t_cmd *cmd)
+int	is_last_cmd(t_cmd *cmd)
 {
-    if(cmd->next == NULL)
-        return (1);
-    return (0);
+    if (cmd->next == NULL)
+		return (1);
+	return (0);
 }
-int is_first_cmd(t_cmd *cmd)
+int	is_first_cmd(t_cmd *cmd)
 {
-    if(cmd->index == 0)
-        return (1);
-    return (0);
+	if (cmd->index == 0)
+		return (1);
+	return (0);
 }

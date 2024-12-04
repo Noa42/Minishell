@@ -1,8 +1,8 @@
 #include "../include/minishell.h"
 
-t_redir *new_redir(t_redir_type type, char *input) //la input es siempre un char * que dependiendo del tipo de redirecion se guarda como nombre del archivo de salida o de entrada o como el delimitador del heredoc
+t_redir	*new_redir(t_redir_type type, char *input) //la input es siempre un char * que dependiendo del tipo de redirecion se guarda como nombre del archivo de salida o de entrada o como el delimitador del heredoc
 {
-	t_redir *new_redir;
+	t_redir	*new_redir;
 
 	new_redir = malloc(sizeof(t_redir));
 	if (new_redir == NULL)
@@ -24,10 +24,10 @@ t_redir *new_redir(t_redir_type type, char *input) //la input es siempre un char
 	return (new_redir);
 }
 
-void update_index_redir_list(t_redir *redir_list)
+void	update_index_redir_list(t_redir *redir_list)
 {
-	t_redir *p;
-	int i;
+	t_redir	*p;
+	int		i;
 
 	i = 0;
 	p = redir_list;
@@ -40,9 +40,9 @@ void update_index_redir_list(t_redir *redir_list)
 		p = p->next;
 	}
 }
-void add_redir(t_cmd *cmd, t_redir *redir)
+void	add_redir(t_cmd *cmd, t_redir *redir)
 {
-	t_redir *p;
+	t_redir	*p;
 
 	if (redir == NULL)
 	{
@@ -60,10 +60,11 @@ void add_redir(t_cmd *cmd, t_redir *redir)
 	p->next = redir;
 	update_index_redir_list(cmd->redir_list);
 }
-t_redir *free_redir_list(t_redir *redir_list)
+
+t_redir	*free_redir_list(t_redir *redir_list)
 {
-	t_redir *p;
-	t_redir *tmp;
+	t_redir	*p;
+	t_redir	*tmp;
 
 	p = redir_list;
 	while (p)

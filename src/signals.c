@@ -1,11 +1,11 @@
 #include "../include/minishell.h"
 
-void signals(void)
+void	signals(void)
 {
 	signal(SIGINT, handle_ctrl_c); // Ctrl+C imprime una nueva entrada en una línea nueva.
 	signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
  	signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
-    //Ctrl+D debe cerrar el programa. Pero esto no lo hacemos con las señales porque cuando pulsamos ctrl+d es como si por readline le metieramos Null y entonces el bucle principal del main se cierra.
+	//Ctrl+D debe cerrar el programa. Pero esto no lo hacemos con las señales porque cuando pulsamos ctrl+d es como si por readline le metieramos Null y entonces el bucle principal del main se cierra.
 }
 
 void	handle_ctrl_c(int signal)

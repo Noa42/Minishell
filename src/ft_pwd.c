@@ -1,17 +1,17 @@
 #include "../include/minishell.h"
 
-void ft_pwd(t_cmd *cmd)
+void	ft_pwd(t_cmd *cmd)
 {
-    char *dir;
+	char	*dir;
 
-    dir = malloc(sizeof(char)* 1024);
-    if (dir == NULL)
-    {
-        ft_putstr_fd("Cannot allocate memory\n", 2);
-        exit_process(cmd->data, 1);
-    }
-    getcwd(dir, 1024);
-    printf("%s\n", dir);
-    free(dir);
-    builtin_end(cmd->data, 0);
+	dir = malloc(sizeof(char) * 1024);
+	if (dir == NULL)
+	{
+		ft_putstr_fd("Cannot allocate memory\n", 2);
+		exit_process(cmd->data, 1);
+	}
+	getcwd(dir, 1024);
+	printf("%s\n", dir);
+	free(dir);
+	builtin_end(cmd->data, 0);
 }

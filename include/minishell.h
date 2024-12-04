@@ -137,7 +137,7 @@ void					free_data(t_data *data);
 void					reboot_data(t_data *data);
 
 //PRUEBAS EJECTUCION
-void					prueba_ejecucion(t_data *data);
+void					execution(t_data *data);
 void					one_cmd_case(t_data *data);
 void					multiple_cmd_case(t_data *data);
 // SIGNALS

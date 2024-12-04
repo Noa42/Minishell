@@ -1,24 +1,24 @@
 #include "../include/minishell.h"
 
-void print_token_list(t_token *token_list)
+void	print_token_list(t_token *token_list)
 {
-    t_token *p;
-	
+	t_token	*p;
+
 	p = token_list;
 	printf("+++++++++++++++TOKEN_LIST+++++++++++++++\n");
-    if (!p)
-    {
-        printf("Empty token_list\n");
-        return;
-    }
-    while (p)
-    {
-        printf("[%i]Token: %s\n",p->index, token_type_to_string(p->token_type));
-        p = p->next;
-    }
+	if (!p)
+	{
+		printf("Empty token_list\n");
+		return ;
+	}
+	while (p)
+	{
+		printf("[%i]Token: %s\n",p->index, token_type_to_string(p->token_type));
+		p = p->next;
+	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
-char *token_type_to_string(t_token_type token_type)
+char	*token_type_to_string(t_token_type token_type)
 {
 	if (token_type == CMD)
 		return ("CMD");
@@ -28,16 +28,16 @@ char *token_type_to_string(t_token_type token_type)
 		return ("REDIR");
 	return ("UNKNOWN");
 }
-void print_cmd_list(t_cmd *cmd_list)
+void	print_cmd_list(t_cmd *cmd_list)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
 	p = cmd_list;
 	printf("+++++++++++++++CMD_LIST+++++++++++++++\n");
 	if (!p)
 	{
 		printf("Empty cmd_list\n");
-		return;
+		return ;
 	}
 	while (p)
 	{
@@ -47,7 +47,7 @@ void print_cmd_list(t_cmd *cmd_list)
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
-void print_cmd(t_cmd *cmd)
+void	print_cmd(t_cmd *cmd)
 {
 	printf("------------[%i]CMD---------------- \n", cmd->index);
 	print_array(cmd->array_cmd);
@@ -56,12 +56,12 @@ void print_cmd(t_cmd *cmd)
 	printf("\n");
 }
 
-void print_redir(t_redir *redir)
+void	print_redir(t_redir *redir)
 {
-	if(redir==NULL)
+	if (redir == NULL)
 	{
 		printf("Empty redir\n");
-		return;
+		return ;
 	}
 	printf("[%i]Redir:\n", redir->index);
 	printf("-Type: %s\n", redir_type_to_string(redir->type));
@@ -72,25 +72,26 @@ void print_redir(t_redir *redir)
 	printf("-fd_out: %i\n", redir->fd_out);
 }
 
-void print_redir_list(t_redir *redir_list)
+void	print_redir_list(t_redir *redir_list)
 {
-	t_redir *p;
+	t_redir	*p;
 
 	p = redir_list;
 	printf("+REDIR_LIST+\n");
 	if (!p)
 	{
 		printf("Empty redir_list\n");
-		return;
+		return ;
 	}
 	while (p)
-	{	
+	{
 		print_redir(p);
 		p = p->next;
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
-char *redir_type_to_string(t_redir_type type)
+
+char	*redir_type_to_string(t_redir_type type)
 {
 	if (type == INPUT)
 		return ("INPUT");

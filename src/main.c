@@ -37,30 +37,31 @@ void	init_data(t_data *data, char **env)
 	data->here_doc_counter = 0;
 	//data-> pipe = NULL;
 }
-void    free_data(t_data *data)
+
+void	free_data(t_data *data)
 {
 	//Está por rellenar
-	if(data->env)
+	if (data->env)
 		free_array(data->env);
-	if(data->array_var)
+	if (data->array_var)
 		free_array(data->array_var);
-	if(data->cmd_list)
+	if (data->cmd_list)
 		free_cmd_list(data->cmd_list);
-	if(data->token_list)
+	if (data->token_list)
 		free_token_list(data->token_list);
-    if (data->input)
+	if (data->input)
 		free(data->input);
 	rl_clear_history();//limpia el historial de readline
 	close_fds();
 }
-void reboot_data(t_data *data)
+void	reboot_data(t_data *data)
 {
 	//Rellenar con el la memoria que haya alocado alvaro
-	if(data->input)
+	if (data->input)
 		free(data->input);
-	if(data->cmd_list)
+	if (data->cmd_list)
 		data->cmd_list = free_cmd_list(data->cmd_list);
-	if(data->token_list)
+	if (data->token_list)
 		data->token_list = free_token_list(data->token_list);
 	data->input = NULL;
 	data->cmd_list = NULL;
@@ -72,12 +73,12 @@ void reboot_data(t_data *data)
 
 int	interact_mode = 0;
 
-int	main(int argc, char** argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	int exit_status;
+	int		exit_status;
 
-	(void)argc; 
+	(void)argc;
 	(void)argv;
 	init_data(&data, env);
 	signals();
@@ -88,12 +89,12 @@ int	main(int argc, char** argv, char **env)
 			break ;
 		history(data.input);
 		//parsing(&data);
-		if(data.exit_status == 0)
-			prueba_ejecucion(&data);
+		if (data.exit_status == 0)
+			execution(&data);
 		reboot_data(&data);
 	}
 	exit_status = data.exit_status; //esto es para que cuando hagamos ctrl+d el exit status sea el que corresponda
-    free_data(&data);
+	free_data(&data);
 	printf("exit\n");
 	return (exit_status);
 }

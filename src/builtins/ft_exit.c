@@ -15,6 +15,7 @@ int	is_a_num(const char *str)
 	}
 	return (1);
 }
+
 int	i_to_exit_status(int exit_status)
 {
 	if (exit_status < 0) //si es negativo se le resta a 256

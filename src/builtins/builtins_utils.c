@@ -12,7 +12,7 @@ char	*ft_var_name(char *name_value)
 
 char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en una cadena del array env concreto
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (name_value[i] != '=' && name_value[i] != '\0')
@@ -23,16 +23,21 @@ char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
 char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
 {
 	int	i;
+	char *empty_value;
 
+	empty_value = ft_strdup("");
 	i = 0;
 	while (env[i])
 	{
 		if ((ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0)
 			&& env[i][ft_strlen(var_name)] == '=') //Si el nombre de la variable coincide con el principio de la cadena y el siguiente caracter es un = entonces es la variable que buscamos
+		{
+			free(empty_value);
 			return (ft_var_value(env[i]));
+		}
 		i++;
 	}
-	return ("\0");
+	return (empty_value); //si no encuentra la variable manda un valor vacio allocado en memoria
 }
 
 char	**insert_var(char **array, char *var_name, char *var_value)

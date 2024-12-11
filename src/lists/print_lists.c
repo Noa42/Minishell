@@ -146,10 +146,11 @@ void instrucciones_ejemplo_listas(t_data *data)
 	////REDIRECCIONES
 	//A un comando concreto (ya se el último o el que queramos obtener con el índice) le añadimos redirecciones con la función add_redir
 	//NUEVO ahora al hacer new_redir le pasamos el tipo y el nombre del archivo (la función se encarga de guardarala en in_name o out_name en función del tipo) Si es Heredoc lo se le megte es el delimitador o end_marker
-	add_redir(get_last_cmd(data->cmd_list), new_redir(HERE_DOC, NULL));//al último le añadimos una primera redirección de tipo HERE_DOC
-	add_redir(get_last_cmd(data->cmd_list), new_redir(OUTPUT, "out4.txt")); //al último le añadimos una segunda redirección de tipo OUTPUT
-	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in1.txt"));//al comando con índice 0 le añadimos una redirección de tipo INPUT
-	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out.txt"));//al comando con índice 0 le añadimos una redirección de tipo APPEND
+	//NUEVO ahora al hacer new_redir le pasamos también la data para enlazar su redir->data con la data que le pasamos
+	add_redir(get_last_cmd(data->cmd_list), new_redir(HERE_DOC, "eof", data));//al último le añadimos una primera redirección de tipo HERE_DOC
+	add_redir(get_last_cmd(data->cmd_list), new_redir(OUTPUT, "out4.txt", data)); //al último le añadimos una segunda redirección de tipo OUTPUT
+	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in1.txt", data));//al comando con índice 0 le añadimos una redirección de tipo INPUT
+	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out.txt", data));//al comando con índice 0 le añadimos una redirección de tipo APPEND
 
 
 	//Para imprimir la lista de comandos usamos print_cmd_list (te imprime tambien las redirecciones si las hay)

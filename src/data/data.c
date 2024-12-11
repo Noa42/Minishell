@@ -2,8 +2,13 @@
 
 void	init_data(t_data *data, char **env)
 {
-	data->env = copy_alloc_array(env);
-	data->array_var = copy_alloc_array(env);
+	if (env[0] == NULL)
+		empty_env(data);
+	else
+	{
+		data->env = copy_alloc_array(env);
+		data->array_var = copy_alloc_array(env);
+	}
 	if (data->env == NULL || data->array_var == NULL)
 	{
 		ft_putstr_fd("Cannot allocate memory\n", 2);
@@ -16,6 +21,7 @@ void	init_data(t_data *data, char **env)
 	data->token_list = NULL;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
+	data->exit_status = 0;
 	//data-> pipe = NULL;
 }
 
@@ -50,4 +56,17 @@ void	reboot_data(t_data *data)
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	close_fds();
+}
+void	empty_env(t_data *data)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	data->env = malloc(sizeof(char *) * 4);
+	data->env[0] = ft_strdup("OLDPWD");
+	data->env[1] = ft_strjoin("PWD=", pwd);
+	data->env[2] = ft_strdup("SHLVL=1");
+	data->env[3] = NULL;
+	data->array_var = copy_alloc_array(data->env);
+	free(pwd);
 }

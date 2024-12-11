@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-t_redir	*new_redir(t_redir_type type, char *input) //la input es siempre un char * que dependiendo del tipo de redirecion se guarda como nombre del archivo de salida o de entrada o como el delimitador del heredoc
+t_redir	*new_redir(t_redir_type type, char *input, t_data *data) //la input es siempre un char * que dependiendo del tipo de redirecion se guarda como nombre del archivo de salida o de entrada o como el delimitador del heredoc
 {
 	t_redir	*new_redir;
 
@@ -17,7 +17,7 @@ t_redir	*new_redir(t_redir_type type, char *input) //la input es siempre un char
 		new_redir->out_name = input;
 	else if (type == HERE_DOC)
 		new_redir->delim = input;
-	new_redir->data = NULL;
+	new_redir->data = data;
 	new_redir->next = NULL;
 	return (new_redir);
 }

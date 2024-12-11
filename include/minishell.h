@@ -119,6 +119,7 @@ void					ft_exit(t_cmd *cmd);
 void					init_data(t_data *data, char **env);
 void					free_data(t_data *data);
 void					reboot_data(t_data *data);
+void					empty_env(t_data *data);
 
 //----------------------EXECUTION----------------------
 
@@ -158,7 +159,7 @@ void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
 void					instrucciones_ejemplo_listas(t_data *data);//BORRAR
 //////REDIR LIST UTILS
-t_redir					*new_redir(t_redir_type type, char *input);
+t_redir					*new_redir(t_redir_type type, char *input, t_data *data);
 void					update_index_redir_list(t_redir *redir_list);
 void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*free_redir_list(t_redir *redir_list);

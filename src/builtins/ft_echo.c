@@ -28,6 +28,7 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 {
 	int		i;
 	char	*var_name;
+	char	*var_value;	
 
 	i = 0;
 	while (input[i] != '\0')
@@ -36,9 +37,10 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 		{
 			i++;
 			var_name = get_exp_var(input, i);//aloca una subcadena desde despues de $ hasta el siquiente espacio o \0 por lo que devuelve el nombre de la variable a imprimir
-			//if(ft_getenv(var_name, env) != NULL)
-			ft_printf("%s", ft_getenv(var_name, env));//imprime el valor de la variable
+			var_value = ft_getenv(var_name, env);//obtiene el valor de la variable
+			ft_printf("%s", var_value);//imprime el valor de la variable
 			free(var_name);
+			free(var_value);
 			return ;
 		}
 		else

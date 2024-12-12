@@ -34,7 +34,7 @@ void	print_cmd_list(t_cmd *cmd_list)
 
 	p = cmd_list;
 	printf("+++++++++++++++CMD_LIST+++++++++++++++\n");
-	if (!p)
+	if (p == NULL)
 	{
 		printf("Empty cmd_list\n");
 		return ;

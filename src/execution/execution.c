@@ -86,7 +86,8 @@ void	child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
 		if (cmd->fd_in == -1 || cmd->fd_out == -1)
 			exit_process(data, data->exit_status);
 		path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
-		execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
+		if (path != NULL)
+			execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
 		ft_printf("Comand not found\n", 2);
 		exit_process(data, 127);
 	}
@@ -114,10 +115,11 @@ void	execution(t_data *data)
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
 	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
+	// print_cmd_list(data->cmd_list);
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file1.txt"));
-	// if (cmd_list_len(data->cmd_list) >= 2)
+	if (cmd_list_len(data->cmd_list) >= 2)
+	    add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2", data));
 	// {
-	//     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2"));
 	//     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(OUTPUT, "out_file2.txt"));
 	// }
 	// if (cmd_list_len(data->cmd_list) >= 3)
@@ -178,7 +180,8 @@ void	one_cmd_case(t_data *data)
 			if (cmd->fd_in == -1 || cmd->fd_out == -1)
 				exit(cmd->data->exit_status);
 			path = get_path(cmd->array_cmd[0], data->env);
-			execve(path, cmd->array_cmd, data->env);
+			if (path != NULL)
+				execve(path, cmd->array_cmd, data->env);
 			ft_printf("Comand not found\n", 2);//esto solo ocurre si el execve falla
 			exit(127);
 		}

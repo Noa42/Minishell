@@ -42,6 +42,7 @@ src/lists/print_lists.c\
 src/main/main.c\
 src/redirs/APPEND_redir.c\
 src/redirs/HERE_DOC_redir.c\
+src/redirs/HERE_DOC_redir_utils.c\
 src/redirs/INPUT_redir.c\
 src/redirs/OUTPUT_redir.c\
 src/redirs/redirs_execution.c\

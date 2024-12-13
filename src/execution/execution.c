@@ -118,7 +118,7 @@ void	execution(t_data *data)
 	//add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
-	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
+	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
 	// print_cmd_list(data->cmd_list);
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file1.txt", data));
 	// if (cmd_list_len(data->cmd_list) >= 2)
@@ -196,4 +196,5 @@ void	one_cmd_case(t_data *data)
 		}
 	}
 	insert_var(data->env, "_", cmd->array_cmd[0]);
+	insert_var(data->array_var, "_", cmd->array_cmd[0]);
 }

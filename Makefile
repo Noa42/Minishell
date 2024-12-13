@@ -32,7 +32,10 @@ src/builtins/ft_export.c\
 src/builtins/ft_pwd.c\
 src/builtins/ft_unset.c\
 src/data/data.c\
+src/execution/execution_utils.c\
 src/execution/execution.c\
+src/execution/multiple_cmd.c\
+src/execution/one_cmd.c\
 src/execution/path.c\
 src/lists/cmd_list_utils_1.c\
 src/lists/cmd_list_utils_2.c\

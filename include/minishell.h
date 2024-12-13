@@ -119,6 +119,7 @@ void					delete_var(char **array, char *var_name);
 void					ft_exit(t_cmd *cmd);
 
 //----------------------DATA----------------------
+////// DATA
 void					init_data(t_data *data, char **env);
 void					free_data(t_data *data);
 void					reboot_data(t_data *data);
@@ -126,15 +127,18 @@ void					empty_env(t_data *data);
 
 //----------------------EXECUTION----------------------
 
-////// EXECUTION
-void					exit_process(t_data *data, int exit_status);
-void					multiple_cmd_case(t_data *data);
-void					one_cmd_case(t_data *data);
-int						is_first_cmd(t_cmd *cmd);
-int						is_last_cmd(t_cmd *cmd);
-void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
-void					execution(t_data *data);
+////// EXECUTION UTILS
 void					close_fds(void);
+void					exit_process(t_data *data, int exit_status);
+////// EXECUTION
+void					basic_parsing(t_data *data);//borrar
+void					execution(t_data *data);
+////// MULTIPLE CMD
+void					multiple_cmd_case(t_data *data);
+void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
+////// ONE CMD
+void					one_cmd_case(t_data *data);
+void					one_builtin_case(t_cmd *cmd);
 ////// PATH
 char					*get_path_line(char **env);
 char					*get_path(char *command, char **env);

@@ -74,12 +74,14 @@ void	empty_env(t_data *data)
 {
 	char	*pwd;
 
-	pwd = getcwd(NULL, 0);
-	data->env = malloc(sizeof(char *) * 4);
+	pwd = malloc(sizeof(char) * 1024);
+	getcwd(pwd, 1024);
+	data->env = malloc(sizeof(char *) * 5);
 	data->env[0] = ft_strdup("OLDPWD");
 	data->env[1] = ft_strjoin("PWD=", pwd);
 	data->env[2] = ft_strdup("SHLVL=1");
-	data->env[3] = NULL;
+	data->env[3] = ft_strdup("_=EMPTY");
+	data->env[4] = NULL;
 	data->array_var = copy_alloc_array(data->env);
 	free(pwd);
 }

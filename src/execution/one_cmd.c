@@ -1,16 +1,28 @@
 #include "../../include/minishell.h"
 
-void	update_last_command (t_cmd *cmd)
+void	update_last_command(t_cmd *cmd)
 {
 	insert_var(cmd->data->env, "_", cmd->array_cmd[0]);
 	insert_var(cmd->data->array_var, "_", cmd->array_cmd[0]);
+}
+void	one_cmd_child(t_cmd* cmd, t_data *data)
+{
+	char	*path;
+
+	dup_fds_redirs(cmd);
+	if (cmd->fd_in == -1 || cmd->fd_out == -1)
+		exit(cmd->data->exit_status);
+	path = get_path(cmd->array_cmd[0], data->env);
+	if (path != NULL)
+		execve(path, cmd->array_cmd, data->env);
+	ft_putstr_fd("Comand not found\n", 2);//esto solo ocurre si el execve falla
+	exit(127);
 }
 
 void	one_cmd_case(t_data *data)
 {
 	t_cmd	*cmd;
 	pid_t	pid;
-	char	*path;
 	int		status;
 
 	cmd = data->cmd_list;
@@ -21,16 +33,7 @@ void	one_cmd_case(t_data *data)
 	{
 		pid = fork();
 		if (pid == 0)
-		{
-			dup_fds_redirs(cmd);
-			if (cmd->fd_in == -1 || cmd->fd_out == -1)
-				exit(cmd->data->exit_status);
-			path = get_path(cmd->array_cmd[0], data->env);
-			if (path != NULL)
-				execve(path, cmd->array_cmd, data->env);
-			ft_putstr_fd("Comand not found\n", 2);//esto solo ocurre si el execve falla
-			exit(127);
-		}
+			one_cmd_child(cmd, cmd->data);
 		else
 		{
 			waitpid(pid, &status, 0); //El exit status es una info que se tiene que interpretar con la macro WIFEXITED

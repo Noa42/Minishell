@@ -1,11 +1,10 @@
 #include "../../include/minishell.h"
 
-void	signals_handler(void)
+void	handle_backlash(int sign)
 {
-	signal(SIGINT, handle_ctrl_c); // Ctrl+C imprime una nueva entrada en una línea nueva.
-	signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
- 	signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
-	//Ctrl+D debe cerrar el programa. Pero esto no lo hacemos con las señales porque cuando pulsamos ctrl+d es como si por readline le metieramos Null y entonces el bucle principal del main se cierra.
+	(void)sign;
+	if (g_signal_flag == 1)
+		printf("Quit (core dumped) \n");
 }
 
 void	handle_ctrl_c(int signal)
@@ -14,5 +13,25 @@ void	handle_ctrl_c(int signal)
 	write(1, "\n", 1);
 	rl_replace_line("", 1); // el 1 es clear_undo = 1, un modo para que no podamos dehacer lo escrito en la line (no tenemos que implementarlo en el proyecto)
 	rl_on_new_line();
-	rl_redisplay(); //refresca para que aparezca el prompt inmediatamente
+	if (g_signal_flag == 0)
+		rl_redisplay(); //refresca para que aparezca el prompt inmediatamente
+}
+void	signals_handler(void)
+{
+	if (g_signal_flag == 2) //Heredoc
+	{
+		signal(SIGINT, SIG_IGN); // Ctrl+C debe ignorarse.
+		signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
+		signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
+	}
+	else
+	{
+		signal(SIGINT, handle_ctrl_c); // Ctrl+C imprime una nueva entrada en una línea nueva.
+		if (g_signal_flag == 0)
+			signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
+		else
+			signal(SIGQUIT, handle_backlash); // Ctrl+\ debe ignorarse.
+		signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
+		//Ctrl+D debe cerrar el programa. Pero esto no lo hacemos con las señales porque cuando pulsamos ctrl+d es como si por readline le metieramos Null y entonces el bucle principal del main se cierra.
+	}
 }

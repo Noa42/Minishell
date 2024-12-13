@@ -38,7 +38,13 @@ void	apply_last_in_redir(t_cmd *cmd)
 		if (last_in_redir->type == INPUT)
 			apply_INPUT_redir(cmd, last_in_redir);
 		else if (last_in_redir->type == HERE_DOC)
+		{
+			g_signal_flag = 2;
+			signals_handler();
 			apply_HERE_DOC_redir(cmd, last_in_redir);
+			g_signal_flag = 1;
+			signals_handler();
+		}
 	}
 	else
 		cmd->fd_in = 0;

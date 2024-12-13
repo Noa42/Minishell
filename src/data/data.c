@@ -1,5 +1,15 @@
 #include "../../include/minishell.h"
 
+void	update_shlvl(t_data *data)
+{
+	int	shlvl;
+
+	shlvl = ft_atoi(ft_getenv("SHLVL", data->env));
+	shlvl++;
+	insert_var(data->env, "SHLVL", ft_itoa(shlvl));
+	insert_var(data->array_var, "SHLVL", ft_itoa(shlvl));
+}
+
 void	init_data(t_data *data, char **env)
 {
 	if (env[0] == NULL)
@@ -22,6 +32,7 @@ void	init_data(t_data *data, char **env)
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	data->exit_status = 0;
+	update_shlvl(data);
 	//data-> pipe = NULL;
 }
 
@@ -55,6 +66,8 @@ void	reboot_data(t_data *data)
 	data->token_list = NULL;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
+	g_signal_flag = 0;
+	signals_handler();
 	close_fds();
 }
 void	empty_env(t_data *data)

@@ -1,6 +1,6 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-extern int interact_mode;
+extern int g_signal_flag;
 
 #endif

@@ -26,8 +26,11 @@ char	*get_path(char *command, char **env)
 	char	*temp;
 
 	i = 0;
-	if (command[0] == '/')
-		return (command);
+	if (ft_strchr(command, '/') != NULL)
+	{
+		if (access(command, F_OK) == 0)
+			return (command);
+	}
 	path_line = get_path_line(env);
 	path_array = ft_split(path_line, ':');
 	while (path_array[i])
@@ -40,6 +43,5 @@ char	*get_path(char *command, char **env)
 		free(path_final);
 		i++;
 	}
-	free_array(path_array);
-	return (NULL);
+	return (free_array(path_array), NULL);// sucio intentar cambiar si tengo tiempo
 }

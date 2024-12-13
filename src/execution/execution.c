@@ -79,6 +79,7 @@ void	child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
 		if (cmd->fd_in == -1 || cmd->fd_out == -1)
 			exit_process(data, data->exit_status);
 		exec_builtin(cmd);
+		insert_var(data->env, "_", cmd->array_cmd[0]);
 		exit_process(data, data->exit_status);
 	}
 	else
@@ -86,9 +87,10 @@ void	child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
 		if (cmd->fd_in == -1 || cmd->fd_out == -1)
 			exit_process(data, data->exit_status);
 		path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
+		insert_var(data->env, "_", cmd->array_cmd[0]);
 		if (path != NULL)
 			execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
-		ft_printf("Comand not found\n", 2);
+		ft_putstr_fd("Comand not found\n", 2);	
 		exit_process(data, 127);
 	}
 }
@@ -109,18 +111,20 @@ void	basic_parsing(t_data *data)
 }
 void	execution(t_data *data)
 {
+	g_signal_flag = 1;
+	signals_handler();
 	basic_parsing(data);
 	//add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
 	//add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
-	add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
+	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
 	// print_cmd_list(data->cmd_list);
-	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file1.txt"));
-	if (cmd_list_len(data->cmd_list) >= 2)
-	    add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2", data));
+	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file1.txt", data));
+	// if (cmd_list_len(data->cmd_list) >= 2)
 	// {
-	//     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(OUTPUT, "out_file2.txt"));
+	//     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(HERE_DOC, "delim2", data));
+	//     add_redir(get_cmd_by_index(data->cmd_list, 1), new_redir(OUTPUT, "out_file2.txt", data));
 	// }
 	// if (cmd_list_len(data->cmd_list) >= 3)
 	// {
@@ -182,7 +186,7 @@ void	one_cmd_case(t_data *data)
 			path = get_path(cmd->array_cmd[0], data->env);
 			if (path != NULL)
 				execve(path, cmd->array_cmd, data->env);
-			ft_printf("Comand not found\n", 2);//esto solo ocurre si el execve falla
+			ft_putstr_fd("Comand not found\n", 2);//esto solo ocurre si el execve falla
 			exit(127);
 		}
 		else
@@ -191,4 +195,5 @@ void	one_cmd_case(t_data *data)
 			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
 		}
 	}
+	insert_var(data->env, "_", cmd->array_cmd[0]);
 }

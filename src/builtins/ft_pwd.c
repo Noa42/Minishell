@@ -10,8 +10,8 @@ void	ft_pwd(t_cmd *cmd)
 		ft_putstr_fd("Cannot allocate memory\n", 2);
 		exit_process(cmd->data, 1);
 	}
-	getcwd(dir, 1024);
-	printf("%s\n", dir);
+	if (getcwd(dir, 1024) != NULL)
+		printf("%s\n", dir);
 	free(dir);
-	builtin_end(cmd->data, 0);
+	builtin_end(cmd->data, errno);
 }

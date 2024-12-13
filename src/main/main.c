@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	interact_mode = 0;
+int	g_signal_flag = 0;
 
 int	main(int argc, char **argv, char **env)
 {

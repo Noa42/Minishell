@@ -104,6 +104,9 @@ void					ft_pwd(t_cmd *cmd);
 ////// FT_CD
 void					ft_cd_home(t_data *data, char *oldpwd, char *pwd);
 void					ft_cd(t_cmd *cmd);
+void					safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd);
+void					update_env(t_data *data, char *oldpwd, char *pwd);
+void					free_dirs(char *oldpwd, char *pwd);
 ////// FT_ENV
 void					ft_env(t_cmd *cmd);
 ////// FT_EXPORT

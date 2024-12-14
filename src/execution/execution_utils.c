@@ -17,3 +17,13 @@ void	close_fds(void)
 		i++;
 	}
 }
+
+void	safe_fork(pid_t *pid, t_data *data)
+{
+	*pid = fork();
+	if (*pid == -1)
+	{
+		ft_putstr_fd("Fork error\n", 2);
+		exit_process(data, 1);
+	}
+}

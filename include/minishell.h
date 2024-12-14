@@ -25,6 +25,12 @@ typedef struct s_cmd	t_cmd;
 typedef struct s_pipe	t_pipe;
 typedef struct s_redir	t_redir;
 
+typedef enum e_quote_status
+{
+	DOUB_QUOT = 34,
+	ONE_QUOT = 39
+}   t_quote_status;
+
 typedef enum e_token_type
 {
 	CMD,
@@ -69,10 +75,28 @@ typedef struct s_token
 	struct s_token		*next;
 }						t_token;
 
+typedef struct s_parsing
+{
+	int 				count;
+    int 				how_much; 
+    int 				reject;
+    char 				flag;
+	char				**arr_lexems;
+	char				**arr_tokens;
+	int					index_arr;
+	int					init_index;
+	int					end_index;
+	int					cnt_new_str;
+	int					len;
+	char				flag_space;
+	t_data				*ptrdata;
+}						t_parsing;
+
 typedef struct s_data
 {
 	char				**env;
 	char				*input;
+	char				*in_ax;
 	char				**array_var;
 	int					exit_status;
 	t_token				*token_list;
@@ -80,6 +104,7 @@ typedef struct s_data
 	int					pipe[2];
 	int					here_doc_counter;
 	int					parsing_error;
+	t_parsing			prs;
 }						t_data;
 
 //----------------------BUILTINS----------------------
@@ -119,7 +144,6 @@ void					delete_var(char **array, char *var_name);
 void					ft_exit(t_cmd *cmd);
 
 //----------------------DATA----------------------
-////// DATA
 void					init_data(t_data *data, char **env);
 void					free_data(t_data *data);
 void					reboot_data(t_data *data);
@@ -130,6 +154,7 @@ void					empty_env(t_data *data);
 ////// EXECUTION UTILS
 void					close_fds(void);
 void					exit_process(t_data *data, int exit_status);
+void					safe_fork(pid_t *pid, t_data *data);
 ////// EXECUTION
 void					basic_parsing(t_data *data);//borrar
 void					execution(t_data *data);
@@ -213,7 +238,7 @@ void					handle_ctrl_c(int signal);
 
 ////// UTILS (1)
 void					history(char *input);
-int						only_spaces(char *input);
+int						ft_only_spaces(char *input);
 int						array_len(char **array);
 void					swap(char **a, char **b);
 int						ft_strcmp(const char *s1, const char *s2);
@@ -224,5 +249,38 @@ void					free_array(char **array);
 char					**copy_alloc_array(char **array);
 void					sort_strings(char **array, int size);
 char					**realloc_elonged_array(char **src_array);
+
+//----------------------PARSING----------------------
+
+// PARSING-SPLIT
+void    				ft_start_parsing(char *str, t_parsing *prs, int top);
+void					ft_init_parsing_struc(t_parsing *prs);
+void				    ft_if_single_quote(t_parsing *prs);
+void 					ft_if_doub_quote(t_parsing *prs);
+void    				ft_create_arr_lexem(char *str, t_parsing *prs);
+void				    ft_string_by_string(char *str, t_parsing *prs);
+void				    ft_split_strings(char *str, t_parsing *prs);
+void				    ft_if_doub_quote_split_strings(t_parsing *prs, char *str);
+void    				ft_if_single_quote_split_strings(t_parsing *prs, char *str);
+void    				ft_create_a_space_lexem(t_parsing *prs);
+int    					ft_if_lexem_only_single_quotes(char *str, t_parsing *prs);
+int					    ft_if_lexem_only_doub_quotes(char *str, t_parsing *prs);
+void    				ft_print_prs_err(char flag, t_parsing *prs);
+void					ft_move_counts(t_parsing	*prs);
+void					ft_string_by_string_aux(char *str, t_parsing *prs);
+void					ft_printf_proofs_split_prs(t_data data); /*Que NO se nos olvide quitar esto LOL*/
+void					ft_parsing(t_data *data);
+char					*new_input(char *s, int len);
+int						ft_len(char *s, int k, int i, int add);
+int						ft_tell_if_oq(char *str, int index, int i, int flag);
+int						ft_is_spc_chr(char str);
+char					*ft_new_input(char *s, int len);
+void    				ft_init_cnt_sc(t_parsing *prs);
+void    				ft_check_if_csp(char *str, t_parsing *prs);
+void   					ft_check_if_csp_aux(char *str, t_parsing *prs);
+void    				ft_realloc_prs_o(t_parsing *prs);
+void    				ft_realloc_prs_t(t_parsing *prs);
+char					*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns);
+void					ft_create_tk_arr(t_parsing *prs);
 
 #endif

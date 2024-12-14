@@ -53,6 +53,11 @@ src/redirs/redirs_utils.c\
 src/signals/signals.c\
 src/utils/utils_1.c\
 src/utils/utils_2.c\
+src/parsing/parsing_1.c\
+src/parsing/parsing_2.c\
+src/parsing/parsing_3.c\
+src/parsing/parsing_4.c\
+src/parsing/parsing_5.c\
 
 OBJ_DIR = obj
 OBJT = $(SRC:src/%.c=$(OBJ_DIR)/%.o)

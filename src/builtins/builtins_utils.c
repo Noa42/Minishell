@@ -22,8 +22,8 @@ char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
 
 char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
 {
-	int	i;
-	char *empty_value;
+	int		i;
+	char	*empty_value;
 
 	empty_value = ft_strdup("");
 	i = 0;

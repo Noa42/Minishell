@@ -1,3 +1,0 @@
-/home/achacon-/Desktop/Minishell/src
-OLDPWD=/home/achacon-/Desktop/Minishell
-PWD=/home/achacon-/Desktop/Minishell/src

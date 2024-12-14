@@ -5,6 +5,7 @@ void	update_last_command(t_cmd *cmd)
 	insert_var(cmd->data->env, "_", cmd->array_cmd[0]);
 	insert_var(cmd->data->array_var, "_", cmd->array_cmd[0]);
 }
+
 void	one_cmd_child(t_cmd* cmd, t_data *data)
 {
 	char	*path;
@@ -31,7 +32,7 @@ void	one_cmd_case(t_data *data)
 		one_builtin_case(cmd);
 	else
 	{
-		pid = fork();
+		safe_fork(&pid, data);
 		if (pid == 0)
 			one_cmd_child(cmd, cmd->data);
 		else

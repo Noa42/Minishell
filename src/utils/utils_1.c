@@ -2,11 +2,11 @@
 
 void	history(char *input)
 {
-	if (input != NULL && ft_strlen(input) != 0 && only_spaces(input) == 0)
+	if (input != NULL && ft_strlen(input) != 0 && ft_only_spaces(input) == 0)
 		add_history(input);
 }
 
-int	only_spaces(char *input)
+int	ft_only_spaces(char *input)
 {
 	int	i;
 

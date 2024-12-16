@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:33:21 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/16 23:59:11 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/17 00:45:35 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,96 @@ PROBLEMAS:
  - Esplitear de array de strings a array de strings hasta carácter especial
  -*/ 
  
+
+ /*PROBAR:   
+ #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+// Función auxiliar para calcular la longitud de una cadena
+size_t ft_strlen(const char *str) {
+    size_t len = 0;
+    while (str[len])
+        len++;
+    return len;
+}
+
+// Función para comprobar si una cadena es un operador de redirección
+int is_redirection(const char *str) {
+    if (!str)
+        return 0;
+    size_t len = ft_strlen(str);
+    return (len == 1 && (str[0] == '<' || str[0] == '>')) ||
+           (len == 2 && ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>')));
+}
+
+// Función principal: filtra el array de strings
+char **filter_strings(char **input) {
+    // Contar cuántas strings no son redirecciones ni sus asociadas
+    int count = 0;
+    for (int i = 0; input[i] != NULL; i++) {
+        if (is_redirection(input[i])) {
+            i++; // Saltar también la siguiente string
+        } else {
+            count++;
+        }
+    }
+
+    // Reservar memoria para el nuevo array
+    char **result = malloc((count + 1) * sizeof(char *));
+    if (!result)
+        return NULL;
+
+    // Llenar el nuevo array con las strings que no sean redirecciones ni sus asociadas
+    int j = 0;
+    for (int i = 0; input[i] != NULL; i++) {
+        if (is_redirection(input[i])) {
+            i++; // Saltar también la siguiente string
+        } else {
+            result[j] = strdup(input[i]); // Copiar la cadena al nuevo array
+            if (!result[j]) {
+                // Liberar memoria en caso de error
+                for (int k = 0; k < j; k++)
+                    free(result[k]);
+                free(result);
+                return NULL;
+            }
+            j++;
+        }
+    }
+    result[j] = NULL; // Terminar el array con NULL
+    return result;
+}
+
+// Función para liberar memoria de un array de strings
+void free_strings(char **strings) {
+    if (!strings)
+        return;
+    for (int i = 0; strings[i] != NULL; i++)
+        free(strings[i]);
+    free(strings);
+}
+
+// Prueba de la función
+int main() {
+    // Array de strings de ejemplo
+    char *input[] = {
+        "CMD", "ARG1", "ARG2", "<", "FILE1",
+        "ARG3", "ARG4", "<<", "DELM", ">", 
+        "FILE2", ">>", "FILE3", "ARG5", NULL
+    };
+
+    // Filtrar las strings
+    char **filtered = filter_strings(input);
+
+    // Imprimir el resultado
+    if (filtered) {
+        for (int i = 0; filtered[i] != NULL; i++) {
+            printf("String número %d es: %s\n", i, filtered[i]);
+        }
+        free_strings(filtered); // Liberar la memoria del array filtrado
+    }
+
+    return 0;
+}
+*/

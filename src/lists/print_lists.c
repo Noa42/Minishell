@@ -116,6 +116,7 @@ void instrucciones_ejemplo_listas(t_data *data)
 	////Para liberar la memoria de la lista de tokens igualamos data->token_list a la función free_token_list
 	data->token_list = free_token_list(data->token_list);
 
+
 	//LISTA DE COMANDOS
 	//Para añadir comandos hay dos opciones:
 
@@ -145,7 +146,7 @@ void instrucciones_ejemplo_listas(t_data *data)
 
 	////REDIRECCIONES
 	//A un comando concreto (ya se el último o el que queramos obtener con el índice) le añadimos redirecciones con la función add_redir
-	//NUEVO ahora al hacer new_redir le pasamos el tipo y el nombre del archivo (la función se encarga de guardarala en in_name o out_name en función del tipo) Si es Heredoc lo se le megte es el delimitador o end_marker
+	//NUEVO ahora al hacer new_redir le pasamos el tipo y el nombre del archivo (la función se encarga de guardarala en in_name o out_name en función del tipo) Si es Heredoc lo se le mete es el delimitador o end_marker
 	//NUEVO ahora al hacer new_redir le pasamos también la data para enlazar su redir->data con la data que le pasamos
 	add_redir(get_last_cmd(data->cmd_list), new_redir(HERE_DOC, "eof", data));//al último le añadimos una primera redirección de tipo HERE_DOC
 	add_redir(get_last_cmd(data->cmd_list), new_redir(OUTPUT, "out4.txt", data)); //al último le añadimos una segunda redirección de tipo OUTPUT

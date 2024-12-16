@@ -58,6 +58,7 @@ src/parsing/parsing_2.c\
 src/parsing/parsing_3.c\
 src/parsing/parsing_4.c\
 src/parsing/parsing_5.c\
+src/send/sending_1.c\
 
 OBJ_DIR = obj
 OBJT = $(SRC:src/%.c=$(OBJ_DIR)/%.o)

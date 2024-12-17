@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/17 11:40:25 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -77,10 +89,10 @@ typedef struct s_token
 
 typedef struct s_parsing
 {
-	int 				count;
-    int 				how_much; 
-    int 				reject;
-    char 				flag;
+	int					count;
+	int					how_much;
+	int					reject;
+	char				flag;
 	char				**arr_lexems;
 	char				**arr_tokens;
 	int					index_arr;

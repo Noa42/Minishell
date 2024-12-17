@@ -282,5 +282,12 @@ void    				ft_realloc_prs_o(t_parsing *prs);
 void    				ft_realloc_prs_t(t_parsing *prs);
 char					*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns);
 void					ft_create_tk_arr(t_parsing *prs);
+void 					ft_start_sending(t_parsing *prs, t_data *data);
+void    				ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node);
+void 					ft_we_are_doing_proofs(t_parsing *prs);
+char 					**filter_strings(char **input);
+int 					is_redirection(const char *str);
+int 					is_redirection_n(const char *str);
+char 					**filter_redirections(char **input);
 
 #endif

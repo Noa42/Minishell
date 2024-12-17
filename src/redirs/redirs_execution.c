@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:43 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:57:52 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	apply_last_in_redir(t_cmd *cmd)
 	if (last_in_redir != NULL)
 	{
 		if (last_in_redir->type == INPUT)
-			apply_INPUT_redir(cmd, last_in_redir);
+			apply_input_redir(cmd, last_in_redir);
 		else if (last_in_redir->type == HERE_DOC)
 		{
 			g_signal_flag = 2;
 			signals_handler();
-			apply_HERE_DOC_redir(cmd, last_in_redir);
+			apply_heredoc_redir(cmd, last_in_redir);
 			g_signal_flag = 1;
 			signals_handler();
 		}
@@ -70,9 +70,9 @@ void	apply_last_out_redir(t_cmd *cmd)
 	if (last_out_redir != NULL)
 	{
 		if (last_out_redir->type == OUTPUT)
-			apply_OUTPUT_redir(cmd, last_out_redir);
+			apply_output_redir(cmd, last_out_redir);
 		else if (last_out_redir->type == APPEND)
-			apply_APPEND_redir(cmd, last_out_redir);
+			apply_append_redir(cmd, last_out_redir);
 	}
 	else
 		cmd->fd_out = 1;

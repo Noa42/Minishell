@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:40:25 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:02:08 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_quote_status
 {
 	DOUB_QUOT = 34,
 	ONE_QUOT = 39
-}   t_quote_status;
+}	t_quote_status;
 
 typedef enum e_token_type
 {
@@ -225,7 +225,7 @@ void					apply_redir_list(t_cmd *cmd);
 void					delete_temp_file(t_cmd *cmd, char *temp_file);
 void					prompt_loop(int here_doc_fd, t_redir *redir);
 char					*temp_file_name(t_cmd *cmd);
-void					apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir);
+void					apply_heredoc_redir(t_cmd *cmd, t_redir *redir);
 //////HERE DOC UTILS
 char					*append_char(char *str, char c);
 char					*hd_var_name(char *line, int i);
@@ -233,11 +233,11 @@ char					*append_var_value(char *expand_line, char *line, int *i, char **env);
 char					*expand_vars_hd(char *line, char **env);
 
 //////INPUT REDIR
-void					apply_INPUT_redir(t_cmd *cmd, t_redir *redir);
+void					apply_input_redir(t_cmd *cmd, t_redir *redir);
 //////OUTPUT REDIR
-void					apply_OUTPUT_redir(t_cmd *cmd, t_redir *redir);
+void					apply_output_redir(t_cmd *cmd, t_redir *redir);
 //////APPEND REDIR
-void					apply_APPEND_redir(t_cmd *cmd, t_redir *redir);
+void					apply_append_redir(t_cmd *cmd, t_redir *redir);
 //////REDIR UTILS
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);

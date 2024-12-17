@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:29 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:30 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:56:34 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	delete_temp_file(t_cmd *cmd, char *temp_file)
 	free(temp_file);
 }
 
-void	apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
+void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
 {
 	char	*temp_file;
 

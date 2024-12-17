@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:35 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:36 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:58:49 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*get_path_line(char **env)
 	path_line = path_line + 5;
 	return (path_line);
 }
+
 char	*search_path(char *command, char *path_line)
 {
 	char	**path_array;

@@ -6,13 +6,13 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:39 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:40 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:57:05 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	apply_OUTPUT_redir(t_cmd *cmd, t_redir *redir)
+void	apply_output_redir(t_cmd *cmd, t_redir *redir)
 {
 	cmd->fd_out = open(redir->out_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)

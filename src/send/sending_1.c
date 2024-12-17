@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:33:21 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/17 00:45:35 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/17 23:06:49 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 void    ft_start_sending(t_parsing *prs, t_data *data)
 {
     t_cmd   *node;
-    int i;
-    int flag;
+    int     i;
+    int     flag;
+    char    **array;
     
     flag = 0;
+    node = NULL;
     i = 0;
-    while(prs->arr_lexems[i] != NULL)
+    while(prs->arr_lexems[i] != NULL && flag == 0)
     {
         if((ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '<')
             || (ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '>')
@@ -35,76 +37,73 @@ void    ft_start_sending(t_parsing *prs, t_data *data)
             || (ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '|'))
         {
             ft_if_pipe_or_rdr(prs, data, node);
-            printf("YA HAREMOS WHATEVER\n");
-            flag ++;
+            flag = 1;
         }
         i++;
-    }    
-    if (flag == 0)
+    }
+    if(flag == 0)
     {
-        node = new_cmd(prs->arr_lexems, data);
+        array = copy_alloc_array(prs->arr_lexems);
+        node = new_cmd(array, data);
         data->cmd_list = add_cmd(data->cmd_list, node);
-        print_cmd_list(data->cmd_list);
-    }        
+    }
+    print_cmd_list(data->cmd_list);
 }
 
 void    ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node)
 {
-    
-}
-
-
-/*{   
-    t_cmd   *node;
+    char    **aux_ar_cmds;
+    char    **aux_redirs;
     int i;
-    
+
     i = 0;
-    node = new_cmd(prs->arr_lexems, data);
+    aux_ar_cmds = filter_strings(prs->arr_lexems);
+    aux_redirs = filter_redirections(prs->arr_lexems);
+    node = new_cmd(copy_alloc_array(aux_ar_cmds), data);
     data->cmd_list = add_cmd(data->cmd_list, node);
-    while(prs->arr_lexems[i] != NULL)
+    while(aux_redirs[i] != NULL)
     {
-        if(ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '<')
+        if(ft_strlen(aux_redirs[i]) == 1 && aux_redirs[i][0] == '<')
         {
             add_redir(get_last_cmd(data->cmd_list), 
-            new_redir(INPUT, prs->arr_lexems[i + 1] , data));
+            new_redir(INPUT, ft_strdup(aux_redirs[i + 1]), data));
         }
-        if(ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '>')
+        if(ft_strlen(aux_redirs[i]) == 1 && aux_redirs[i][0] == '>')
         {
             add_redir(get_last_cmd(data->cmd_list), 
-            new_redir(OUTPUT, prs->arr_lexems[i + 1] , data));
+            new_redir(OUTPUT, ft_strdup(aux_redirs[i + 1]), data));
         }
-        if(ft_strlen(prs->arr_lexems[i]) == 2 && prs->arr_lexems[i][0] == '<'
-            && prs->arr_lexems[i][1] == '<')
+        if(ft_strlen(aux_redirs[i]) == 2 && aux_redirs[i][0] == '<'
+            && aux_redirs[i][1] == '<')
         {    
             add_redir(get_last_cmd(data->cmd_list), 
-            new_redir(HERE_DOC, prs->arr_lexems[i + 1] , data));
+            new_redir(HERE_DOC, ft_strdup(aux_redirs[i + 1]), data));
         }    
-        if(ft_strlen(prs->arr_lexems[i]) == 2 && prs->arr_lexems[i][0] == '>'
-            && prs->arr_lexems[i][1] == '>')
+        if(ft_strlen(aux_redirs[i]) == 2 && aux_redirs[i][0] == '>'
+            && aux_redirs[i][1] == '>')
         {  
             add_redir(get_last_cmd(data->cmd_list), 
-            new_redir(APPEND, prs->arr_lexems[i + 1] , data));
+            new_redir(APPEND, ft_strdup(aux_redirs[i + 1]), data));
         }          
         i++;
-    } 
+    }
+    free_array(aux_ar_cmds);
+    free_array(aux_redirs);
     print_cmd_list(data->cmd_list);
 }
-
+/*
 PROBLEMAS:
  - El orden de los archivos después de caracter especial !!!
  - ¿Necesario comprobar en la función de arriba ese i + 1? Posiblemente ya me lo cargue
  en syntax error  y deje por tanto de ser necesario!!
  - Esplitear de array de strings a array de strings hasta carácter especial
  -*/ 
- 
 
- /*PROBAR:   
- #include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+
 
 // Función auxiliar para calcular la longitud de una cadena
-size_t ft_strlen(const char *str) {
+size_t ft_strlen(const char *str) 
+{
     size_t len = 0;
     while (str[len])
         len++;
@@ -112,7 +111,8 @@ size_t ft_strlen(const char *str) {
 }
 
 // Función para comprobar si una cadena es un operador de redirección
-int is_redirection(const char *str) {
+int is_redirection(const char *str) 
+{
     if (!str)
         return 0;
     size_t len = ft_strlen(str);
@@ -120,55 +120,143 @@ int is_redirection(const char *str) {
            (len == 2 && ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>')));
 }
 
+int is_redirection_n(const char *str) 
+{
+    size_t len;
+
+    if (!str)
+        return 0;
+    len = ft_strlen(str);
+    if ((len == 1 && (str[0] == '<' || str[0] == '>')) ||
+        (len == 2 && ((str[0] == '<' && str[1] == '<') || (str[0] == '>' && str[1] == '>'))))
+        return 1;
+    return 0;
+}
+
+
 // Función principal: filtra el array de strings
-char **filter_strings(char **input) {
-    // Contar cuántas strings no son redirecciones ni sus asociadas
-    int count = 0;
-    for (int i = 0; input[i] != NULL; i++) {
-        if (is_redirection(input[i])) {
-            i++; // Saltar también la siguiente string
-        } else {
+// Contar cuántas strings no son redirecciones ni sus asociadas
+// Saltar también la siguiente string
+char **filter_strings(char **input) 
+{
+    int count;
+    int i;
+    int j;
+    int k;
+    char    **result;
+     
+    count = 0;
+    i = 0;
+    j = 0;
+    k = 0; 
+    while(input[i] != NULL) 
+    {
+        if (is_redirection(input[i])) 
+            i++; 
+        else 
             count++;
-        }
+        i++;    
     }
-
-    // Reservar memoria para el nuevo array
-    char **result = malloc((count + 1) * sizeof(char *));
+    result = malloc(sizeof(char *) * (count + 1));
     if (!result)
-        return NULL;
-
-    // Llenar el nuevo array con las strings que no sean redirecciones ni sus asociadas
-    int j = 0;
-    for (int i = 0; input[i] != NULL; i++) {
-        if (is_redirection(input[i])) {
-            i++; // Saltar también la siguiente string
-        } else {
-            result[j] = strdup(input[i]); // Copiar la cadena al nuevo array
-            if (!result[j]) {
-                // Liberar memoria en caso de error
-                for (int k = 0; k < j; k++)
+        return (NULL);
+    i = 0;
+    while (input[i] != NULL) 
+    {
+        if (is_redirection(input[i])) 
+            i = i + 2;
+        else 
+        {
+            result[j] = ft_strdup(input[i]); 
+            if (!result[j]) 
+            {    
+                while (k < j)
+                {
                     free(result[k]);
+                    k++;
+                }    
                 free(result);
-                return NULL;
+                return (NULL);
             }
             j++;
+            i++;
         }
     }
-    result[j] = NULL; // Terminar el array con NULL
-    return result;
+    result[j] = NULL; 
+    return (result);
 }
 
-// Función para liberar memoria de un array de strings
-void free_strings(char **strings) {
-    if (!strings)
-        return;
-    for (int i = 0; strings[i] != NULL; i++)
-        free(strings[i]);
-    free(strings);
+
+// Función principal: filtra solo las redirecciones y sus asociadas
+char **filter_redirections(char **input) 
+{
+    int count;
+    int i;
+    int j;
+    int k;
+    char **result;
+
+    count = 0;
+    i = 0;
+    j = 0;
+    k = 0;
+
+    // Contar cuántas strings son redirecciones y sus asociadas
+    while (input[i] != NULL) 
+    {
+        if (is_redirection_n(input[i])) 
+        {
+            count += 2;
+            i += 2;
+        }
+        else
+            i++;
+    }
+    result = malloc(sizeof(char *) * (count + 1));
+    if (!result)
+        return (NULL);
+    i = 0;
+    while (input[i] != NULL) 
+    {
+        if (is_redirection_n(input[i])) 
+        {
+            result[j] = ft_strdup(input[i]);
+            if (!result[j]) 
+            {
+                while (k < j) 
+                {
+                    free(result[k]);
+                    k++;
+                }
+                free(result);
+                return (NULL);
+            }
+            j++;
+            i++;
+            result[j] = ft_strdup(input[i]);
+            if (!result[j]) 
+            {
+                while (k < j) 
+                {
+                    free(result[k]);
+                    k++;
+                }
+                free(result);
+                return (NULL);
+            }
+            j++;
+            i++;
+        }
+        else
+            i++;
+    }
+    result[j] = NULL;
+    return (result);
 }
+
 
 // Prueba de la función
-int main() {
+/*int main() {
     // Array de strings de ejemplo
     char *input[] = {
         "CMD", "ARG1", "ARG2", "<", "FILE1",

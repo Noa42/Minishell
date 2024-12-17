@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:31:03 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/16 20:27:32 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:21:27 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_create_arr_lexem(char *str, t_parsing *prs)
 	prs->flag = 0;
 	prs->reject = 0;
 	ft_string_by_string(str, prs);
-	//ft_create_tk_arr(prs);
 	ft_start_sending(prs, prs->ptrdata);
+	//ft_create_tk_arr(prs);
 }
 
 /*esta función va iterando el data.input para ir diciendo dónde hay que

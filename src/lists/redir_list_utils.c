@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_list_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:41:51 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/17 14:03:46 by alvapari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 t_redir	*new_redir(t_redir_type type, char *input, t_data *data) //la input es siempre un char * que dependiendo del tipo de redirecion se guarda como nombre del archivo de salida o de entrada o como el delimitador del heredoc
@@ -59,6 +71,16 @@ void	add_redir(t_cmd *cmd, t_redir *redir)
 	update_index_redir_list(cmd->redir_list);
 }
 
+void	free_redir(t_redir redir)
+{
+	if (redir.in_name)
+		free(redir.in_name);
+	if (redir.out_name)
+		free(redir.out_name);
+	if (redir.delim)
+		free(redir.delim);
+}
+
 t_redir	*free_redir_list(t_redir *redir_list)
 {
 	t_redir	*p;
@@ -68,6 +90,7 @@ t_redir	*free_redir_list(t_redir *redir_list)
 	while (p)
 	{
 		tmp = p->next;
+		free_redir(*p);
 		free(p);
 		p = tmp;
 	}

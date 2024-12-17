@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:14 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:27:18 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,41 @@ int	g_signal_flag = 0;
 
 void	ft_printf_proofs_split_prs(t_data data)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(count < data.prs.how_much)
+	while (count < data.prs.how_much)
 	{
 		printf("string número %i es: %s\n", count, data.prs.arr_lexems[count]);
 		count++;
 	}
+}
+
+void	header(void)
+{
+	printf("              ____\n");
+    printf("             /\\   \\\n");
+    printf("            /  \\___\\\n");
+    printf("           _\\  / __/_\n");
+    printf("          /\\ \\/_/\\   \\\n");
+    printf("         /  \\__/  \\___\\\n");
+    printf("        _\\  /  \\  / __/_\n");
+    printf("       /\\ \\/___/\\/_/\\   \\\n");
+    printf("      /  \\___\\    /  \\___\\\n");
+    printf("     _\\  /   /_  _\\__/ __/_\n");
+    printf("    /\\ \\/___/  \\/\\   \\/\\   \\\n");
+    printf("   /  \\___\\ \\___\\ \\___\\ \\___\\\n");
+    printf("   \\  /   / /   / /   / /   / \n");
+    printf("    \\/___/\\/___/\\/___/\\/___/   \n");
+	printf("\n");
+	printf("░█░█░█▀▀░█░░░█▀▀░█▀█░█▄█░█▀▀░░░▀█▀░█▀█\n");
+	printf("░█▄█░█▀▀░█░░░█░░░█░█░█░█░█▀▀░░░░█░░█░█\n");
+	printf("░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░▀░░▀▀▀\n");
+	printf("░█▄█░▀█▀░█▀█░▀█▀░█▀▀░█░█░█▀▀░█░░░█░░░█\n");
+	printf("░█░█░░█░░█░█░░█░░▀▀█░█▀█░█▀▀░█░░░█░░░▀\n");
+	printf("░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀\n");
+	printf("\n");
+	printf("\n");
 }
 
 int	main(int argc, char **argv, char **env)
@@ -33,6 +60,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	header();
 	init_data(&data, env);
 	signals_handler();
 	while (1)

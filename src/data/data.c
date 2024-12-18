@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:05 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:47:14 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,20 @@ void	free_data(t_data *data)
 	rl_clear_history();//limpia el historial de readline
 	close_fds();
 }
+
 void	reboot_data(t_data *data)
 {
 	//Rellenar con el la memoria que haya alocado alvaro
 	if (data->input)
 		free(data->input);
-	if(data->in_ax)
+	if (data->in_ax)
 		free(data->in_ax);
 	if (data->cmd_list)
 		data->cmd_list = free_cmd_list(data->cmd_list);
 	if (data->token_list)
 		data->token_list = free_token_list(data->token_list);
 	if (data->prs.arr_lexems)
-		free_array(data->prs.arr_lexems);	
+		free_array(data->prs.arr_lexems);
 	if (data->prs.arr_tokens)
 		free_array(data->prs.arr_tokens);
 	data->input = NULL;
@@ -102,6 +103,7 @@ void	reboot_data(t_data *data)
 	signals_handler();
 	close_fds();
 }
+
 void	empty_env(t_data *data)
 {
 	char	*pwd;

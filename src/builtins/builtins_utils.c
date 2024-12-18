@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 12:22:15 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/18 12:27:42 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 char	*ft_var_name(char *name_value)
@@ -19,33 +31,6 @@ char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
 		i++;
 	return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
-
-// char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
-// {
-// 	int		i;
-// 	char	*empty_value;
-// 	char	*temp;
-
-// 	if (var_name[0] == '{' && var_name[ft_strlen(var_name) - 1] == '}')
-// 	{
-// 		temp = var_name;
-// 		var_name = ft_substr(var_name, 1, ft_strlen(var_name) - 2);
-// 		free(temp);
-// 	}
-// 	empty_value = ft_strdup("");
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		if ((ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0)
-// 			&& env[i][ft_strlen(var_name)] == '=') //Si el nombre de la variable coincide con el principio de la cadena y el siguiente caracter es un = entonces es la variable que buscamos
-// 		{
-// 			free(empty_value);
-// 			return (ft_var_value(env[i]));
-// 		}
-// 		i++;
-// 	}
-// 	return (empty_value); //si no encuentra la variable manda un valor vacio allocado en memoria
-// }
 
 char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
 {
@@ -102,6 +87,3 @@ char	**insert_var(char **array, char *var_name, char *var_value)
 	free(temp);
 	return (new_array);
 }
-
-
-

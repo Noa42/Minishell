@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:42 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:55:50 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	cmd_list_len(t_cmd *cmd_list)
 	}
 	return (len);
 }
+
 t_cmd	*free_cmd_list(t_cmd *cmd_list)
 {
 	t_cmd	*p;
@@ -80,6 +81,7 @@ t_cmd	*free_cmd_list(t_cmd *cmd_list)
 	}
 	return (NULL);
 }
+
 void	free_cmd(t_cmd *cmd)
 {
 	if (cmd->array_cmd)

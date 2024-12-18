@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:51 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 13:57:25 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:57:52 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	update_index_redir_list(t_redir *redir_list)
 		p = p->next;
 	}
 }
+
 void	add_redir(t_cmd *cmd, t_redir *redir)
 {
 	t_redir	*p;

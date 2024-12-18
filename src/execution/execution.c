@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:20 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 13:59:20 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:49:23 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	basic_parsing(t_data *data)
 	array_pipes = ft_split(data->input, '|');
 	while (array_pipes[i])
 	{
-		data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split(array_pipes[i], ' '), data));
+		data->cmd_list = add_cmd(data->cmd_list, \
+			new_cmd(ft_split(array_pipes[i], ' '), data));
 		i++;
 	}
 	free_array(array_pipes);

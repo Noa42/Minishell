@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:49 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:50 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:00:43 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	signals_heredoc(void)
 	signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
 	signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
 }
+
 void	signals_handler(void)
 {
 	if (g_signal_flag == 0) //Normal

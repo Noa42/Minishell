@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:53:50 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	update_last_command(t_cmd *cmd)
 	insert_var(cmd->data->array_var, "_", cmd->array_cmd[0]);
 }
 
-void	one_cmd_child(t_cmd* cmd, t_data *data)
+void	one_cmd_child(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
@@ -55,6 +55,7 @@ void	one_cmd_case(t_data *data)
 	}
 	update_last_command(cmd);
 }
+
 void	one_builtin_case(t_cmd *cmd)
 {
 	int	stdin_copy;

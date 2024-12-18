@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:23 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:24 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:53:14 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	multiple_cmd_case(t_data *data)
 {
-	t_cmd	*cmd;    
+	t_cmd	*cmd;
 	int		fd_in;
 	int		fd_out;
 	pid_t	pid;
@@ -35,14 +35,16 @@ void	multiple_cmd_case(t_data *data)
 			waitpid(pid, &status, 0); //El exit status es una info que se tiene que interpretar con la macro WIFEXITED
 			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
 			close(data->pipe[1]); // Cierra el extremo de escritura de la tubería en el padre
-			fd_in = data->pipe[0];			// Actualiza fd_in para el próximo comando, usando el extremo de lectura actual
+			fd_in = data->pipe[0]; // Actualiza fd_in para el próximo comando, usando el extremo de lectura actual
 			cmd = cmd->next;
 		}
 	}
 }
-void safe_dup2(int *fd_in, int *fd_out, t_data *data)
+
+void	safe_dup2(int *fd_in, int *fd_out, t_data *data)
 {
-	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1)// Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
+	if (dup2(*fd_in, STDIN_FILENO) == -1 || \
+		dup2(*fd_out, STDOUT_FILENO) == -1) // Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
 	{
 		ft_putstr_fd("Dup error\n", 2);
 		data->exit_status = 1;
@@ -73,7 +75,7 @@ void	child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
 	{
 		path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
 		if (path != NULL)
-			execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
+			execve(path, cmd->array_cmd, data->env); //Ejecuta el comando con execve
 		ft_putstr_fd("Comand not found\n", 2);	
 		exit_process(data, 127);
 	}

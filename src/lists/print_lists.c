@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:48 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:49 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:57:28 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	print_token_list(t_token *token_list)
 	}
 	while (p)
 	{
-		printf("[%i]Token: %s\n",p->index, token_type_to_string(p->token_type));
+		printf("[%i]Token: %s\n", \
+			p->index, token_type_to_string(p->token_type));
 		p = p->next;
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
@@ -114,7 +115,7 @@ char	*redir_type_to_string(t_redir_type type)
 	return ("UNKNOWN");
 }
 
-void instrucciones_ejemplo_listas(t_data *data)
+void	instrucciones_ejemplo_listas(t_data *data)
 {
 	//INSTRUCCIONES DE COMO USAR LAS LISTAS
 

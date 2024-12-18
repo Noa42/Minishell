@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/18 12:25:23 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	has_variable(char *input)//Mira si hay un $ en la cadena
@@ -46,7 +58,7 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 			return ;
 		}
 		else
-			ft_printf("%c", input[i]);            
+			ft_printf("%c", input[i]);
 		i++;
 	}
 }
@@ -78,8 +90,7 @@ void	ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por proble
 	{
 		if (ft_strcmp(cmd->array_cmd[i], "$?") == 0)
 			ft_printf("Exit status: %i", cmd->data->exit_status);
-		else
-		if (has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
+		else if (has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
 			ft_printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
 		else
 			print_expanded(cmd->array_cmd[i], cmd->data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 

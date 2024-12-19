@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:49 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 13:00:43 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:45:51 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,4 @@ void	signals_handler(void)
 		signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
 	}
 }
+

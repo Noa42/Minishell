@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 14:10:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:11:42 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	header();
 	init_data(&data, env);
+	disable_printing_signals(&data);
 	signals_handler();
 	while (1)
 	{

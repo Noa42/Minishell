@@ -1,29 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:42:58 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 13:02:43 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	print_array(char **array)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
+	int i = 0;
+	while	(array[i])
 	{
 		printf("[%i]: %s\n", i, array[i]);
 		i++;
 	}
 }
-
 void	free_array(char **array)
 {
 	int	i;
@@ -37,11 +22,10 @@ void	free_array(char **array)
 	free(array);
 	array = NULL;
 }
-
 char	**copy_alloc_array(char **array)
 {
-	int		i;
-	char	**new_array;
+	int i;
+	char **new_array;
 
 	i = 0;
 	new_array = malloc(sizeof(char *) * (array_len(array) + 1));
@@ -81,7 +65,7 @@ void	sort_strings(char **array, int size)
 	}
 }
 
-char	**realloc_elonged_array(char **src_array)
+char **realloc_elonged_array(char **src_array)
 {
 	int		len;
 	char	**new_array;

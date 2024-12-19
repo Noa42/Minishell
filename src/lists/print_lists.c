@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print_lists.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:48 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:57:28 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	print_token_list(t_token *token_list)
@@ -25,8 +13,7 @@ void	print_token_list(t_token *token_list)
 	}
 	while (p)
 	{
-		printf("[%i]Token: %s\n", \
-			p->index, token_type_to_string(p->token_type));
+		printf("[%i]Token: %s\n",p->index, token_type_to_string(p->token_type));
 		p = p->next;
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
@@ -115,7 +102,7 @@ char	*redir_type_to_string(t_redir_type type)
 	return ("UNKNOWN");
 }
 
-void	instrucciones_ejemplo_listas(t_data *data)
+void instrucciones_ejemplo_listas(t_data *data)
 {
 	//INSTRUCCIONES DE COMO USAR LAS LISTAS
 
@@ -128,6 +115,7 @@ void	instrucciones_ejemplo_listas(t_data *data)
 	print_token_list(data->token_list);
 	////Para liberar la memoria de la lista de tokens igualamos data->token_list a la función free_token_list
 	data->token_list = free_token_list(data->token_list);
+
 
 	//LISTA DE COMANDOS
 	//Para añadir comandos hay dos opciones:
@@ -158,7 +146,7 @@ void	instrucciones_ejemplo_listas(t_data *data)
 
 	////REDIRECCIONES
 	//A un comando concreto (ya se el último o el que queramos obtener con el índice) le añadimos redirecciones con la función add_redir
-	//NUEVO ahora al hacer new_redir le pasamos el tipo y el nombre del archivo (la función se encarga de guardarala en in_name o out_name en función del tipo) Si es Heredoc lo se le megte es el delimitador o end_marker
+	//NUEVO ahora al hacer new_redir le pasamos el tipo y el nombre del archivo (la función se encarga de guardarala en in_name o out_name en función del tipo) Si es Heredoc lo se le mete es el delimitador o end_marker
 	//NUEVO ahora al hacer new_redir le pasamos también la data para enlazar su redir->data con la data que le pasamos
 	add_redir(get_last_cmd(data->cmd_list), new_redir(HERE_DOC, "eof", data));//al último le añadimos una primera redirección de tipo HERE_DOC
 	add_redir(get_last_cmd(data->cmd_list), new_redir(OUTPUT, "out4.txt", data)); //al último le añadimos una segunda redirección de tipo OUTPUT

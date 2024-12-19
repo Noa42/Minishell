@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:25:23 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 int	has_variable(char *input)//Mira si hay un $ en la cadena
@@ -25,7 +13,6 @@ int	has_variable(char *input)//Mira si hay un $ en la cadena
 	}
 	return (0);
 }
-
 char	*get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el nombre de la variable (es decir lo que hay después de $ lo que llamamos var_name)
 {
 	unsigned int	start;
@@ -37,7 +24,6 @@ char	*get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el n
 	var = ft_substr(s, start, i - start);
 	return (var);
 }
-
 void	print_expanded(char *input, char **env)//Imprime una palabra con una variable expandida
 {
 	int		i;
@@ -58,22 +44,8 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 			return ;
 		}
 		else
-			ft_printf("%c", input[i]);
+			ft_printf("%c", input[i]);            
 		i++;
-	}
-}
-
-void	set_n_flag_and_i(char *s, int *n_flag, int *i)
-{
-	int	j;
-
-	j = 1;
-	while (s[j] != '\0' && s[j] == 'n')
-		j++;
-	if (s[j] == '\0')
-	{
-		*n_flag = 1;
-		*i = 2;
 	}
 }
 
@@ -84,13 +56,18 @@ void	ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por proble
 
 	i = 1;
 	n_flag = 0;
-	if (array_len(cmd->array_cmd) >= 2 && ft_strlen(cmd->array_cmd[1]) >= 2)
-		set_n_flag_and_i(cmd->array_cmd[1], &n_flag, &i);
+	if (array_len(cmd->array_cmd) >= 2
+		&& ft_strcmp(cmd->array_cmd[1], "-n") == 0)
+	{
+		n_flag = 1;
+		i = 2;
+	}
 	while (cmd->array_cmd[i] != NULL)
 	{
 		if (ft_strcmp(cmd->array_cmd[i], "$?") == 0)
 			ft_printf("Exit status: %i", cmd->data->exit_status);
-		else if (has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
+		else
+		if (has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
 			ft_printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
 		else
 			print_expanded(cmd->array_cmd[i], cmd->data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 

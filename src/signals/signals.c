@@ -35,7 +35,6 @@ void	signals_heredoc(void)
 	signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
 	signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
 }
-
 void	signals_handler(void)
 {
 	if (g_signal_flag == 0) //Normal

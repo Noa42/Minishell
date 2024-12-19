@@ -1,16 +1,1 @@
-include
-in_file1.txt
-in_file2.txt
-je.ber
-Makefile
-minishell
-obj
-out_file1.txt
-out_file2.txt
-out_file3.txt
-out_file4.txt
-README.md
-src
-test2.txt
-x.txt
-1hd2eñoihdoihdc 
+hola

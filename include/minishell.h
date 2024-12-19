@@ -83,6 +83,9 @@ typedef struct s_parsing
     char 				flag;
 	char				**arr_lexems;
 	char				**arr_tokens;
+	char				**aux_ar_cmds;
+    char				**aux_redirs;
+	char				***ar_of_ar;
 	int					index_arr;
 	int					init_index;
 	int					end_index;
@@ -281,13 +284,26 @@ void   					ft_check_if_csp_aux(char *str, t_parsing *prs);
 void    				ft_realloc_prs_o(t_parsing *prs);
 void    				ft_realloc_prs_t(t_parsing *prs);
 char					*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns);
+
+// PARSING-TOKEN
 void					ft_create_tk_arr(t_parsing *prs);
+
+// PARSING-SEND
 void 					ft_start_sending(t_parsing *prs, t_data *data);
 void    				ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node);
+void					ft_if_not_special_char(t_parsing *prs, t_data *data, t_cmd *node);
 void 					ft_we_are_doing_proofs(t_parsing *prs);
 char 					**filter_strings(char **input);
 int 					is_redirection(const char *str);
 int 					is_redirection_n(const char *str);
 char 					**filter_redirections(char **input);
+void					ft_create_three_ptr(t_parsing *prs, int pipes);
+void    				free_triple_ptr(char ***ptr);
+char 					**ft_give_me_arr(char **ar_lexems, int init, int end);
+int    					ft_tell_me_if_pipes(t_parsing *prs);
+void				    ft_send_to_cmd_str(t_parsing *prs, t_data *data, t_cmd *node, int i);
+void    				ft_send_rd(t_parsing *prs, t_data *data, int i);
+void			        ft_send_if_pipe(t_parsing *prs, int pipes, int i);
+
 
 #endif

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution_utils.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:16 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:54:59 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	exit_process(t_data *data, int exit_status)
@@ -23,7 +11,7 @@ void	close_fds(void)
 	int	i;
 
 	i = 3; //el primer fd no estandard es el 3
-	while (i < 1024 ) //1024 es el maximo numero de fd que se pueden tener
+	while (i < 1024)//1024 es el maximo numero de fd que se pueden tener
 	{
 		close(i);
 		i++;

@@ -6,13 +6,17 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:31:03 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/13 14:55:36 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:42:19 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*esta función crea una array de strings donde estarán los lexemas*/
+/*esta función crea una array de strings donde estarán los lexemas, y además
+después hace que el parseo entre en otras fases en las 
+llamadas a ft_create_fork  y  a  ft_start_sending.  Son nuevas fases
+del parsing*/
+
 void	ft_create_arr_lexem(char *str, t_parsing *prs)
 {
 	prs->arr_lexems = malloc(sizeof(char *) * (prs->how_much + 1));
@@ -26,6 +30,7 @@ void	ft_create_arr_lexem(char *str, t_parsing *prs)
 	prs->flag = 0;
 	prs->reject = 0;
 	ft_string_by_string(str, prs);
+	ft_start_sending(prs, prs->ptrdata);
 	//ft_create_tk_arr(prs);
 }
 

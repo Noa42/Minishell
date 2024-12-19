@@ -1,56 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 14:10:27 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 int	g_signal_flag = 0;
 
 void	ft_printf_proofs_split_prs(t_data data)
 {
-	int	count;
+	int count;
 
 	count = 0;
-	while (count < data.prs.how_much)
+	while(count < data.prs.how_much)
 	{
 		printf("string número %i es: %s\n", count, data.prs.arr_lexems[count]);
 		count++;
 	}
-}
-
-void	header(void)
-{
-	printf("                ____\n");
-	printf("               /\\   \\\n");
-	printf("              /  \\___\\\n");
-	printf("             _\\  / __/_\n");
-	printf("            /\\ \\/_/\\   \\\n");
-	printf("           /  \\__/  \\___\\\n");
-	printf("          _\\  /  \\  / __/_\n");
-	printf("         /\\ \\/___/\\/_/\\   \\\n");
-	printf("        /  \\___\\    /  \\___\\\n");
-	printf("       _\\  /   /_  _\\__/ __/_\n");
-	printf("      /\\ \\/___/  \\/\\   \\/\\   \\\n");
-	printf("     /  \\___\\ \\___\\ \\___\\ \\___\\\n");
-	printf("     \\  /   / /   / /   / /   / \n");
-	printf("      \\/___/\\/___/\\/___/\\/___/   \n");
-	printf("\n");
-	printf("░█░█░█▀▀░█░░░█▀▀░█▀█░█▄█░█▀▀░░░▀█▀░█▀█\n");
-	printf("░█▄█░█▀▀░█░░░█░░░█░█░█░█░█▀▀░░░░█░░█░█\n");
-	printf("░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░▀░░▀▀▀\n");
-	printf("░█▄█░▀█▀░█▀█░▀█▀░█▀▀░█░█░█▀▀░█░░░█░░░█\n");
-	printf("░█░█░░█░░█░█░░█░░▀▀█░█▀█░█▀▀░█░░░█░░░▀\n");
-	printf("░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀\n");
-	printf("\n");
-	printf("\n");
+	printf("data_input es: %s\n", data.input);
+	printf("in_ax es: %s\n", data.in_ax);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -60,7 +23,6 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	header();
 	init_data(&data, env);
 	signals_handler();
 	while (1)
@@ -69,13 +31,13 @@ int	main(int argc, char **argv, char **env)
 		if (data.input == NULL)
 			break ;
 		history(data.input);
-		//ft_parsing(&data);
-		//if(data.exit_status == 0 && data.parsing_error == 0 && data.prs.flag_space == 'g')
-		//{
-		execution(&data);
+		ft_parsing(&data);
+		if(data.exit_status == 0 && data.parsing_error == 0 && data.prs.flag_space == 'g')
+		{
+			execution(&data);
 			//ft_printf_proofs_split_prs(data);
-		//}
-		//if (data.parsing_error == 0)
+			print_cmd_list(data.cmd_list);
+		}
 		reboot_data(&data);
 	}
 	exit_status = data.exit_status; //esto es para que cuando hagamos ctrl+d el exit status sea el que corresponda

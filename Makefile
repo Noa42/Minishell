@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
-#    Updated: 2024/12/17 11:43:10 by achacon-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Librerías
 LIBFT_DIR = include/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -19,7 +7,7 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 # Flags
 INC = -I /home/achacon-/.brew/Cellar/readline/8.2.13/include
 LFLAGS = -L /home/achacon-/.brew/Cellar/readline/8.2.13/lib -lreadline -lncurses
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 COMPILE = -g
 
 # Colors
@@ -70,6 +58,9 @@ src/parsing/parsing_2.c\
 src/parsing/parsing_3.c\
 src/parsing/parsing_4.c\
 src/parsing/parsing_5.c\
+src/send/sending_1.c\
+src/send/sending_2.c\
+src/send/sending_3.c\
 
 OBJ_DIR = obj
 OBJT = $(SRC:src/%.c=$(OBJ_DIR)/%.o)

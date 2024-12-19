@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 12:22:38 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:25:48 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	free_dirs(char *oldpwd, char *pwd)
@@ -60,6 +48,7 @@ void	ft_cd_home(t_data *data, char *oldpwd, char *pwd)
 
 void	safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd)
 {
+
 	if (oldpwd == NULL || pwd == NULL)
 	{
 		ft_putstr_fd("Cannot allocate memory\n", 2);
@@ -72,6 +61,7 @@ void	safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd)
 		*oldpwd = ft_strdup("NULL");
 	}
 }
+
 
 void	ft_cd(t_cmd *cmd)
 {

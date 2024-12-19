@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:47:14 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	update_shlvl(t_data *data)
@@ -72,24 +60,28 @@ void	free_data(t_data *data)
 	if (data->prs.arr_lexems)
 		free_array(data->prs.arr_lexems);
 	if (data->prs.arr_tokens)
-		free_array(data->prs.arr_tokens);
+		free_array(data->prs.arr_tokens);		
 	rl_clear_history();//limpia el historial de readline
 	close_fds();
 }
-
 void	reboot_data(t_data *data)
 {
 	//Rellenar con el la memoria que haya alocado alvaro
 	if (data->input)
 		free(data->input);
-	if (data->in_ax)
+	if (data->prs.aux_ar_cmds)
+		free_array(data->prs.aux_ar_cmds);
+	if (data->prs.aux_redirs)
+		free_array(data->prs.aux_redirs);	
+	if(data->in_ax)
 		free(data->in_ax);
+	free_triple_ptr(data->prs.ar_of_ar);
 	if (data->cmd_list)
 		data->cmd_list = free_cmd_list(data->cmd_list);
 	if (data->token_list)
 		data->token_list = free_token_list(data->token_list);
 	if (data->prs.arr_lexems)
-		free_array(data->prs.arr_lexems);
+		free_array(data->prs.arr_lexems);	
 	if (data->prs.arr_tokens)
 		free_array(data->prs.arr_tokens);
 	data->input = NULL;
@@ -118,4 +110,24 @@ void	empty_env(t_data *data)
 	data->env[4] = NULL;
 	data->array_var = copy_alloc_array(data->env);
 	free(pwd);
+}
+
+void	free_triple_ptr(char ***ptr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (ptr && ptr[i])
+	{
+		j = 0;
+		while (ptr[i][j])
+		{
+			free(ptr[i][j]);
+			j++;
+		}
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }

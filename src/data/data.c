@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 11:07:24 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:44:36 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	reboot_data(t_data *data)
 	if (data->token_list)
 		data->token_list = free_token_list(data->token_list);
 	if (data->prs.arr_lexems)
-		free_array(data->prs.arr_lexems);	
+		free_array(data->prs.arr_lexems);
 	if (data->prs.arr_tokens)
 		free_array(data->prs.arr_tokens);
 	data->input = NULL;

@@ -54,7 +54,7 @@ void	delete_temp_file(t_cmd *cmd, char *temp_file)
 	free(temp_file);
 }
 
-void	apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
+void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
 {
 	char	*temp_file;
 

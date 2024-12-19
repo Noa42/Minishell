@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	apply_OUTPUT_redir(t_cmd *cmd, t_redir *redir)
+void	apply_output_redir(t_cmd *cmd, t_redir *redir)
 {
 	cmd->fd_out = open(redir->out_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)

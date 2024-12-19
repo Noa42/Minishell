@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/19 11:11:14 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -15,10 +26,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <termios.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
-#include "global.h"
+# include "global.h"
 
 typedef struct s_data	t_data;
 typedef struct s_cmd	t_cmd;
@@ -108,6 +120,7 @@ typedef struct s_data
 	int					here_doc_counter;
 	int					parsing_error;
 	t_parsing			prs;
+	struct termios		original_settings;
 }						t_data;
 
 //----------------------BUILTINS----------------------
@@ -233,9 +246,16 @@ void					apply_APPEND_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);
 
-// SIGNALS
+//----------------------SIGNALS----------------------
+//////SIGNALS
 void					signals_handler(void);
 void					handle_ctrl_c(int signal);
+void					handle_backlash(int sign);
+void					signals_heredoc(void);
+
+//////DISABLE PRINTING SIGNALS
+void					disable_printing_signals(t_data *data);
+void					restore_original_settings(t_data *data);
 
 //----------------------UTILS----------------------
 

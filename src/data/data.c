@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/19 11:07:24 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	update_shlvl(t_data *data)
@@ -41,7 +53,6 @@ void	init_data(t_data *data, char **env)
 	data->prs.ptrdata = data;
 	ft_init_parsing_struc(&data->prs);
 	update_shlvl(data);
-	//data-> pipe = NULL;
 }
 
 void	free_data(t_data *data)
@@ -63,6 +74,7 @@ void	free_data(t_data *data)
 		free_array(data->prs.arr_tokens);		
 	rl_clear_history();//limpia el historial de readline
 	close_fds();
+	restore_original_settings(data);
 }
 void	reboot_data(t_data *data)
 {

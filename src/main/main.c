@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/19 11:11:42 by achacon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	g_signal_flag = 0;
@@ -24,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	init_data(&data, env);
+	disable_printing_signals(&data);
 	signals_handler();
 	while (1)
 	{

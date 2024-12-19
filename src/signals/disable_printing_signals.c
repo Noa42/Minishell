@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   global.h                                           :+:      :+:    :+:   */
+/*   disable_printing_signals.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:40:36 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 11:08:20 by achacon-         ###   ########.fr       */
+/*   Created: 2024/12/19 10:45:30 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/19 11:13:55 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#include "../../include/minishell.h"
 
-extern int      g_signal_flag;
+void	restore_original_settings(t_data *data)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &data->original_settings);
+}
 
-#endif
+void	disable_printing_signals(t_data *data)
+{
+	struct termios	new_settings;
+
+	tcgetattr(STDIN_FILENO, &data->original_settings);
+	new_settings = data->original_settings;
+	new_settings.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_settings);
+}

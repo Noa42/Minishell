@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
+#    Updated: 2024/12/19 10:50:55 by achacon-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Librerías
 LIBFT_DIR = include/libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -51,6 +63,7 @@ src/redirs/OUTPUT_redir.c\
 src/redirs/redirs_execution.c\
 src/redirs/redirs_utils.c\
 src/signals/signals.c\
+src/signals/disable_printing_signals.c\
 src/utils/utils_1.c\
 src/utils/utils_2.c\
 src/parsing/parsing_1.c\

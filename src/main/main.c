@@ -34,8 +34,9 @@ int	main(int argc, char **argv, char **env)
 		ft_parsing(&data);
 		if(data.exit_status == 0 && data.parsing_error == 0 && data.prs.flag_space == 'g')
 		{
-			execution(&data);
-			ft_printf_proofs_split_prs(data);
+			//execution(&data);
+			//ft_printf_proofs_split_prs(data);
+			print_cmd_list(data.cmd_list);
 		}
 		reboot_data(&data);
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirs_execution.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
+/*   Updated: 2024/12/19 13:52:18 by alvapari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	apply_redir_list(t_cmd *cmd)
@@ -36,12 +48,12 @@ void	apply_last_in_redir(t_cmd *cmd)
 	if (last_in_redir != NULL)
 	{
 		if (last_in_redir->type == INPUT)
-			apply_INPUT_redir(cmd, last_in_redir);
+			apply_input_redir(cmd, last_in_redir);
 		else if (last_in_redir->type == HERE_DOC)
 		{
 			g_signal_flag = 2;
 			signals_handler();
-			apply_HERE_DOC_redir(cmd, last_in_redir);
+			apply_heredoc_redir(cmd, last_in_redir);
 			g_signal_flag = 1;
 			signals_handler();
 		}
@@ -58,9 +70,9 @@ void	apply_last_out_redir(t_cmd *cmd)
 	if (last_out_redir != NULL)
 	{
 		if (last_out_redir->type == OUTPUT)
-			apply_OUTPUT_redir(cmd, last_out_redir);
+			apply_output_redir(cmd, last_out_redir);
 		else if (last_out_redir->type == APPEND)
-			apply_APPEND_redir(cmd, last_out_redir);
+			apply_append_redir(cmd, last_out_redir);
 	}
 	else
 		cmd->fd_out = 1;

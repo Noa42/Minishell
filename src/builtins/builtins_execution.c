@@ -44,5 +44,5 @@ void	builtin_end(t_data *data, int error)
 		ft_putstr_fd(strerror(error), 2);
 		ft_putstr_fd("\n", 2);
 		data->exit_status = error;
-	}//E2BIG = Argument list too long
+	}
 }

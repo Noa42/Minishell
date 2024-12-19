@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   HERE_DOC_redir.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:42:29 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/17 11:56:34 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 char	*temp_file_name(t_cmd *cmd)
@@ -66,7 +54,7 @@ void	delete_temp_file(t_cmd *cmd, char *temp_file)
 	free(temp_file);
 }
 
-void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
+void	apply_HERE_DOC_redir(t_cmd *cmd, t_redir *redir)
 {
 	char	*temp_file;
 

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:35 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:54:34 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
@@ -29,7 +18,6 @@ char	*get_path_line(char **env)
 	path_line = path_line + 5;
 	return (path_line);
 }
-
 char	*search_path(char *command, char *path_line)
 {
 	char	**path_array;
@@ -60,7 +48,6 @@ char	*get_path(char *command, char **env)
 {
 	char	*path_line;
 	char	*path;
-
 	if (ft_strchr(command, '/') != NULL)
 	{
 		if (access(command, F_OK) == 0)

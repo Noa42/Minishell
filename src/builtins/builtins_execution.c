@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   builtins_execution.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 12:21:58 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:44:58 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 int	is_a_builtin(t_cmd *cmd)
@@ -56,5 +44,5 @@ void	builtin_end(t_data *data, int error)
 		ft_putstr_fd(strerror(error), 2);
 		ft_putstr_fd("\n", 2);
 		data->exit_status = error;
-	}
+	}//E2BIG = Argument list too long
 }

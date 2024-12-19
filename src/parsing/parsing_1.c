@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:02:28 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/13 14:55:29 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:07:46 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	ft_init_parsing_struc(t_parsing *prs)
 	prs->reject = 0;
 	prs->arr_lexems = NULL;
 	prs->arr_tokens = NULL;
+	prs->aux_ar_cmds = NULL;
+    prs->aux_redirs = NULL;
+	prs->ar_of_ar = NULL;
 	prs->init_index = 0;
 	prs->end_index = 0;
 	prs->index_arr = 0;

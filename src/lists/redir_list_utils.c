@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_list_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:51 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:57:52 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:03:46 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	update_index_redir_list(t_redir *redir_list)
 		p = p->next;
 	}
 }
-
 void	add_redir(t_cmd *cmd, t_redir *redir)
 {
 	t_redir	*p;

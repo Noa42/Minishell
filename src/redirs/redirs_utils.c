@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirs_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:42:45 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 13:00:15 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 t_redir	*get_last_out_redir(t_cmd *cmd)
@@ -28,7 +16,7 @@ t_redir	*get_last_out_redir(t_cmd *cmd)
 	return (last_out_redir);
 }
 
-t_redir	*get_last_in_redir(t_cmd *cmd)
+t_redir *get_last_in_redir(t_cmd *cmd)
 {
 	t_redir	*redir;
 	t_redir	*last_in_redir;
@@ -43,3 +31,4 @@ t_redir	*get_last_in_redir(t_cmd *cmd)
 	}
 	return (last_in_redir);
 }
+

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:41:20 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 12:49:23 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	basic_parsing(t_data *data)
@@ -21,8 +9,7 @@ void	basic_parsing(t_data *data)
 	array_pipes = ft_split(data->input, '|');
 	while (array_pipes[i])
 	{
-		data->cmd_list = add_cmd(data->cmd_list, \
-			new_cmd(ft_split(array_pipes[i], ' '), data));
+		data->cmd_list = add_cmd(data->cmd_list, new_cmd(ft_split(array_pipes[i], ' '), data));
 		i++;
 	}
 	free_array(array_pipes);
@@ -31,12 +18,12 @@ void	execution(t_data *data)
 {
 	g_signal_flag = 1;
 	signals_handler();
-	basic_parsing(data);
+	//basic_parsing(data);
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(OUTPUT, "out_file2.txt", data));
-	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt", data));
+	// //add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file2.txt"));
 	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file1.txt", data));
-	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, ft_strdup("in_file2.txt"), data));
-	// add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
+	// // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(INPUT, "in_file2.txt"));
+	// // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(HERE_DOC, "delim1", data));
 	// // print_cmd_list(data->cmd_list);
 	// // add_redir(get_cmd_by_index(data->cmd_list, 0), new_redir(APPEND, "out_file1.txt", data));
 	// if (cmd_list_len(data->cmd_list) >= 2)

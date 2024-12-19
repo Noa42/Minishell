@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_1.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:42:55 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/18 13:02:03 by achacon-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	history(char *input)
@@ -52,7 +40,7 @@ int	array_len(char **array)
 	return (i);
 }
 
-void	swap(char **a, char **b)
+void swap(char **a, char **b)
 {
 	char	*temp;
 

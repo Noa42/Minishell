@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
-#    Updated: 2024/12/19 10:50:55 by achacon-         ###   ########.fr        #
+#    Updated: 2024/12/19 19:44:45 by alvapari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ src/parsing/parsing_5.c\
 src/send/sending_1.c\
 src/send/sending_2.c\
 src/send/sending_3.c\
+src/tokenization/tokens_1.c\
 
 OBJ_DIR = obj
 OBJT = $(SRC:src/%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:33:21 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 01:22:00 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:26:08 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 // usamos usan data y necesitan nutrirse de una array de lexemas que está
 // en prs
 
-void	ft_start_sending(t_parsing *prs, t_data *data)
+void	ft_start_sending(t_parsing *prs, t_data *data, int i)
 {
 	t_cmd	*node;
-	int		i;
 	int		flag;
 
 	flag = 0;
 	node = NULL;
-	i = 0;
 	while (prs->arr_lexems[i] != NULL && flag == 0)
 	{
 		if ((ft_strlen(prs->arr_lexems[i]) == 1 && prs->arr_lexems[i][0] == '<')
@@ -64,7 +62,7 @@ void	ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node)
 	pipes = ft_tell_me_if_pipes(prs);
 	if (pipes > 0)
 	{
-        ft_send_if_pipe(prs, pipes, 0);
+		ft_send_if_pipe(prs, pipes, 0);
 		return ;
 	}
 	ft_send_to_cmd_str(prs, data, node, 0);
@@ -81,7 +79,6 @@ void	ft_send_to_cmd_str(t_parsing *prs, t_data *data, t_cmd *node, int i)
 		ft_send_rd(prs, data, i);
 		i++;
 	}
-	// print_cmd_list(data->cmd_list);
 }
 
 int	ft_tell_me_if_pipes(t_parsing *prs)

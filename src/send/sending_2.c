@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 23:27:49 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 02:38:13 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:31:58 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_create_three_ptr(t_parsing *prs, int pipes)
 	end = 0;
 	count = 0;
 	prs->ar_of_ar = malloc(sizeof(char **) * (pipes + 2));
-	if(!prs->ar_of_ar)
-    {
+	if (!prs->ar_of_ar)
+	{
 		printf("Array has not been created (Error).");
 		exit(0);
 	}
@@ -41,44 +41,32 @@ void	ft_create_three_ptr(t_parsing *prs, int pipes)
 	prs->ar_of_ar[count] = NULL;
 }
 
-void    ft_send_if_pipe(t_parsing *prs, int pipes, int i)
+void	ft_send_if_pipe(t_parsing *prs, int pipes, int i)
 {
-    t_cmd *node;
-    int count;
+	t_cmd	*node;
+	int		count;
 
-    count = 0;
-    ft_create_three_ptr(prs, pipes);
-    while(prs->ar_of_ar[count] != NULL)
-    {
-        prs->aux_ar_cmds = filter_strings(prs->ar_of_ar[count]);
-	    prs->aux_redirs = filter_redirections(prs->ar_of_ar[count]);
-	    node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), prs->ptrdata);
-	    prs->ptrdata->cmd_list = add_cmd(prs->ptrdata->cmd_list, node);
-	    i = 0;
-        while (prs->aux_redirs && prs->aux_redirs[i] != NULL)
-	    {
-		    ft_send_rd(prs, prs->ptrdata, i);
-		    i++;
-	    }
-        count++;
-        free_array(prs->aux_ar_cmds);
-        free_array(prs->aux_redirs);
-        prs->aux_ar_cmds = NULL;
-        prs->aux_redirs = NULL;
-    }
-}
-
-
-/* SI QUIERO IMPRIMIR LO DE ARRIBA, UNO LO DE ABAJO CON LO DE ARRIBA LOL
-ES EL TRIPLE ARRAY QUE IMPRIME LAS COSITAS
-for (int i = 0; prs->ar_of_ar[i]; ++i)
-{
-	for (int j = 0; prs->ar_of_ar[i][j]; ++j)
+	count = 0;
+	ft_create_three_ptr(prs, pipes);
+	while (prs->ar_of_ar[count] != NULL)
 	{
-		printf("%s\n", prs->ar_of_ar[i][j]);
+		prs->aux_ar_cmds = filter_strings(prs->ar_of_ar[count]);
+		prs->aux_redirs = filter_redirections(prs->ar_of_ar[count]);
+		node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), prs->ptrdata);
+		prs->ptrdata->cmd_list = add_cmd(prs->ptrdata->cmd_list, node);
+		i = 0;
+		while (prs->aux_redirs && prs->aux_redirs[i] != NULL)
+		{
+			ft_send_rd(prs, prs->ptrdata, i);
+			i++;
+		}
+		count++;
+		free_array(prs->aux_ar_cmds);
+		free_array(prs->aux_redirs);
+		prs->aux_ar_cmds = NULL;
+		prs->aux_redirs = NULL;
 	}
-	printf("\n");
-}*/
+}
 
 void	ft_send_rd(t_parsing *prs, t_data *data, int i)
 {
@@ -106,18 +94,6 @@ void	ft_send_rd(t_parsing *prs, t_data *data, int i)
 	}
 }
 
-/*
-PROBLEMAS:
- - El orden de los archivos después de caracter especial !!!
- - ¿Necesario comprobar en la función de arriba ese i
-	+ 1? Posiblemente ya me lo cargue
- en syntax error  y deje por tanto de ser necesario!!
- - Esplitear de array de strings a array de strings hasta carácter especial
- -*/
-
-
-// Función para comprobar si una cadena es un operador de redirección
-
 int	is_redirection(const char *str)
 {
 	size_t	len;
@@ -125,16 +101,17 @@ int	is_redirection(const char *str)
 	if (!str)
 		return (0);
 	len = ft_strlen(str);
-	return (len == 1 && (str[0] == '<' || str[0] == '>')) || (len == 2
-		&& ((str[0] == '<' && str[1] == '<') || (str[0] == '>'
-				&& str[1] == '>')));
+	return ((len == 1 && (str[0] == '<' || str[0] == '>')) || (len == 2
+			&& ((str[0] == '<' && str[1] == '<') || (str[0] == '>'
+					&& str[1] == '>'))));
 }
 
 int	is_redirection_n(const char *str)
 {
 	if (!str)
 		return (0);
-	if (ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<<") == 0 || ft_strcmp(str, ">>") == 0)
+	if (ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">") == 0 || ft_strcmp(str,
+			"<<") == 0 || ft_strcmp(str, ">>") == 0)
 		return (1);
 	return (0);
 }

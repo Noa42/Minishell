@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 09:30:08 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:22:09 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void	apply_last_in_redir(t_cmd *cmd)
 	{
 		if (last_in_redir->type == INPUT)
 			apply_input_redir(cmd, last_in_redir);
-		else if (last_in_redir->type == HERE_DOC)
-		{
-			g_signal_flag = 2;
-			signals_handler();
-			apply_heredoc_redir(cmd, last_in_redir);
-			g_signal_flag = 1;
-			signals_handler();
-		}
 	}
 	else
 		cmd->fd_in = 0;
@@ -51,20 +43,55 @@ void	apply_last_out_redir(t_cmd *cmd)
 		cmd->fd_out = 1;
 }
 
-void	update_fds_redirs(t_cmd *cmd_list) //esto es para uno o varios comandos
+int	open_and_try_redir(t_redir *redir)
 {
-	t_cmd	*cmd;
+	int	fd;
 
-	cmd = cmd_list;
-	while (cmd)
+	if (redir->type == INPUT)
 	{
-		if (cmd->redir_list != NULL)
+		fd = open(redir->in_name, O_RDONLY);
+		if (fd == -1)
 		{
-			apply_last_in_redir(cmd);
-			apply_last_out_redir(cmd);
+			ft_putstr_fd(redir->in_name, 2);
+			ft_putstr_fd(": Error opening file\n", 2);
+			return (1);
 		}
-		cmd = cmd->next;
+		close(fd);
 	}
+	else if (redir->type == OUTPUT || redir->type == APPEND)
+	{
+		fd = open(redir->out_name, O_WRONLY | O_CREAT, 0644);
+		if (fd == -1)
+		{
+			ft_putstr_fd(redir->out_name, 2);
+			ft_putstr_fd(": Error opening file\n", 2);
+			return (1);
+		}
+		close(fd);
+	}
+	return (0);
+}
+
+int	update_fds_redirs(t_cmd *cmd)
+{
+	t_redir	*redir;
+	int		result;
+
+	result = 0;
+	redir = cmd->redir_list;
+	while (redir)
+	{
+		result += open_and_try_redir(redir);
+		if (result != 0)
+			break ;
+		redir = redir->next;
+	}
+	if (result == 0)
+	{
+		apply_last_in_redir(cmd);
+		apply_last_out_redir(cmd);
+	}
+	return (result);
 }
 
 void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando

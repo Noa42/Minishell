@@ -54,6 +54,31 @@ void	delete_temp_file(t_cmd *cmd, char *temp_file)
 	free(temp_file);
 }
 
+void	apply_every_heredoc(t_data *data)
+{
+	t_cmd	*cmd;
+	t_redir	*redir;
+
+	cmd = data->cmd_list;
+	while (cmd)
+	{
+		redir = cmd->redir_list;
+		while (redir)
+		{
+			if (redir->type == HERE_DOC)
+			{
+				g_signal_flag = 2;
+				signals_handler();
+				apply_heredoc_redir(cmd, redir);
+				g_signal_flag = 1;
+				signals_handler();
+			}
+			redir = redir->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
 void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
 {
 	char	*temp_file;

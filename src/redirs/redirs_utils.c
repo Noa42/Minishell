@@ -4,26 +4,13 @@ t_redir	*get_last_out_redir(t_cmd *cmd)
 {
 	t_redir	*redir;
 	t_redir	*last_out_redir;
-	// int		fd;
 
 	last_out_redir = NULL;
 	redir = cmd->redir_list;
 	while (redir)
 	{
 		if (redir->type == OUTPUT || redir->type == APPEND)
-		{
-			// if (redir->type == OUTPUT)
-			// {
-			// 	fd = open(redir->out_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			// 	close(fd);
-			// }
-			// else if (redir->type == APPEND)
-			// {
-			// 	open(redir->out_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-			// 	close(fd);
-			// }
 			last_out_redir = redir;
-		}
 		redir = redir->next;
 	}
 	return (last_out_redir);

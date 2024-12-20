@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 14:21:19 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:25:46 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		history(data.input);
 		ft_parsing(&data);
-		if(data.exit_status == 0 && data.parsing_error == 0 && data.prs.flag_space == 'g')
+		if (data.parsing_error == 0 && data.prs.flag_space == 'g')
 		{
 			//ft_printf_proofs_split_prs(data);
 			execution(&data);

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 14:20:23 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:54:26 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ char					*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns);
 // PARSING-TOKEN
 void					ft_create_tk_arr(t_parsing *prs);
 void				    ft_create_tks(t_parsing *prs, int count_2);
+//void					ft_send_empty_cmd(t_parsing *prs);
 
 
 // PARSING-SEND

@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 12:25:06 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:36:55 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,8 @@ char					*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns);
 // PARSING-TOKEN
 void					ft_create_tk_arr(t_parsing *prs);
 void				    ft_create_tks(t_parsing *prs, int count_2);
-
+void    				ft_check_toks(t_parsing *prs, int len);
+void    				ft_print_unexpected(t_parsing *prs, int count, int len);
 
 // PARSING-SEND
 void 					ft_start_sending(t_parsing *prs, t_data *data, int i);
@@ -328,8 +329,11 @@ void    				ft_send_rd(t_parsing *prs, t_data *data, int i);
 void			        ft_send_if_pipe(t_parsing *prs, int pipes, int i);
 void					ft_create_arr_lexem(char *str, t_parsing *prs);
 void        			ft_create_tks(t_parsing *prs, int count_2);
-void    				ft_check_toks(t_parsing *prs, int len);
-void    				ft_print_unexpected(t_parsing *prs, int count, int len);
+
+// PARSING-EXPANS
+void					ft_check_if_expans_var(t_parsing *prs);
+void					ft_check_dollar(t_parsing *prs, int index);
+void					ft_tell_if_dllr_qt(t_parsing *prs, int index);
 
 
 #endif

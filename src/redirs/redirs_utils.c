@@ -16,7 +16,7 @@ t_redir	*get_last_out_redir(t_cmd *cmd)
 	return (last_out_redir);
 }
 
-t_redir *get_last_in_redir(t_cmd *cmd)
+t_redir	*get_last_in_redir(t_cmd *cmd)
 {
 	t_redir	*redir;
 	t_redir	*last_in_redir;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sending_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:33:21 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/20 12:26:08 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:36:07 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_if_not_special_char(t_parsing *prs, t_data *data, t_cmd *node)
 	array = copy_alloc_array(prs->arr_lexems);
 	node = new_cmd(array, data);
 	data->cmd_list = add_cmd(data->cmd_list, node);
-	print_cmd_list(data->cmd_list);
+	//print_cmd_list(data->cmd_list);
 }
 
 void	ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node)
@@ -68,11 +68,24 @@ void	ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node)
 	ft_send_to_cmd_str(prs, data, node, 0);
 }
 
+t_cmd *new_empty_cmd(t_parsing *prs)
+{
+	char **array_cmd;
+	t_cmd *cmd;
+
+	array_cmd = copy_alloc_array((char *[]){" ", NULL});
+	cmd = new_cmd(array_cmd, prs->ptrdata);
+	return (cmd);
+}
+
 void	ft_send_to_cmd_str(t_parsing *prs, t_data *data, t_cmd *node, int i)
 {
 	prs->aux_ar_cmds = filter_strings(prs->arr_lexems);
+	if (prs->aux_ar_cmds == NULL)
+		node = new_empty_cmd(prs);
+	else
+		node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), data);
 	prs->aux_redirs = filter_redirections(prs->arr_lexems);
-	node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), data);
 	data->cmd_list = add_cmd(data->cmd_list, node);
 	while (prs->aux_redirs[i] != NULL)
 	{

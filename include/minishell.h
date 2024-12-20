@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 14:36:55 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:55:13 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,12 +171,14 @@ void					empty_env(t_data *data);
 void					close_fds(void);
 void					exit_process(t_data *data, int exit_status);
 void					safe_fork(pid_t *pid, t_data *data);
+void					exec_cmd(t_cmd *cmd, t_data *data);
+void					safe_dup2(int *fd_in, int *fd_out, t_data *data);
 ////// EXECUTION
-void					basic_parsing(t_data *data);//borrar
 void					execution(t_data *data);
 ////// MULTIPLE CMD
 void					multiple_cmd_case(t_data *data);
 void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
+
 ////// ONE CMD
 void					one_cmd_case(t_data *data);
 void					one_builtin_case(t_cmd *cmd);
@@ -220,21 +222,24 @@ t_token					*free_token_list(t_token *token_list);
 //----------------------REDIRS----------------------
 
 //////REDIRS EXECUTION
-void					update_fds_redirs(t_cmd *cmd_list);
+int						update_fds_redirs(t_cmd *cmd_list);
 void					dup_fds_redirs(t_cmd *cmd);
 void					apply_last_out_redir(t_cmd *cmd);
 void					apply_last_in_redir(t_cmd *cmd);
-void					apply_redir_list(t_cmd *cmd);
+int						open_and_try_redir(t_redir *redir);
+
 //////HERE DOC REDIR
 void					delete_temp_file(t_cmd *cmd, char *temp_file);
 void					prompt_loop(int here_doc_fd, t_redir *redir);
 char					*temp_file_name(t_cmd *cmd);
 void					apply_heredoc_redir(t_cmd *cmd, t_redir *redir);
+void					apply_every_heredoc(t_data *data);
 //////HERE DOC UTILS
 char					*append_char(char *str, char c);
 char					*hd_var_name(char *line, int i);
 char					*append_var_value(char *expand_line, char *line, int *i, char **env);
 char					*expand_vars_hd(char *line, char **env);
+
 
 //////INPUT REDIR
 void					apply_input_redir(t_cmd *cmd, t_redir *redir);
@@ -252,6 +257,8 @@ void					signals_handler(void);
 void					handle_ctrl_c(int signal);
 void					handle_backlash(int sign);
 void					signals_heredoc(void);
+t_data					*get_data(t_data *data);
+
 
 //////DISABLE PRINTING SIGNALS
 void					disable_printing_signals(t_data *data);

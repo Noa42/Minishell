@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sending_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 02:35:25 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 02:38:35 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:35:07 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	**filter_strings(char **input)
 			count++;
 		i++;
 	}
+	if(count == 0)
+		return (NULL);
 	result = malloc(sizeof(char *) * (count + 1));
 	if (!result)
 		return (NULL);

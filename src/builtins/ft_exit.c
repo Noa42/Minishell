@@ -46,6 +46,7 @@ void	ft_exit(t_cmd *cmd)
 	else if (is_a_num(cmd->array_cmd[1]) == 1)
 	{
 		builtin_end(cmd->data, E2BIG);
+		printf("\n");
 		return ;
 	}
 	printf("\n");

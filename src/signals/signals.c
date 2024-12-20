@@ -6,11 +6,20 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:49 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 10:45:51 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:35:39 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_data	*get_data(t_data *data)
+{
+	static t_data *data_ptr;
+
+	if (data_ptr == NULL)
+		data_ptr = data;
+	return (data_ptr);
+}
 
 void	handle_backlash(int sign)
 {
@@ -27,6 +36,7 @@ void	handle_ctrl_c(int signal)
 	rl_on_new_line();
 	if (g_signal_flag == 0)
 		rl_redisplay(); //refresca para que aparezca el prompt inmediatamente
+	get_data(NULL)->exit_status = 130;
 }
 
 void	signals_heredoc(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 13:41:36 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:12:37 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,25 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 	}
 }
 
-void	set_n_flag_and_i(char *s, int *n_flag, int *i)
+void	set_n_flag_and_i(char **array_cmd, int *n_flag, int *i)
 {
-	int	j;
+	int		j;
+	char	*s;
 
 	j = 1;
-	while (s[j] != '\0' && s[j] == 'n')
-		j++;
-	if (s[j] == '\0')
+	while (array_cmd [*i] != NULL)
 	{
-		*n_flag = 1;
-		*i = 2;
+		s = array_cmd[*i];
+		j = 1;
+		while (s[j] != '\0' && s[j] == 'n')
+			j++;
+		if (s[j] == '\0')
+		{
+			*n_flag = 1;
+			*i += 1;
+		}
+		else
+			break ;
 	}
 }
 
@@ -85,7 +93,7 @@ void	ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por proble
 	i = 1;
 	n_flag = 0;
 	if (array_len(cmd->array_cmd) >= 2 && ft_strlen(cmd->array_cmd[1]) >= 2)
-		set_n_flag_and_i(cmd->array_cmd[1], &n_flag, &i);
+		set_n_flag_and_i(cmd->array_cmd, &n_flag, &i);
 	while (cmd->array_cmd[i] != NULL)
 	{
 		if (ft_strcmp(cmd->array_cmd[i], "$?") == 0)

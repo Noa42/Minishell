@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 13:32:59 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:15:35 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void					child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data);
 ////// ONE CMD
 void					one_cmd_case(t_data *data);
 void					one_builtin_case(t_cmd *cmd);
+int						open_and_try_redirs(t_data *data); //Mover al archivo en el que esté finalmente
 ////// PATH
 char					*get_path_line(char **env);
 char					*get_path(char *command, char **env);
@@ -252,6 +253,8 @@ void					signals_handler(void);
 void					handle_ctrl_c(int signal);
 void					handle_backlash(int sign);
 void					signals_heredoc(void);
+t_data					*get_data(t_data *data);
+
 
 //////DISABLE PRINTING SIGNALS
 void					disable_printing_signals(t_data *data);

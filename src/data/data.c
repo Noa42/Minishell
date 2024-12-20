@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 13:44:36 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:27:50 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_data(t_data *data, char **env)
 	data->parsing_error = 0;
 	data->exit_status = 0;
 	data->prs.ptrdata = data;
+	get_data(data); //para el exit status de las señales
 	ft_init_parsing_struc(&data->prs);
 	update_shlvl(data);
 }
@@ -99,7 +100,6 @@ void	reboot_data(t_data *data)
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->token_list = NULL;
-	data->exit_status = 0;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	g_signal_flag = 0;

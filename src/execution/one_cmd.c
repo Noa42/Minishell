@@ -5,11 +5,53 @@ void	update_last_command(t_cmd *cmd)
 	insert_var(cmd->data->env, "_", cmd->array_cmd[0]);
 	insert_var(cmd->data->array_var, "_", cmd->array_cmd[0]);
 }
+// int	open_and_try_redirs(t_data *data)
+// {
+// 	t_redir	*redir;
+// 	int		fd;
+// 	t_cmd	*cmd;
+// 	int		result;
+
+// 	result = 0;
+// 	cmd = data->cmd_list;
+// 	while (cmd)
+// 	{
+// 		redir = cmd->redir_list;
+// 		while (redir)
+// 		{
+// 			if (redir->type == INPUT)
+// 			{
+// 				fd = open(redir->in_name, O_RDONLY);
+// 				if (fd == -1)
+// 				{
+// 					result = 1;
+// 					ft_putstr_fd("1 Error opening file\n", 2);
+// 					break;
+// 				}
+// 			}
+// 			else if (redir->type == OUTPUT || redir->type == APPEND)
+// 			{
+// 				fd = open(redir->out_name, O_WRONLY | O_CREAT, 0644);
+// 				if (fd == -1)
+// 				{
+// 					result = 1;
+// 					ft_putstr_fd("2 Error opening file\n", 2);
+// 					break;
+// 				}
+// 			}
+// 			close(fd);
+// 			redir = redir->next;
+// 		}
+// 		cmd = cmd->next;
+// 	}
+// 	return (result);
+// }
 
 void	one_cmd_child(t_cmd* cmd, t_data *data)
 {
 	char	*path;
 
+	// open_and_try_redirs(cmd);
 	dup_fds_redirs(cmd);
 	if (cmd->fd_in == -1 || cmd->fd_out == -1)
 		exit(cmd->data->exit_status);

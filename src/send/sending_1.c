@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sending_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:33:21 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 01:22:00 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:48:11 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_if_not_special_char(t_parsing *prs, t_data *data, t_cmd *node)
 	array = copy_alloc_array(prs->arr_lexems);
 	node = new_cmd(array, data);
 	data->cmd_list = add_cmd(data->cmd_list, node);
-	print_cmd_list(data->cmd_list);
+	//print_cmd_list(data->cmd_list);
 }
 
 void	ft_if_pipe_or_rdr(t_parsing *prs, t_data *data, t_cmd *node)

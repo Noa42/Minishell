@@ -3,42 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirs_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 13:52:18 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:30:08 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	apply_redir_list(t_cmd *cmd)
-{
-	if (cmd->redir_list == NULL)
-		return ;
-	apply_last_in_redir(cmd);
-	apply_last_out_redir(cmd);
-	if (cmd->fd_in == -1 || cmd->fd_out == -1)
-		return ;
-	if (cmd->fd_in != 0)
-	{
-		if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
-		{
-			ft_printf("Error duplicating file descriptor\n", 2);
-			cmd->data->exit_status = 1;
-			return ;
-		}
-	}
-	if (cmd->fd_out != 1)
-	{
-		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
-		{
-			ft_printf("Error duplicating file descriptor\n", 2);
-			cmd->data->exit_status = 1;
-			return ;
-		}
-	}
-}
 
 void	apply_last_in_redir(t_cmd *cmd)
 {
@@ -96,7 +69,7 @@ void	update_fds_redirs(t_cmd *cmd_list) //esto es para uno o varios comandos
 
 void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
 {
-	if (cmd->fd_in != 0)
+	if (cmd->fd_in != 0 && cmd->fd_in != -1)
 	{
 		if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		{
@@ -105,7 +78,7 @@ void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
 			return ;
 		}
 	}
-	if (cmd->fd_out != 1)
+	if (cmd->fd_out != 1 && cmd->fd_out != -1)
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{

@@ -28,7 +28,8 @@ void	multiple_cmd_case(t_data *data)
 		}
 	}
 }
-void safe_dup2(int *fd_in, int *fd_out, t_data *data)
+
+void	safe_dup2(int *fd_in, int *fd_out, t_data *data)
 {
 	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1)// Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
 	{

@@ -74,9 +74,9 @@ void	free_cmd(t_cmd *cmd)
 		free_array(cmd->array_cmd);
 	if (cmd->redir_list)
 		free_redir_list(cmd->redir_list);
-	if (cmd->fd_in != STDIN_FILENO)
+	if (cmd->fd_in != STDIN_FILENO  && cmd->fd_in != -1)
 		close(cmd->fd_in);
-	if (cmd->fd_out != STDOUT_FILENO)
+	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out != -1)
 		close(cmd->fd_out);
 	free(cmd);
 	cmd = NULL;

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:49 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 16:35:39 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:22:47 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_data	*get_data(t_data *data)
 {
-	static t_data *data_ptr;
+	static t_data	*data_ptr;
 
 	if (data_ptr == NULL)
 		data_ptr = data;
@@ -45,6 +45,7 @@ void	signals_heredoc(void)
 	signal(SIGQUIT, SIG_IGN); // Ctrl+\ debe ignorarse.
 	signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
 }
+
 void	signals_handler(void)
 {
 	if (g_signal_flag == 0) //Normal
@@ -66,4 +67,3 @@ void	signals_handler(void)
 		signal(SIGTSTP, SIG_IGN); // Ctrl+Z debe ignorarse.
 	}
 }
-

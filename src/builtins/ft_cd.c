@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:56:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:56:45 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:04:13 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_cd_home(t_data *data, char *oldpwd, char *pwd)
 
 void	safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd)
 {
-
 	if (oldpwd == NULL || pwd == NULL)
 	{
 		ft_putstr_fd("Cannot allocate memory\n", 2);
@@ -74,7 +73,6 @@ void	safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd)
 	}
 }
 
-
 void	ft_cd(t_cmd *cmd)
 {
 	char	*oldpwd;
@@ -82,7 +80,7 @@ void	ft_cd(t_cmd *cmd)
 
 	if (array_len(cmd->array_cmd) > 2)
 	{
-		builtin_end(cmd->data, E2BIG); //E2BIG = Argument list too long
+		builtin_end(cmd->data, E2BIG);
 		return ;
 	}
 	oldpwd = malloc(sizeof(char) * 1024);

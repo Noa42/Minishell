@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:38 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:58:39 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:21:45 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ t_redir	*get_last_in_redir(t_cmd *cmd)
 	}
 	return (last_in_redir);
 }
-

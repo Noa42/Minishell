@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:35 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:36 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:13:59 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	one_cmd_case(t_data *data)
 	}
 	update_last_command(cmd);
 }
+
 void	one_builtin_case(t_cmd *cmd)
 {
 	int	stdin_copy;

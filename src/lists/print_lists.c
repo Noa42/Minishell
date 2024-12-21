@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:54 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:55 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:16:21 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_token_list(t_token *token_list)
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
+
 char	*token_type_to_string(t_token_type token_type)
 {
 	if (token_type == CMD)
@@ -40,6 +41,7 @@ char	*token_type_to_string(t_token_type token_type)
 		return ("REDIR");
 	return ("UNKNOWN");
 }
+
 void	print_cmd_list(t_cmd *cmd_list)
 {
 	t_cmd	*p;
@@ -59,6 +61,7 @@ void	print_cmd_list(t_cmd *cmd_list)
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
 }
+
 void	print_cmd(t_cmd *cmd)
 {
 	printf("------------[%i]CMD---------------- \n", cmd->index);

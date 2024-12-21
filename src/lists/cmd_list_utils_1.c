@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:45 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:15:43 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	cmd_list_len(t_cmd *cmd_list)
 	}
 	return (len);
 }
+
 t_cmd	*free_cmd_list(t_cmd *cmd_list)
 {
 	t_cmd	*p;
@@ -80,13 +81,14 @@ t_cmd	*free_cmd_list(t_cmd *cmd_list)
 	}
 	return (NULL);
 }
+
 void	free_cmd(t_cmd *cmd)
 {
 	if (cmd->array_cmd)
 		free_array(cmd->array_cmd);
 	if (cmd->redir_list)
 		free_redir_list(cmd->redir_list);
-	if (cmd->fd_in != STDIN_FILENO  && cmd->fd_in != -1)
+	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in != -1)
 		close(cmd->fd_in);
 	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out != -1)
 		close(cmd->fd_out);

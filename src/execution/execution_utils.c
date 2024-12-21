@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:20 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:21 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:12:27 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	close_fds(void)
 {
 	int	i;
 
-	i = 3; //el primer fd no estandard es el 3
-	while (i < 1024)//1024 es el maximo numero de fd que se pueden tener
+	i = 3;
+	while (i < 1024)
 	{
 		close(i);
 		i++;
@@ -42,13 +42,14 @@ void	safe_fork(pid_t *pid, t_data *data)
 
 void	safe_dup2(int *fd_in, int *fd_out, t_data *data)
 {
-	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1)// Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
+	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1) // Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
 	{
 		ft_putstr_fd("Dup error\n", 2);
 		data->exit_status = 1;
 		exit_process(data, data->exit_status);
 	}
 }
+
 void	exec_cmd(t_cmd *cmd, t_data *data)
 {
 	char	*path;
@@ -56,6 +57,6 @@ void	exec_cmd(t_cmd *cmd, t_data *data)
 	path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
 	if (path != NULL)
 		execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
-	ft_putstr_fd("Comand not found\n", 2);	
+	ft_putstr_fd("Comand not found\n", 2);
 	exit_process(data, 127);
 }

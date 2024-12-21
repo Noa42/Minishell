@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:59:02 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:59:03 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:24:01 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	array_len(char **array)
 	return (i);
 }
 
-void swap(char **a, char **b)
+void	swap(char **a, char **b)
 {
 	char	*temp;
 

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:13:12 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	multiple_cmd_case(t_data *data)
 {
-	t_cmd	*cmd;    
+	t_cmd	*cmd;
 	int		fd_in;
 	int		fd_out;
 	pid_t	pid;
@@ -35,7 +35,7 @@ void	multiple_cmd_case(t_data *data)
 			waitpid(pid, &status, 0); //El exit status es una info que se tiene que interpretar con la macro WIFEXITED
 			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
 			close(data->pipe[1]); // Cierra el extremo de escritura de la tubería en el padre
-			fd_in = data->pipe[0];			// Actualiza fd_in para el próximo comando, usando el extremo de lectura actual
+			fd_in = data->pipe[0];// Actualiza fd_in para el próximo comando, usando el extremo de lectura actual
 			cmd = cmd->next;
 		}
 	}

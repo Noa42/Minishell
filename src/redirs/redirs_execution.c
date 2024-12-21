@@ -6,12 +6,11 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/20 13:22:09 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:21:28 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 void	apply_last_in_redir(t_cmd *cmd)
 {

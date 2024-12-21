@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:03 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:58:04 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:17:35 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ t_token	*add_token(t_token *token_list, t_token_type token_type)
 		return (NULL);
 	new_token->token_type = token_type;
 	new_token->next = NULL;
-	// Si la lista está vacía, el nuevo token es el primero
 	if (token_list == NULL)
 	{
 		new_token->index = 0;
 		return (new_token);
 	}
-	// Si la lista ya tiene elementos, recorre hasta el final y añade el nuevo token
 	p = token_list;
 	while (p->next)
 		p = p->next;

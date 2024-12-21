@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:54 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:33:02 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:16:02 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,18 @@ void	print_cmd_list(t_cmd *cmd_list)
 		p = p->next;
 	}
 	printf("+++++++++++++++++++++++++++++++++++++++\n\n");
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		printf("[%i]: %s\n", i, array[i]);
+		i++;
+	}
 }
 
 void	print_cmd(t_cmd *cmd)
@@ -117,19 +129,8 @@ char	*redir_type_to_string(t_redir_type type)
 	return ("UNKNOWN");
 }
 
-void	print_array(char **array)
-{
-	int	i;
 
-	i = 0;
-	while (array[i])
-	{
-		printf("[%i]: %s\n", i, array[i]);
-		i++;
-	}
-}
-
-void instrucciones_ejemplo_listas(t_data *data)
+/*void instrucciones_ejemplo_listas(t_data *data)
 {
 	//INSTRUCCIONES DE COMO USAR LAS LISTAS
 
@@ -191,4 +192,4 @@ void instrucciones_ejemplo_listas(t_data *data)
 	print_token_list(data->token_list);
 	print_cmd_list(data->cmd_list);
 
-}
+} */

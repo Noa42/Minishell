@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 12:11:03 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:16:22 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 		ft_parsing(&data);
 		if (data.parsing_error == 0 && data.prs.flag_space == 'g')
 		{
-			ft_printf_proofs_split_prs(data);
+			//ft_printf_proofs_split_prs(data);
 			execution(&data);
 		}
 		reboot_data(&data);

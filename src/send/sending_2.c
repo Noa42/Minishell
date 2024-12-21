@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 23:27:49 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/20 12:31:58 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:35:01 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ void	ft_send_if_pipe(t_parsing *prs, int pipes, int i)
 	while (prs->ar_of_ar[count] != NULL)
 	{
 		prs->aux_ar_cmds = filter_strings(prs->ar_of_ar[count]);
+		if (prs->aux_ar_cmds == NULL)
+			node = new_cmd(copy_alloc_array((char *[]){" ", NULL}), prs->ptrdata);
+		else
+			node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), prs->ptrdata);
 		prs->aux_redirs = filter_redirections(prs->ar_of_ar[count]);
-		node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), prs->ptrdata);
 		prs->ptrdata->cmd_list = add_cmd(prs->ptrdata->cmd_list, node);
 		i = 0;
 		while (prs->aux_redirs && prs->aux_redirs[i] != NULL)

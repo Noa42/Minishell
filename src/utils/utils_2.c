@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:59:07 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:33:23 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:36:20 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_array(char **array)
 	int	i;
 
 	i = 0;
-	while (array[i] != NULL)
+	while (array && array[i] != NULL)
 	{
 		free(array[i]);
 		i++;

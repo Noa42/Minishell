@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 12:08:01 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:18:15 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,5 +352,11 @@ void					ft_create_arr_lexem(char *str, t_parsing *prs);
 void					ft_create_tks(t_parsing *prs, int count_2);
 void					ft_check_toks(t_parsing *prs, int len);
 void					ft_print_unexpected(t_parsing *prs, int count, int len);
+t_cmd 					*new_empty_cmd(t_parsing *prs);
+
+
+// PARSING-EXPANS
+
+
 
 #endif

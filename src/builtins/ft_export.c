@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:05 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:06 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 17:04:07 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,68 @@ void	print_export(char **array_var)
 	}
 }
 
+int	valid_var_name(char *var_name)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(var_name[i]) && var_name[i] != '_')
+		return (0);
+	i++;
+	while (var_name[i])
+	{
+		if (!ft_isalnum(var_name[i]) && var_name[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	not_valid_identifier(char *var_name, int *exit_status)
+{
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(var_name, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	free(var_name);
+	*exit_status = 1;
+}
+
+void	valid_identifier(t_cmd *cmd, char *var_name, int i)
+{
+	char	*var_value;
+
+	var_value = ft_var_value(cmd->array_cmd[i]);
+	cmd->data->env = insert_var(cmd->data->env, var_name, var_value);
+	cmd->data->array_var = \
+	insert_var(cmd->data->array_var, var_name, var_value);
+	free(var_name);
+	free(var_value);
+}
+
 void	ft_export(t_cmd *cmd)
 {
 	char	*var_name;
-	char	*var_value;
 	int		i;
+	int		exit_status;
 
+	exit_status = 0;
 	if (cmd->array_cmd[1] == NULL)
 	{
 		print_export(cmd->data->array_var);
+		builtin_end(cmd->data, 0);
 		return ;
 	}
 	i = 1;
 	while (cmd->array_cmd[i])
 	{
 		var_name = ft_var_name(cmd->array_cmd[i]);
-		var_value = ft_var_value(cmd->array_cmd[i]);
-		//if comprobaciones porque hay variables que se incluyen en export y no en env por ejemplo si está vacía $export a="", esto aparece en export pero no en env
-		cmd->data->env = insert_var(cmd->data->env, var_name, var_value);
-		cmd->data->array_var = \
-		insert_var(cmd->data->array_var, var_name, var_value);
+		if (valid_var_name((var_name)) == 0)
+		{
+			not_valid_identifier(var_name, &exit_status);
+			break ;
+		}
+		valid_identifier(cmd, var_name, i);
 		i++;
-		free(var_name);
-		free(var_value);
 	}
-	builtin_end(cmd->data, 0);
+	builtin_end(cmd->data, exit_status);
 }

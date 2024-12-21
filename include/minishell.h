@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 13:22:06 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:52:13 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,18 @@ void					free_data(t_data *data);
 void					reboot_data(t_data *data);
 void					empty_env(t_data *data);
 
+//----------------------DATA----------------------
+
+//////DATA UTILS
+void					update_shlvl(t_data *data);
+void					empty_env(t_data *data);
+//////DATA
+void					init_data(t_data *data, char **env);
+void					free_data(t_data *data);
+void					reboot_data(t_data *data);
+void					free_parsing(t_parsing *prs);
+
+
 //----------------------EXECUTION----------------------
 
 ////// EXECUTION UTILS
@@ -208,6 +220,7 @@ void					print_cmd_list(t_cmd *cmd_list);
 void					print_redir(t_redir *redir);
 void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
+void					print_array(char **array);
 void					instrucciones_ejemplo_listas(t_data *data);//BORRAR
 //////REDIR LIST UTILS
 t_redir					*new_redir(t_redir_type type, \

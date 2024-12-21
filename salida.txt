@@ -1,16 +1,8 @@
-AHAHHAA
-hehe
-heheh
 include
 in_file1.txt
 in_file2.txt
-ja
-ju
 Makefile
 minishell
-neUw.txt
-noesxit
-nombre
 obj
 out_file1.txt
 out_file2.txt
@@ -21,3 +13,4 @@ README.md
 salida.txt
 src
 test2.txt
+hola

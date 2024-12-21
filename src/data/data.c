@@ -6,26 +6,11 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:35:35 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:33:41 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	update_shlvl(t_data *data)
-{
-	int		shlvl_int;
-	char	*shlvl_str;
-
-	shlvl_str = ft_getenv("SHLVL", data->env);
-	shlvl_int = ft_atoi(shlvl_str);
-	shlvl_int ++;
-	free(shlvl_str);
-	shlvl_str = ft_itoa(shlvl_int);
-	insert_var(data->env, "SHLVL", shlvl_str);
-	insert_var(data->array_var, "SHLVL", shlvl_str);
-	free(shlvl_str);
-}
 
 void	init_data(t_data *data, char **env)
 {
@@ -64,14 +49,11 @@ void	free_data(t_data *data)
 		free_array(data->array_var);
 	if (data->cmd_list)
 		free_cmd_list(data->cmd_list);
-	if (data->token_list)
-		free_token_list(data->token_list);
 	if (data->input)
 		free(data->input);
-	if (data->prs.arr_lexems)
-		free_array(data->prs.arr_lexems);
-	if (data->prs.arr_toks)
-		free(data->prs.arr_toks);
+	if (data->in_ax)
+		free(data->in_ax);
+	free_parsing(&data->prs);
 	rl_clear_history();
 	close_fds();
 	restore_original_settings(data);
@@ -81,44 +63,34 @@ void	reboot_data(t_data *data)
 {
 	if (data->input)
 		free(data->input);
-	if (data->prs.aux_ar_cmds)
-		free_array(data->prs.aux_ar_cmds);
-	if (data->prs.aux_redirs)
-		free_array(data->prs.aux_redirs);
-	if (data->in_ax)
-		free(data->in_ax);
-	free_triple_ptr(data->prs.ar_of_ar);
 	if (data->cmd_list)
 		data->cmd_list = free_cmd_list(data->cmd_list);
-	if (data->token_list)
-		data->token_list = free_token_list(data->token_list);
-	if (data->prs.arr_lexems)
-		free_array(data->prs.arr_lexems);
-	if (data->prs.arr_toks)
-		free(data->prs.arr_toks);
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->token_list = NULL;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	g_signal_flag = 0;
+	free_parsing(&data->prs);
 	ft_init_parsing_struc(&data->prs);
 	signals_handler();
 	close_fds();
 }
 
-void	empty_env(t_data *data)
+void	free_parsing(t_parsing *prs)
 {
-	char	*pwd;
-
-	pwd = malloc(sizeof(char) * 1024);
-	getcwd(pwd, 1024);
-	data->env = malloc(sizeof(char *) * 5);
-	data->env[0] = ft_strdup("OLDPWD");
-	data->env[1] = ft_strjoin("PWD=", pwd);
-	data->env[2] = ft_strdup("SHLVL=1");
-	data->env[3] = ft_strdup("_=EMPTY");
-	data->env[4] = NULL;
-	data->array_var = copy_alloc_array(data->env);
-	free(pwd);
+	if (prs->arr_lexems)
+		free_array(prs->arr_lexems);
+	if (prs->arr_toks)
+		free(prs->arr_toks);
+	if (prs->aux_ar_cmds)
+		free_array(prs->aux_ar_cmds);
+	if (prs->aux_redirs)
+		free_array(prs->aux_redirs);
+	free_triple_ptr(prs->ar_of_ar);
+	prs->arr_lexems = NULL;
+	prs->arr_toks = NULL;
+	prs->aux_ar_cmds = NULL;
+	prs->aux_redirs = NULL;
+	prs->ar_of_ar = NULL;
 }

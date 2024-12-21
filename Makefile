@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+         #
+#    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
-#    Updated: 2024/12/21 13:20:53 by alvapari         ###   ########.fr        #
+#    Updated: 2024/12/21 14:52:30 by achacon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ src/builtins/ft_export.c\
 src/builtins/ft_pwd.c\
 src/builtins/ft_unset.c\
 src/data/data.c\
+src/data/data_utils.c\
 src/execution/execution_utils.c\
 src/execution/execution.c\
 src/execution/multiple_cmd.c\

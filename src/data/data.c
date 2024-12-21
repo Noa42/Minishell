@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:05:53 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:35:35 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ void	init_data(t_data *data, char **env)
 	data->parsing_error = 0;
 	data->exit_status = 0;
 	data->prs.ptrdata = data;
-	get_data(data); //para el exit status de las señales
+	get_data(data);
 	ft_init_parsing_struc(&data->prs);
 	update_shlvl(data);
 }
 
 void	free_data(t_data *data)
 {
-	//Está por rellenar
 	if (data->env)
 		free_array(data->env);
 	if (data->array_var)
@@ -73,7 +72,7 @@ void	free_data(t_data *data)
 		free_array(data->prs.arr_lexems);
 	if (data->prs.arr_toks)
 		free(data->prs.arr_toks);
-	rl_clear_history();//limpia el historial de readline
+	rl_clear_history();
 	close_fds();
 	restore_original_settings(data);
 }
@@ -122,24 +121,4 @@ void	empty_env(t_data *data)
 	data->env[4] = NULL;
 	data->array_var = copy_alloc_array(data->env);
 	free(pwd);
-}
-
-void	free_triple_ptr(char ***ptr)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (ptr && ptr[i])
-	{
-		j = 0;
-		while (ptr[i][j])
-		{
-			free(ptr[i][j]);
-			j++;
-		}
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
 }

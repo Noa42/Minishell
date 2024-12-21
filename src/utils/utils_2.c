@@ -6,23 +6,11 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:59:07 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:24:59 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:33:23 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	print_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		printf("[%i]: %s\n", i, array[i]);
-		i++;
-	}
-}
 
 void	free_array(char **array)
 {
@@ -107,4 +95,24 @@ char	**realloc_elonged_array(char **src_array)
 	new_array[len] = NULL;
 	new_array[len + 1] = NULL;
 	return (new_array);
+}
+
+void	free_triple_ptr(char ***ptr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (ptr && ptr[i])
+	{
+		j = 0;
+		while (ptr[i][j])
+		{
+			free(ptr[i][j]);
+			j++;
+		}
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }

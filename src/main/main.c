@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:19:38 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:29:26 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ void	header(void)
 	printf("░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀\n");
 	printf("\n");
 	printf("\n");
+}
+
+void	history(char *input)
+{
+	if (input != NULL && ft_strlen(input) != 0 && ft_only_spaces(input) == 0)
+		add_history(input);
 }
 
 int	main(int argc, char **argv, char **env)

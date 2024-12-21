@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:54 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:16:21 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:33:02 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,18 @@ char	*redir_type_to_string(t_redir_type type)
 	else if (type == HERE_DOC)
 		return ("HERE_DOC");
 	return ("UNKNOWN");
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		printf("[%i]: %s\n", i, array[i]);
+		i++;
+	}
 }
 
 void instrucciones_ejemplo_listas(t_data *data)

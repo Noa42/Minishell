@@ -6,17 +6,11 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:59:02 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:24:01 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:28:10 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	history(char *input)
-{
-	if (input != NULL && ft_strlen(input) != 0 && ft_only_spaces(input) == 0)
-		add_history(input);
-}
 
 int	ft_only_spaces(char *input)
 {

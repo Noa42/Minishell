@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:56:48 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:14:13 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 int	has_variable(char *input)//Mira si hay un $ en la cadena
 {
-	int	i;
+	int	i;	
+	int cnt_dollar;
 
+	cnt_dollar = 0;
 	i = 0;
 	while (input[i] != '\0')
 	{
 		if (input[i] == '$' && input[i + 1] != '\0' && input[i + 1] != ' ')
-			return (1);
+			cnt_dollar++;
 		i++;
 	}
-	return (0);
+	return (cnt_dollar);
 }
 
 char	*get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el nombre de la variable (es decir lo que hay después de $ lo que llamamos var_name)

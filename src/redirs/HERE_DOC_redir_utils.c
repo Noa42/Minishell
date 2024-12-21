@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HERE_DOC_redir_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:23 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:58:24 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:26:57 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*hd_var_name(char *line, int i)
 	char	*var_name;
 
 	j = i + 1;
-	while (line[j] != ' ' && line[j] != '\0')
+	while (line[j] != ' ' && line[j] != '\0' && line[j] != '$')
 		j++;
 	var_name = ft_substr(line, i + 1, j - i - 1);
 	return (var_name);

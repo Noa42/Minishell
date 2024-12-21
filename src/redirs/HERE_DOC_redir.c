@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HERE_DOC_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:58:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:14:41 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	prompt_loop(int here_doc_fd, t_redir *redir)
 			break ;
 		}
 		i++;
-		if (has_variable(line))
+		if (has_variable(line) != 0)
 			line = expand_vars_hd(line, redir->data->env);
 		if (ft_strcmp(line, redir->delim) == 0)
 			break ;

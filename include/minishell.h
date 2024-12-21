@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 12:18:15 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:22:06 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,9 @@ t_cmd 					*new_empty_cmd(t_parsing *prs);
 
 
 // PARSING-EXPANS
+void    ft_check_if_expans_var(t_parsing *prs);
+int    ft_check_dollar(t_parsing *prs, int index);
+int ft_tell_if_dllr_qt(t_parsing *prs, int index);
 
 
 

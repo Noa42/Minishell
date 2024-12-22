@@ -6,41 +6,72 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 13:34:14 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/21 14:41:19 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:56:12 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// void    ft_check_if_expans_var(t_parsing *prs)
-// {
-//     int cnt_arr;
-//     int cnt_str;
-//     int cnt_dollar;
+void    ft_check_if_expans_var(t_parsing *prs)
+ {
+    int cnt_arr;
+    int cnt_str;
+    int cnt_dollar;
 
-//     cnt_arr = 0;
-//     cnt_str = 0;
-//     cnt_dollar = 0;
-//     while(prs->arr_lexems[cnt_arr] != NULL)
-//     {
-//         while(prs->arr_lexems[cnt_arr][cnt_str] != '\0')
-//         {
-//             printf("LLEGAS?????%s\n", prs->arr_lexems[cnt_arr]);
-//             if(prs->arr_lexems[cnt_arr][cnt_str] == '$')
-//             {
-//                 cnt_dollar++;
-//                 if (ft_check_dollar(prs, cnt_str) == 0)
-//                 {
-//                     printf("LLEGAS?????%s\n", prs->arr_lexems[cnt_arr]);
-//                     prs->arr_lexems[cnt_arr] = expand_vars_hd(prs->arr_lexems[cnt_arr], prs->ptrdata->env);
-//                     printf("2   2    LLEGAS?????%s\n", prs->arr_lexems[cnt_arr]);
-//                 }
-//             }
-//             cnt_str++;
-//         }
-//         cnt_arr++;
-//     }
-// }
+    cnt_arr = 0;
+    cnt_str = 0;
+    cnt_dollar = 0;
+    while(prs->arr_lexems[cnt_arr] != NULL)
+    {
+        cnt_str = 0;
+        while(prs->arr_lexems[cnt_arr][cnt_str] != '\0')
+        {
+            if(prs->arr_lexems[cnt_arr][cnt_str] == '$')
+            {
+                cnt_dollar++;
+                printf("FT_CHECK_DOLLAR%s\n", prs->arr_lexems[cnt_arr]);
+                prs->flag = 0;
+                if (ft_check_dollar(prs, cnt_dollar) == 0)
+                {
+                    printf("FT_CHECK_DOLLAR%s\n", prs->arr_lexems[cnt_arr]);
+                    //prs->arr_lexems[cnt_arr] = expand_vars_hd(prs->arr_lexems[cnt_arr], prs->ptrdata->env);
+                    //printf("2   2    LLEGAS?????%s\n", prs->arr_lexems[cnt_arr]);
+                }
+            }
+            cnt_str++;
+        }
+        cnt_arr++;
+    }
+}
+
+
+//si esta función devuelve 0 SÍ expandimos, de lo contrario no!
+int     ft_check_dollar(t_parsing *prs, int index)
+{
+    int count;
+    int cnt_dol;
+
+    cnt_dol = 0;
+    count = 0;
+    while(prs->ptrdata->in_ax[count] != '\0')
+    {
+	    if (prs->ptrdata->in_ax[count] == DOUB_QUOT)
+			ft_if_doub_quote_exp(prs);
+		else if (prs->ptrdata->in_ax[count] == ONE_QUOT)
+			ft_if_single_quote_exp(prs);
+        if (prs->ptrdata->in_ax[count] == '$')
+            cnt_dol++;
+        if((cnt_dol == index && prs->flag == 0) || (cnt_dol == index && prs->flag == DOUB_QUOT))
+            return (0);
+        count++;
+    }
+    return (1);
+}
+
+//si está función devuelve 0 SÍ expandimos, de lo contrario no!
+
+
+
 
 int     ft_tell_me_where(char   *str, char c)
 {
@@ -54,6 +85,24 @@ int     ft_tell_me_where(char   *str, char c)
     return (i);
 }
 
+void	ft_if_doub_quote_exp(t_parsing *prs)
+{
+	if (prs->flag == 0)
+		prs->flag = DOUB_QUOT;
+	else if (prs->flag == DOUB_QUOT)
+		prs->flag = 0;
+}
+
+
+void	ft_if_single_quote_exp(t_parsing *prs)
+{
+	if (prs->flag == 0)
+		prs->flag = ONE_QUOT;
+	else if (prs->flag == ONE_QUOT)
+		prs->flag = 0;
+}
+
+/**
 void    ft_check_if_expans_var(t_parsing *prs)
 {
     int cnt_arr;
@@ -74,79 +123,14 @@ void    ft_check_if_expans_var(t_parsing *prs)
         }
         cnt_arr ++;
     }
-}
-
-int    ft_check_dollar(t_parsing *prs, int index)
-{
-    int count;
-    int cnt_dol;
-
-    cnt_dol = 0;
-    count = 0;
-    while(prs->ptrdata->in_ax[count] != '\0')
-    {
-        if(prs->ptrdata->in_ax[count] == '$')
-        {
-            cnt_dol++;
-            if(cnt_dol == index)
-                return (ft_tell_if_dllr_qt(prs, count));
-        }
-        count++;
-    }
-    return (1);
-}
-
-//si está función devuelve 0 SÍ expandimos, de lo contrario no!
-int ft_tell_if_dllr_qt(t_parsing *prs, int index)
-{
-    int count;
-    int flag;
-
-    flag = 0;
-    count = 0;
-    while(prs->ptrdata->in_ax[count] != '\0' && count < index)
-    {
-	    if (prs->ptrdata->in_ax[count] == ONE_QUOT)
-	    {
-		    if (flag == 0)
-			    flag = ONE_QUOT;
-		    else if (flag == ONE_QUOT)
-			    flag = 0;
-	    }
-	    count++;
-    }
-	if ((prs->ptrdata->in_ax[count]) && flag == 0)
-	    return (0);
-    return (1);
-}
-
-
-
-
-/*
-int	ft_tell_if_oq(char *str, int index, int i, int flag)
-{
-	if (index < 0)
-		return (0);
-	while (str[i] != '\0' && i <= index)
-	{
-		if (str[i] == DOUB_QUOT)
-		{
-			if (flag == 0)
-				flag = DOUB_QUOT;
-			else if (flag == DOUB_QUOT)
-				flag = 0;
-		}
-		if (str[i] == ONE_QUOT)
-		{
-			if (flag == 0)
-				flag = ONE_QUOT;
-			else if (flag == ONE_QUOT)
-				flag = 0;
-		}
-		if ((i == index) && flag == 0)
-			return (0);
-		i++;
-	}
-	return (1);
 }*/
+
+
+
+
+/*es una extensión de la función how_mux_lem:  cuando llegamos a las comillas,
+	si estamos en un estado libre (flag = 0) abrimos estado,
+	si estamos en estado abierto, lo cerramos,
+	si el estado está abierto pero por otro tipo de comillas no haremos nada,
+	es decir, trataremos a esas comillas como un carácter más*/
+    

@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:31:03 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/22 16:14:06 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 20:13:00 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	ft_create_arr_lexem(char *str, t_parsing *prs)
 	prs->flag = 0;
 	prs->reject = 0;
 	ft_string_by_string(str, prs);
-	ft_start_expas(prs);
-	//ft_check_if_expans_var(prs);
 	ft_create_tk_arr(prs);
 	if (prs->ptrdata->parsing_error == 0)
 		ft_start_sending(prs, prs->ptrdata, 0);

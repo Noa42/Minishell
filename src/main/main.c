@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 13:00:35 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 21:59:17 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	main(int argc, char **argv, char **env)
 		ft_parsing(&data);
 		if (data.parsing_error == 0 && data.prs.flag_space == 'g')
 			execution(&data);
+		//ft_printf_proofs_split_prs(data);
 		reboot_data(&data);
 	}
 	exit_status = data.exit_status;

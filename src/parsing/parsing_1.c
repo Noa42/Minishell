@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:02:28 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 19:59:10 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 20:27:41 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_parsing(t_data *data)
 
 	new_len = ft_len(data->input, 0, 0, 0) + ft_strlen(data->input);
 	data->in_ax = ft_new_input(data->input, new_len);
+	ft_start_expas(&data->prs);
+	data->prs.flag = 0;
 	top = ft_strlen(data->in_ax) - 1;
 	if (ft_only_spaces(data->in_ax) == 1)
 		ft_print_prs_err('s', &data->prs);

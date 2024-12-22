@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:13:18 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/20 16:08:05 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 20:44:19 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ void	ft_check_toks(t_parsing *prs, int len)
 		else if (prs->arr_toks[count] == REDIR && ((count + 1) < len)
 			&& prs->arr_toks[count + 1] == PIPE)
 			ft_print_unexpected(prs, count, len);
-		/*else if (prs->arr_toks[count] == REDIR && ((count + 1) < len)
-			&& prs->arr_toks[count + 1] == CMD && (count == (len - 1)))	
-			ft_send_empty_cmd(prs);*/
 		count++;
 	}
 }
@@ -111,31 +108,3 @@ void	ft_print_unexpected(t_parsing *prs, int count, int len)
 
 
 
-// void	ft_chech_
-// {
-// 	int i;
-
-// 	i = 0;
-// 	if (ft_strlen(prs->arr_lexems[i]) == 1 && prs->aux_redirs[i][0] == '<')
-// 	{
-// 		add_redir(get_last_cmd(data->cmd_list), new_redir(INPUT,
-// 				ft_strdup(prs->aux_redirs[i + 1]), data));
-// 	}
-// 	if (ft_strlen(prs->arr_lexems[i]) == 1 && prs->aux_redirs[i][0] == '>')
-// 	{
-// 		add_redir(get_last_cmd(data->cmd_list), new_redir(OUTPUT,
-// 				ft_strdup(prs->aux_redirs[i + 1]), data));
-// 	}
-// 	if (ft_strlen(prs->arr_lexems[i]) == 2 && prs->arr_lexems[i][0] == '<'
-// 		&& prs->aux_redirs[i][1] == '<')
-// 	{
-// 		add_redir(get_last_cmd(data->cmd_list), new_redir(HERE_DOC,
-// 				ft_strdup(prs->aux_redirs[i + 1]), data));
-// 	}
-// 	if (ft_strlen(prs->arr_lexems[i]) == 2 && prs->aux_redirs[i][0] == '>'
-// 		&& prs->aux_redirs[i][1] == '>')
-// 	{
-// 		add_redir(get_last_cmd(data->cmd_list), new_redir(APPEND,
-// 				ft_strdup(prs->aux_redirs[i + 1]), data));
-// 	}
-// }

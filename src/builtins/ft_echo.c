@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 11:28:05 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:41:31 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	has_variable(char *input)
 {
 	int	i;	
-	int cnt_dollar;
+	int	cnt_dollar;
 
 	cnt_dollar = 0;
 	i = 0;

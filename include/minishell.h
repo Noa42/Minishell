@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 12:04:06 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:31:24 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ void					free_data(t_data *data);
 void					reboot_data(t_data *data);
 void					free_parsing(t_parsing *prs);
 
-
 //----------------------EXECUTION----------------------
 
 ////// EXECUTION UTILS
@@ -246,7 +245,6 @@ char					*append_var_value(char *expand_line, \
 							char *line, int *i, char **env);
 char					*expand_vars_hd(char *line, char **env);
 
-
 //////INPUT REDIR
 void					apply_input_redir(t_cmd *cmd, t_redir *redir);
 //////OUTPUT REDIR
@@ -265,7 +263,6 @@ void					handle_ctrl_c(int signal);
 void					handle_backlash(int sign);
 void					signals_heredoc(void);
 t_data					*get_data(t_data *data);
-
 
 //////DISABLE PRINTING SIGNALS
 void					disable_printing_signals(t_data *data);
@@ -308,14 +305,13 @@ int						ft_if_lexem_only_doub_quotes(char *str, t_parsing *prs);
 void					ft_print_prs_err(char flag, t_parsing *prs);
 void					ft_move_counts(t_parsing	*prs);
 void					ft_string_by_string_aux(char *str, t_parsing *prs);
-void					ft_printf_proofs_split_prs(t_data data); /*Que NO se nos olvide quitar esto LOL*/
+void					ft_printf_proofs_split_prs(t_data data);
 void					ft_parsing(t_data *data);
 char					*new_input(char *s, int len);
 int						ft_len(char *s, int k, int i, int add);
 int						ft_tell_if_oq(char *str, int index, int i, int flag);
 int						ft_is_spc_chr(char str);
 char					*ft_new_input(char *s, int len);
-void					ft_init_cnt_sc(t_parsing *prs);//No encontrada (mensaje de Noa)
 void					ft_check_if_csp(char *str, t_parsing *prs);
 void					ft_check_if_csp_aux(char *str, t_parsing *prs);
 void					ft_realloc_prs_o(t_parsing *prs);
@@ -326,7 +322,6 @@ char					*ft_new_input_aux(char *s, char *new_str, int i, \
 // PARSING-TOKEN
 void					ft_create_tk_arr(t_parsing *prs);
 void					ft_create_tks(t_parsing *prs, int count_2);
-
 
 // PARSING-SEND
 void					ft_start_sending(t_parsing *prs, t_data *data, int i);
@@ -352,14 +347,11 @@ void					ft_check_toks(t_parsing *prs, int len);
 void					ft_print_unexpected(t_parsing *prs, int count, int len);
 t_cmd					*new_empty_cmd(t_parsing *prs);
 
-
 // PARSING-EXPANS
 void					ft_if_doub_quote_exp(t_parsing *prs);
 void					ft_if_single_quote_exp(t_parsing *prs);
 void					ft_check_if_expans_var(t_parsing *prs);
 int						ft_check_dollar(t_parsing *prs, int index);
 int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
-
-
 
 #endif

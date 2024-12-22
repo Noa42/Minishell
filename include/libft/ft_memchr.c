@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:21:38 by achacon-          #+#    #+#             */
-/*   Updated: 2024/05/22 10:39:20 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:32:21 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	{
 		if (((unsigned char *)s)[i] == (unsigned char)c)
 		{
-			//s = &s[i];
 			return ((void *)s);
 		}
 		else

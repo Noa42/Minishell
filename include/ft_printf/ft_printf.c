@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:14:58 by achacon-          #+#    #+#             */
-/*   Updated: 2023/11/06 13:24:04 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:39:51 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_printf(char const *s, ...)
 		}
 		else
 		{
-			counter ++;       
+			counter ++;
 			ft_putchar_fd(s[i], 1);
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:08 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:09 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:23:15 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_pwd(t_cmd *cmd)
 	dir = malloc(sizeof(char) * 1024);
 	if (dir == NULL)
 	{
-		ft_putstr_fd("Cannot allocate memory\n", 2);
+		ft_putstr_fd("MiniShell: Cannot allocate memory\n", 2);
 		exit_process(cmd->data, 1);
 	}
 	if (getcwd(dir, 1024) != NULL)

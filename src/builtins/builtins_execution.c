@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:56:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:56:25 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:19:50 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	builtin_end(t_data *data, int error)
 	}
 	else
 	{
-		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd("MiniShell: ", 2);
 		ft_putstr_fd(strerror(error), 2);
 		ft_putstr_fd("\n", 2);
 		data->exit_status = error;

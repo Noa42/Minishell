@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:01 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 10:57:02 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:28:17 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	is_a_num(const char *str)
 
 int	i_to_exit_status(int exit_status)
 {
-	if (exit_status < 0) //si es negativo se le resta a 256
+	if (exit_status < 0)
 		exit_status = 256 + exit_status;
-	if (exit_status > 255) //si es mayor que 255 se le hace el modulo 256
+	if (exit_status > 255)
 		exit_status = exit_status % 256;
 	return (exit_status);
 }

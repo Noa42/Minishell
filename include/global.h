@@ -6,12 +6,12 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:36 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 11:08:20 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:25:10 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_H
-#define GLOBAL_H
+# define GLOBAL_H
 
 extern int      g_signal_flag;
 

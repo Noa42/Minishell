@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 15:46:09 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:04:06 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_quote_status
 {
 	DOUB_QUOT = 34,
 	ONE_QUOT = 39
-}   t_quote_status;
+}	t_quote_status;
 
 typedef enum e_token_type
 {
@@ -80,13 +80,6 @@ typedef struct s_redir
 	t_data				*data;
 }						t_redir;
 
-typedef struct s_token
-{
-	int					index;
-	t_token_type		token_type;
-	struct s_token		*next;
-}						t_token;
-
 typedef struct s_parsing
 {
 	int					count;
@@ -114,7 +107,6 @@ typedef struct s_data
 	char				*in_ax;
 	char				**array_var;
 	int					exit_status;
-	t_token				*token_list;
 	t_cmd				*cmd_list;
 	int					pipe[2];
 	int					here_doc_counter;
@@ -165,6 +157,18 @@ void					free_data(t_data *data);
 void					reboot_data(t_data *data);
 void					empty_env(t_data *data);
 
+//----------------------DATA----------------------
+
+//////DATA UTILS
+void					update_shlvl(t_data *data);
+void					empty_env(t_data *data);
+//////DATA
+void					init_data(t_data *data, char **env);
+void					free_data(t_data *data);
+void					reboot_data(t_data *data);
+void					free_parsing(t_parsing *prs);
+
+
 //----------------------EXECUTION----------------------
 
 ////// EXECUTION UTILS
@@ -201,25 +205,17 @@ t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
 int						is_first_cmd(t_cmd *cmd);
 int						is_last_cmd(t_cmd *cmd);
 //////PRINT LISTS
-void					print_token_list(t_token *token_list);
-char					*token_type_to_string(t_token_type token_type);
 void					print_cmd(t_cmd *cmd);
 void					print_cmd_list(t_cmd *cmd_list);
 void					print_redir(t_redir *redir);
 void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
-void					instrucciones_ejemplo_listas(t_data *data);//BORRAR
 //////REDIR LIST UTILS
 t_redir					*new_redir(t_redir_type type, \
 							char *input, t_data *data);
 void					update_index_redir_list(t_redir *redir_list);
 void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*free_redir_list(t_redir *redir_list);
-////TOKEN LIST UTILS
-t_token					*add_token(t_token *token_list, \
-							t_token_type token_type);
-int						token_list_len(t_token *token_list);
-t_token					*free_token_list(t_token *token_list);
 
 //----------------------MAIN----------------------
 
@@ -260,6 +256,7 @@ void					apply_append_redir(t_cmd *cmd, t_redir *redir);
 //////REDIR UTILS
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);
+void					print_error_openining_file(char *file_name);
 
 //----------------------SIGNALS----------------------
 //////SIGNALS
@@ -281,6 +278,7 @@ int						ft_only_spaces(char *input);
 int						array_len(char **array);
 void					swap(char **a, char **b);
 int						ft_strcmp(const char *s1, const char *s2);
+void					print_array(char **array);
 
 ////// UTILS (2)
 void					free_array(char **array);
@@ -352,15 +350,15 @@ void					ft_create_arr_lexem(char *str, t_parsing *prs);
 void					ft_create_tks(t_parsing *prs, int count_2);
 void					ft_check_toks(t_parsing *prs, int len);
 void					ft_print_unexpected(t_parsing *prs, int count, int len);
-t_cmd 					*new_empty_cmd(t_parsing *prs);
+t_cmd					*new_empty_cmd(t_parsing *prs);
 
 
 // PARSING-EXPANS
-void    ft_check_if_expans_var(t_parsing *prs);
-int     ft_check_dollar(t_parsing *prs, int index);
-int 	ft_tell_if_dllr_qt(t_parsing *prs, int index);
-void	ft_if_doub_quote_exp(t_parsing *prs);
-void	ft_if_single_quote_exp(t_parsing *prs);
+void					ft_if_doub_quote_exp(t_parsing *prs);
+void					ft_if_single_quote_exp(t_parsing *prs);
+void					ft_check_if_expans_var(t_parsing *prs);
+int						ft_check_dollar(t_parsing *prs, int index);
+int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
 
 
 

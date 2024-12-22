@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:59:02 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:28:10 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:41:14 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ void	swap(char **a, char **b)
 	temp = *a;
 	*a = *b;
 	*b = temp;
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		printf("[%i]: %s\n", i, array[i]);
+		i++;
+	}
 }

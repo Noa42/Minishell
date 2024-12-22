@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:41 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 14:14:13 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:28:05 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	has_variable(char *input)//Mira si hay un $ en la cadena
+int	has_variable(char *input)
 {
 	int	i;	
 	int cnt_dollar;
@@ -28,7 +28,7 @@ int	has_variable(char *input)//Mira si hay un $ en la cadena
 	return (cnt_dollar);
 }
 
-char	*get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el nombre de la variable (es decir lo que hay después de $ lo que llamamos var_name)
+char	*get_exp_var(char *s, int i)
 {
 	unsigned int	start;
 	char			*var;
@@ -40,7 +40,7 @@ char	*get_exp_var(char *s, int i)//De la palabra que empieza por $ devuelve el n
 	return (var);
 }
 
-void	print_expanded(char *input, char **env)//Imprime una palabra con una variable expandida
+void	print_expanded(char *input, char **env)
 {
 	int		i;
 	char	*var_name;
@@ -52,9 +52,9 @@ void	print_expanded(char *input, char **env)//Imprime una palabra con una variab
 		if (input[i] == '$')
 		{
 			i++;
-			var_name = get_exp_var(input, i);//aloca una subcadena desde despues de $ hasta el siquiente espacio o \0 por lo que devuelve el nombre de la variable a imprimir
-			var_value = ft_getenv(var_name, env);//obtiene el valor de la variable
-			ft_printf("%s", var_value);//imprime el valor de la variable
+			var_name = get_exp_var(input, i);
+			var_value = ft_getenv(var_name, env);
+			ft_printf("%s", var_value);
 			free(var_name);
 			free(var_value);
 			return ;
@@ -87,7 +87,7 @@ void	set_n_flag_and_i(char **array_cmd, int *n_flag, int *i)
 	}
 }
 
-void	ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por problemas de como guarda el buffer printf no me hacia bien el -n
+void	ft_echo(t_cmd *cmd)
 {
 	int	n_flag;
 	int	i;
@@ -100,15 +100,15 @@ void	ft_echo(t_cmd *cmd) //he usado ft_printf en vez de printf porque por proble
 	{
 		if (ft_strcmp(cmd->array_cmd[i], "$?") == 0)
 			ft_printf("Exit status: %i", cmd->data->exit_status);
-		else if (has_variable(cmd->array_cmd[i]) == 0) //si no tiene $
-			ft_printf("%s", cmd->array_cmd[i]);//imprimimos la palabra tal cual
+		else if (has_variable(cmd->array_cmd[i]) == 0)
+			ft_printf("%s", cmd->array_cmd[i]);
 		else
-			print_expanded(cmd->array_cmd[i], cmd->data->env);//imprme la palabra sustituyendo lo que hay después de $ por el valor de la variable 
-		if (cmd->array_cmd[i + 1] != NULL) //pone los espacios entre las palabras a menos que sea el final
+			print_expanded(cmd->array_cmd[i], cmd->data->env);
+		if (cmd->array_cmd[i + 1] != NULL)
 			ft_printf(" ");
 		i++;
 	}
-	if (n_flag == 0) //Si la flag no se ha cambiado imprime salto de linea//
+	if (n_flag == 0)
 		ft_printf("\n");
 	builtin_end(cmd->data, 0);
 }

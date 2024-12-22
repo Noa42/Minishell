@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:20 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:12:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:28:53 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void	safe_fork(pid_t *pid, t_data *data)
 	*pid = fork();
 	if (*pid == -1)
 	{
-		ft_putstr_fd("Fork error\n", 2);
+		ft_putstr_fd("MiniShell: Fork error\n", 2);
 		exit_process(data, 1);
 	}
 }
 
 void	safe_dup2(int *fd_in, int *fd_out, t_data *data)
 {
-	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1) // Redirige la entrada estándar a la salida del comando anterior// Redirige la salida estándar al fd_out seleccionado
+	if (dup2(*fd_in, STDIN_FILENO) == -1 || dup2(*fd_out, STDOUT_FILENO) == -1)
 	{
-		ft_putstr_fd("Dup error\n", 2);
+		ft_putstr_fd("MiniShell: Dup error\n", 2);
 		data->exit_status = 1;
 		exit_process(data, data->exit_status);
 	}
@@ -54,9 +54,9 @@ void	exec_cmd(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
-	path = get_path(cmd->array_cmd[0], data->env); // Obtiene la ruta del comando
+	path = get_path(cmd->array_cmd[0], data->env);
 	if (path != NULL)
-		execve(path, cmd->array_cmd, data->env); // Ejecuta el comando con execve
-	ft_putstr_fd("Comand not found\n", 2);
+		execve(path, cmd->array_cmd, data->env);
+	ft_putstr_fd("MiniShell: Command not found\n", 2);
 	exit_process(data, 127);
 }

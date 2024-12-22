@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:13:12 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:30:05 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,21 @@ void	multiple_cmd_case(t_data *data)
 	pid_t	pid;
 	int		status;
 
-	fd_out = STDOUT_FILENO;// Descriptor de archivo para la salida del último comando
-	fd_in = STDIN_FILENO; // Descriptor de archivo para la entrada del primer comando
+	fd_out = STDOUT_FILENO;
+	fd_in = STDIN_FILENO;
 	cmd = data->cmd_list;
-	//update_fds_redirs(data->cmd_list);
 	while (cmd)
 	{
-		pipe(data->pipe); // Crea la tubería para el comando actual y el siguiente
+		pipe(data->pipe);
 		safe_fork(&pid, data);
-		if (pid == 0) //Hijo
+		if (pid == 0)
 			child(cmd, &fd_in, &fd_out, data);
-		else//Padre
+		else
 		{
-			waitpid(pid, &status, 0); //El exit status es una info que se tiene que interpretar con la macro WIFEXITED
-			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
-			close(data->pipe[1]); // Cierra el extremo de escritura de la tubería en el padre
-			fd_in = data->pipe[0];// Actualiza fd_in para el próximo comando, usando el extremo de lectura actual
+			waitpid(pid, &status, 0);
+			data->exit_status = WEXITSTATUS(status);
+			close(data->pipe[1]);
+			fd_in = data->pipe[0];
 			cmd = cmd->next;
 		}
 	}
@@ -43,14 +42,13 @@ void	multiple_cmd_case(t_data *data)
 
 void	child(t_cmd *cmd, int *fd_in, int *fd_out, t_data *data)
 {
-	// Configura la salida del proceso hijo
-	if (is_last_cmd(cmd) == 0) // Si hay un comando siguiente
-		*fd_out = data->pipe[1]; // Redirige la salida a la escritura de la tubería
+	if (is_last_cmd(cmd) == 0)
+		*fd_out = data->pipe[1];
 	else
-		*fd_out = STDOUT_FILENO; // Si es el último comando, redirige a la salida estándar
+		*fd_out = STDOUT_FILENO;
 	safe_dup2(fd_in, fd_out, data);
-	close(data->pipe[0]); // Cierra el extremo de lectura de la tubería en el hijo
-	close(data->pipe[1]); // Cierra el extremo de escritura de la tubería en el hijo
+	close(data->pipe[0]);
+	close(data->pipe[1]);
 	if (update_fds_redirs(cmd) != 0)
 	{
 		data->exit_status = 1;

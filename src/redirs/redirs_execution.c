@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:21:28 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:32:59 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	open_and_try_redir(t_redir *redir)
 		fd = open(redir->in_name, O_RDONLY);
 		if (fd == -1)
 		{
-			ft_putstr_fd(redir->in_name, 2);
-			ft_putstr_fd(": Error opening file\n", 2);
+			print_error_openining_file(redir->in_name);
 			return (1);
 		}
 		close(fd);
@@ -62,8 +61,7 @@ int	open_and_try_redir(t_redir *redir)
 		fd = open(redir->out_name, O_WRONLY | O_CREAT, 0644);
 		if (fd == -1)
 		{
-			ft_putstr_fd(redir->out_name, 2);
-			ft_putstr_fd(": Error opening file\n", 2);
+			print_error_openining_file(redir->out_name);
 			return (1);
 		}
 		close(fd);
@@ -93,13 +91,13 @@ int	update_fds_redirs(t_cmd *cmd)
 	return (result);
 }
 
-void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
+void	dup_fds_redirs(t_cmd *cmd)
 {
 	if (cmd->fd_in != 0 && cmd->fd_in != -1)
 	{
 		if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		{
-			ft_putstr_fd("Error duplicating file descriptor\n", 2);
+			ft_putstr_fd("MiniShell: Dup error\n", 2);
 			cmd->data->exit_status = 1;
 			return ;
 		}
@@ -108,7 +106,7 @@ void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		{
-			ft_putstr_fd("Error duplicating file descriptor\n", 2);
+			ft_putstr_fd("MiniShell: Dup error\n", 2);
 			cmd->data->exit_status = 1;
 			return ;
 		}

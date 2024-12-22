@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:56:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:04:13 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:17:10 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd)
 {
 	if (oldpwd == NULL || pwd == NULL)
 	{
-		ft_putstr_fd("Cannot allocate memory\n", 2);
+		ft_putstr_fd("Minishell: Cannot allocate memory\n", 2);
 		exit_process(cmd->data, 1);
 	}
 	if (getcwd(*oldpwd, 1024) == NULL)

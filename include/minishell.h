@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 12:31:24 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:19:47 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void					ft_pwd(t_cmd *cmd);
 void					ft_cd_home(t_data *data, char *oldpwd, char *pwd);
 void					ft_cd(t_cmd *cmd);
 void					safe_init_cd(t_cmd *cmd, char **oldpwd, char **pwd);
-void					update_env(t_data *data, char *oldpwd, char *pwd);
+void					update_env(t_data *data, char **oldpwd, char **pwd);
 void					free_dirs(char *oldpwd, char *pwd);
 ////// FT_ENV
 void					ft_env(t_cmd *cmd);
@@ -255,6 +255,8 @@ void					apply_append_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);
 void					print_error_openining_file(char *file_name);
+int						open_and_try_redir_output(t_redir *redir);
+int						open_and_try_redir_append(t_redir *redir);
 
 //----------------------SIGNALS----------------------
 //////SIGNALS

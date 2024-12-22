@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:38 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:35:25 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:18:15 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,32 @@ void	print_error_openining_file(char *file_name)
 	ft_putstr_fd("MiniShell: ", 2);
 	ft_putstr_fd(file_name, 2);
 	ft_putstr_fd(": Error opening file\n", 2);
+}
+
+int	open_and_try_redir_append(t_redir *redir)
+{
+	int	fd;
+
+	fd = open(redir->out_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd == -1)
+	{
+		print_error_openining_file(redir->out_name);
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
+
+int	open_and_try_redir_output(t_redir *redir)
+{
+	int	fd;
+
+	fd = open(redir->out_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		print_error_openining_file(redir->out_name);
+		return (1);
+	}
+	close(fd);
+	return (0);
 }

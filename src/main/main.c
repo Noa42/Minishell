@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 14:52:07 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:00:35 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int argc, char **argv, char **env)
 		reboot_data(&data);
 	}
 	exit_status = data.exit_status;
+	restore_original_settings(&data);
 	free_data(&data);
 	printf("exit\n");
 	return (exit_status);

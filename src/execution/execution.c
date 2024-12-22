@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:23 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 17:07:30 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:52:50 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	execution(t_data *data)
 		one_cmd_case(data);
 	else
 		multiple_cmd_case(data);
+	printf("Exit status: %d\n", data->exit_status);
 }

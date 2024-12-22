@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 11:32:59 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:18:43 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ int	open_and_try_redir(t_redir *redir)
 		}
 		close(fd);
 	}
-	else if (redir->type == OUTPUT || redir->type == APPEND)
+	else if (redir->type == OUTPUT)
 	{
-		fd = open(redir->out_name, O_WRONLY | O_CREAT, 0644);
-		if (fd == -1)
-		{
-			print_error_openining_file(redir->out_name);
+		if (open_and_try_redir_output(redir) != 0)
 			return (1);
-		}
-		close(fd);
+	}
+	else if (redir->type == APPEND)
+	{
+		if (open_and_try_redir_append(redir) != 0)
+			return (1);
 	}
 	return (0);
 }

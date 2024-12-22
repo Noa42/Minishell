@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:20 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 11:28:53 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:51:12 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	exec_cmd(t_cmd *cmd, t_data *data)
 	path = get_path(cmd->array_cmd[0], data->env);
 	if (path != NULL)
 		execve(path, cmd->array_cmd, data->env);
-	ft_putstr_fd("MiniShell: Command not found\n", 2);
+	ft_putstr_fd("MiniShell: ", 2);
+	if (ft_strcmp(cmd->array_cmd[0], " ") != 0)
+		ft_putstr_fd(cmd->array_cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
 	exit_process(data, 127);
 }

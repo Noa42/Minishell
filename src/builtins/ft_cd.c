@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:56:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:17:10 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:58:48 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,26 @@ void	free_dirs(char *oldpwd, char *pwd)
 		free(pwd);
 }
 
-void	update_env(t_data *data, char *oldpwd, char *pwd)
+void	update_env(t_data *data, char **oldpwd, char **pwd)
 {
-	data->env = insert_var(data->env, "OLDPWD", oldpwd);
-	data->array_var = insert_var(data->array_var, "OLDPWD", oldpwd);
-	getcwd(pwd, 1024);
-	data->env = insert_var(data->env, "PWD", pwd);
-	data->array_var = insert_var(data->array_var, "PWD", pwd);
-	if (ft_strcmp(oldpwd, "NULL") == 0)
+	data->env = insert_var(data->env, "OLDPWD", *oldpwd);
+	data->array_var = insert_var(data->array_var, "OLDPWD", *oldpwd);
+	if (getcwd(*pwd, 1024) == NULL)
 	{
-		free_dirs(oldpwd, pwd);
+		free (*pwd);
+		*pwd = NULL;
+		*pwd = ft_strdup("NULL");
+	}
+	data->env = insert_var(data->env, "PWD", *pwd);
+	data->array_var = insert_var(data->array_var, "PWD", *pwd);
+	if (ft_strcmp(*oldpwd, "NULL") == 0)
+	{
+		free_dirs(*oldpwd, *pwd);
 		builtin_end(data, 0);
 	}
 	else
 	{
-		free_dirs(oldpwd, pwd);
+		free_dirs(*oldpwd, *pwd);
 		builtin_end(data, errno);
 	}
 }
@@ -54,7 +59,7 @@ void	ft_cd_home(t_data *data, char *oldpwd, char *pwd)
 	else
 	{
 		free(home);
-		update_env(data, oldpwd, pwd);
+		update_env(data, &oldpwd, &pwd);
 	}
 }
 
@@ -98,5 +103,5 @@ void	ft_cd(t_cmd *cmd)
 		return ;
 	}
 	else
-		update_env(cmd->data, oldpwd, pwd);
+		update_env(cmd->data, &oldpwd, &pwd);
 }

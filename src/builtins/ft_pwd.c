@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:08 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:23:15 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:11:34 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	ft_pwd(t_cmd *cmd)
 {
 	char	*dir;
 
+	if (array_len(cmd->array_cmd) >= 2)
+	{
+		builtin_end(cmd->data, E2BIG);
+		return ;
+	}
 	dir = malloc(sizeof(char) * 1024);
 	if (dir == NULL)
 	{

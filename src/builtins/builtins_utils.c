@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:15 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/19 13:38:49 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:26:17 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_var_name(char *name_value)
 	return (ft_substr(name_value, 0, i));
 }
 
-char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en una cadena del array env concreto
+char	*ft_var_value(char *name_value)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*ft_var_value(char *name_value)//Obtiene el var_value de una var_name en un
 	return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
 
-char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de entre todas las variables de entorno a partir de su nombre
+char	*ft_getenv(char *var_name, char **env)
 {
 	int		i;
 	char	*temp_var_name;
@@ -47,7 +47,7 @@ char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de
 	while (env[i])
 	{
 		if ((ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0)
-			&& env[i][ft_strlen(var_name)] == '=') //Si el nombre de la variable coincide con el principio de la cadena y el siguiente caracter es un = entonces es la variable que buscamos
+			&& env[i][ft_strlen(var_name)] == '=')
 		{
 			if (temp_var_name)
 				free(temp_var_name);
@@ -57,7 +57,7 @@ char	*ft_getenv(char *var_name, char **env)//obtiene el valor de una variable de
 	}
 	if (temp_var_name)
 		free(temp_var_name);
-	return (ft_strdup("")); //si no encuentra la variable manda un valor vacio allocado en memoria
+	return (ft_strdup(""));
 }
 
 char	**insert_var(char **array, char *var_name, char *var_value)

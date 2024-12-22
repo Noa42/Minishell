@@ -6,7 +6,7 @@
 #    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
-#    Updated: 2024/12/21 14:52:30 by achacon-         ###   ########.fr        #
+#    Updated: 2024/12/22 11:42:35 by achacon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,6 @@ src/expansion/expan_1.c\
 src/lists/cmd_list_utils_1.c\
 src/lists/cmd_list_utils_2.c\
 src/lists/redir_list_utils.c\
-src/lists/token_list_utils.c\
 src/lists/print_lists.c\
 src/main/main.c\
 src/redirs/APPEND_redir.c\

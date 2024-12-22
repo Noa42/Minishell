@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:36:29 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:43:55 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_quote_status
 {
 	DOUB_QUOT = 34,
 	ONE_QUOT = 39
-}   t_quote_status;
+}	t_quote_status;
 
 typedef enum e_token_type
 {
@@ -80,13 +80,6 @@ typedef struct s_redir
 	t_data				*data;
 }						t_redir;
 
-typedef struct s_token
-{
-	int					index;
-	t_token_type		token_type;
-	struct s_token		*next;
-}						t_token;
-
 typedef struct s_parsing
 {
 	int					count;
@@ -114,7 +107,6 @@ typedef struct s_data
 	char				*in_ax;
 	char				**array_var;
 	int					exit_status;
-	t_token				*token_list;
 	t_cmd				*cmd_list;
 	int					pipe[2];
 	int					here_doc_counter;
@@ -213,26 +205,17 @@ t_cmd					*get_cmd_by_index(t_cmd *cmd_list, int index);
 int						is_first_cmd(t_cmd *cmd);
 int						is_last_cmd(t_cmd *cmd);
 //////PRINT LISTS
-void					print_token_list(t_token *token_list);
-char					*token_type_to_string(t_token_type token_type);
 void					print_cmd(t_cmd *cmd);
 void					print_cmd_list(t_cmd *cmd_list);
 void					print_redir(t_redir *redir);
 void					print_redir_list(t_redir *redir_list);
 char					*redir_type_to_string(t_redir_type type);
-void					print_array(char **array);
-void					instrucciones_ejemplo_listas(t_data *data);//BORRAR
 //////REDIR LIST UTILS
 t_redir					*new_redir(t_redir_type type, \
 							char *input, t_data *data);
 void					update_index_redir_list(t_redir *redir_list);
 void					add_redir(t_cmd *cmd, t_redir *redir);
 t_redir					*free_redir_list(t_redir *redir_list);
-////TOKEN LIST UTILS
-t_token					*add_token(t_token *token_list, \
-							t_token_type token_type);
-int						token_list_len(t_token *token_list);
-t_token					*free_token_list(t_token *token_list);
 
 //----------------------MAIN----------------------
 
@@ -295,6 +278,7 @@ int						ft_only_spaces(char *input);
 int						array_len(char **array);
 void					swap(char **a, char **b);
 int						ft_strcmp(const char *s1, const char *s2);
+void					print_array(char **array);
 
 ////// UTILS (2)
 void					free_array(char **array);

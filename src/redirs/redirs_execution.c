@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:42:42 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:35:07 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:32:59 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	update_fds_redirs(t_cmd *cmd)
 	return (result);
 }
 
-void	dup_fds_redirs(t_cmd *cmd) //Esto es para un solo comando
+void	dup_fds_redirs(t_cmd *cmd)
 {
 	if (cmd->fd_in != 0 && cmd->fd_in != -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:23:47 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:53:56 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_data(t_data *data, char **env)
 	data->in_ax = NULL;
 	data->cmd_list = NULL;
 	data->exit_status = 0;
-	data->token_list = NULL;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	data->exit_status = 0;
@@ -65,9 +64,11 @@ void	reboot_data(t_data *data)
 		free(data->input);
 	if (data->cmd_list)
 		data->cmd_list = free_cmd_list(data->cmd_list);
+	if (data->in_ax)
+		free(data->in_ax);
+	data->in_ax = NULL;
 	data->input = NULL;
 	data->cmd_list = NULL;
-	data->token_list = NULL;
 	data->here_doc_counter = 0;
 	data->parsing_error = 0;
 	g_signal_flag = 0;

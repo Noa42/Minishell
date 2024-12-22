@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:35 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 10:47:39 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:30:26 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	one_cmd_case(t_data *data)
 			one_cmd_child(cmd, cmd->data);
 		else
 		{
-			waitpid(pid, &status, 0); //El exit status es una info que se tiene que interpretar con la macro WIFEXITED
-			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
+			waitpid(pid, &status, 0);
+			data->exit_status = WEXITSTATUS(status);
 		}
 	}
 	if (data->exit_status == 0)

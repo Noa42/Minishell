@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:15:43 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:28:00 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cmd	*new_cmd(char **array_cmds, t_data *data)
 	new_cmd = malloc(sizeof(t_cmd));
 	if (new_cmd == NULL)
 	{
-		ft_putstr_fd("Cannot allocate memory\n", 2);
+		ft_putstr_fd("MiniShell: Cannot allocate memory\n", 2);
 		exit_process(data, 1);
 	}
 	new_cmd->array_cmd = array_cmds;

@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:04 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 12:33:41 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:23:47 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_data(t_data *data, char **env)
 	}
 	if (data->env == NULL || data->array_var == NULL)
 	{
-		ft_putstr_fd("Cannot allocate memory\n", 2);
+		ft_putstr_fd("MiniShell: Cannot allocate memory\n", 2);
 		exit_process(data, 1);
 	}
 	sort_strings(data->array_var, array_len(data->array_var));

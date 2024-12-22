@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:35 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:13:59 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:47:39 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	one_cmd_case(t_data *data)
 			data->exit_status = WEXITSTATUS(status); //WEXITSTATUS es una macro que devuelve el exit status del hijo
 		}
 	}
-	update_last_command(cmd);
+	if (data->exit_status == 0)
+		update_last_command(cmd);
 }
 
 void	one_builtin_case(t_cmd *cmd)

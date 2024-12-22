@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:57:05 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 17:04:07 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:22:59 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	valid_var_name(char *var_name)
 
 void	not_valid_identifier(char *var_name, int *exit_status)
 {
-	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd("MiniShell: export: `", 2);
 	ft_putstr_fd(var_name, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
 	free(var_name);

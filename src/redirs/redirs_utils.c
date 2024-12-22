@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:38 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:21:45 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:35:25 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,11 @@ t_redir	*get_last_in_redir(t_cmd *cmd)
 		redir = redir->next;
 	}
 	return (last_in_redir);
+}
+
+void	print_error_openining_file(char *file_name)
+{
+	ft_putstr_fd("MiniShell: ", 2);
+	ft_putstr_fd(file_name, 2);
+	ft_putstr_fd(": Error opening file\n", 2);
 }

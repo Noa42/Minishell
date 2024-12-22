@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:51 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 11:17:17 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:27:55 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	add_redir(t_cmd *cmd, t_redir *redir)
 
 	if (redir == NULL)
 	{
-		ft_putstr_fd("Cannot allocate memory\n", 2);
+		ft_putstr_fd("MiniShell: Cannot allocate memory\n", 2);
 		exit_process(cmd->data, 1);
 	}
 	if (cmd->redir_list == NULL)

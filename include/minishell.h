@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 14:52:13 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:36:29 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,7 @@ void					apply_append_redir(t_cmd *cmd, t_redir *redir);
 //////REDIR UTILS
 t_redir					*get_last_in_redir(t_cmd *cmd);
 t_redir					*get_last_out_redir(t_cmd *cmd);
+void					print_error_openining_file(char *file_name);
 
 //----------------------SIGNALS----------------------
 //////SIGNALS
@@ -365,13 +366,13 @@ void					ft_create_arr_lexem(char *str, t_parsing *prs);
 void					ft_create_tks(t_parsing *prs, int count_2);
 void					ft_check_toks(t_parsing *prs, int len);
 void					ft_print_unexpected(t_parsing *prs, int count, int len);
-t_cmd 					*new_empty_cmd(t_parsing *prs);
+t_cmd					*new_empty_cmd(t_parsing *prs);
 
 
 // PARSING-EXPANS
-void    ft_check_if_expans_var(t_parsing *prs);
-int    ft_check_dollar(t_parsing *prs, int index);
-int ft_tell_if_dllr_qt(t_parsing *prs, int index);
+void					ft_check_if_expans_var(t_parsing *prs);
+int						ft_check_dollar(t_parsing *prs, int index);
+int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
 
 
 

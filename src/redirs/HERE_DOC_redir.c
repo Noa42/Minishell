@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HERE_DOC_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 14:14:41 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:29:22 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	delete_temp_file(t_cmd *cmd, char *temp_file)
 {
 	if (unlink(temp_file) == -1) //borra el archivo pero la info de dentro sigue siendo accesible en teoria (y de hecho funciona xD)
 	{
-		ft_putstr_fd("Error deleting temp file\n", 2);
+		ft_putstr_fd("MiniShell: Error deleting temp file\n", 2);
 		cmd->data->exit_status = 1;
 		free(temp_file);
 		return ;
@@ -100,7 +100,7 @@ void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
 	open(temp_file, O_WRONLY | O_CREAT | O_TRUNC, 0644); //primero abro el archivo solo para escritura, lo creo si no exite, es oculto
 	if (cmd->fd_in == -1)
 	{
-		ft_putstr_fd("Error opening file\n", 2);
+		ft_putstr_fd("MiniShell: Error opening file\n", 2);
 		free(temp_file);
 		cmd->data->exit_status = 1;
 		return ;
@@ -109,7 +109,7 @@ void	apply_heredoc_redir(t_cmd *cmd, t_redir *redir)
 	cmd->fd_in = open(temp_file, O_RDONLY);
 	if (cmd->fd_in == -1)
 	{
-		ft_putstr_fd("Error opening file\n", 2);
+		ft_putstr_fd("MiniShell: Error opening file\n", 2);
 		cmd->data->exit_status = 1;
 		free(temp_file);
 		return ;

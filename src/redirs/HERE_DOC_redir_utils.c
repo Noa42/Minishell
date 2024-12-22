@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:23 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 17:53:48 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:39:51 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*hd_var_name(char *line, int i)
 
 	j = i + 1;
 	// while (line[j] != ' ' && line[j] != '\0' && line[j] != '$')
-	while (ft_isalnum(line[j]) == 1 || line[j] == '{' || line[j] == '}')
+	while (ft_isalnum(line[j]) == 1 || line[j] == '{' || line[j] == '}' || line[j] == '_')
 		j++;
 	var_name = ft_substr(line, i + 1, j - i - 1);
 	return (var_name);

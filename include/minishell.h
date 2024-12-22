@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 16:19:47 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/22 17:27:00 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,8 +352,10 @@ t_cmd					*new_empty_cmd(t_parsing *prs);
 // PARSING-EXPANS
 void					ft_if_doub_quote_exp(t_parsing *prs);
 void					ft_if_single_quote_exp(t_parsing *prs);
-void					ft_check_if_expans_var(t_parsing *prs);
-int						ft_check_dollar(t_parsing *prs, int index);
-int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
+//int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
+void					ft_start_expas(t_parsing *prs);
+void					ft_expan_n_times(t_parsing *prs, int times);
+void					ft_dollar_by_dollar(t_parsing *prs, int count);
+char    				*ft_take_name_var(t_parsing *prs, int cnt_str);
 
 #endif

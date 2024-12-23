@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:13:18 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/22 20:44:19 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/23 01:03:29 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_create_tk_arr(t_parsing *prs)
 	prs->arr_toks = malloc(sizeof(int) * (count));
 	if (!prs->arr_toks)
 	{
-		printf("Array has not been created (Error).");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	while (prs->arr_lexems && prs->arr_lexems[count_2] != NULL)
@@ -90,7 +90,7 @@ void	ft_print_unexpected(t_parsing *prs, int count, int len)
 		ft_putstr_fd("MiniShell: syntax error near unexpected token `|'\n", 2);
 	if (prs->arr_toks[count] == REDIR && (count == (len - 1)))
 	{
-		ft_putstr_fd("MiniShell: syntax error near unexpected", 2);
+		ft_putstr_fd("MiniShell: syntax error near unexpected\n", 2);
 		ft_putstr_fd(" token `newline'\n", 2);
 	}
 	else if (prs->arr_toks[count] == PIPE && (count == (len - 1)))
@@ -105,6 +105,3 @@ void	ft_print_unexpected(t_parsing *prs, int count, int len)
 		&& prs->arr_toks[count + 1] == PIPE)
 		ft_putstr_fd("MiniShell: syntax error near unexpected token `|'\n", 2);
 }
-
-
-

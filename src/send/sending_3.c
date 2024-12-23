@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sending_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 02:35:25 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/20 16:35:07 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:49:43 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**ft_give_me_arr(char **ar_lexems, int init, int end)
 	result = malloc(sizeof(char *) * (len + 1));
 	if (!result)
 	{
-		printf("Array has not been created (Error)");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	while (count < len)
@@ -31,12 +31,41 @@ char	**ft_give_me_arr(char **ar_lexems, int init, int end)
 		result[count] = ft_strdup(ar_lexems[init + count]);
 		if (!result[count])
 		{
-			printf("String has not been created (Error)");
+			ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 			exit(0);
 		}
 		count++;
 	}
 	result[count] = NULL;
+	return (result);
+}
+
+char	**ft_return_result(char **input, int count, int j)
+{
+	char	**result;
+	int		i;
+
+	i = 0;
+	result = malloc(sizeof(char *) * (count + 1));
+	while (input[i] != NULL)
+	{
+		if (is_redirection(input[i]))
+			i = i + 2;
+		else
+		{
+			result[j] = ft_strdup(input[i]);
+			if (!result[j])
+			{
+				while (j-- >= 0)
+					free(result[j]);
+				free(result);
+				return (NULL);
+			}
+			j++;
+			i++;
+		}
+	}
+	result[j] = NULL;
 	return (result);
 }
 
@@ -48,13 +77,11 @@ char	**filter_strings(char **input)
 	int		count;
 	int		i;
 	int		j;
-	int		k;
 	char	**result;
 
 	count = 0;
 	i = 0;
 	j = 0;
-	k = 0;
 	while (input[i] != NULL)
 	{
 		if (is_redirection(input[i]))
@@ -63,32 +90,36 @@ char	**filter_strings(char **input)
 			count++;
 		i++;
 	}
-	if(count == 0)
+	if (count == 0)
 		return (NULL);
-	result = malloc(sizeof(char *) * (count + 1));
-	if (!result)
-		return (NULL);
+	result = ft_return_result(input, count, j);
+	return (result);
+}
+
+char	**ft_return_result_2(char **input, int count, int j)
+{
+	char	**result;
+	int		i;
+
 	i = 0;
+	result = malloc(sizeof(char *) * (count + 1));
 	while (input[i] != NULL)
 	{
-		if (is_redirection(input[i]))
-			i = i + 2;
-		else
+		if (is_redirection_n(input[i]))
 		{
 			result[j] = ft_strdup(input[i]);
 			if (!result[j])
-			{
-				while (k < j)
-				{
-					free(result[k]);
-					k++;
-				}
-				free(result);
 				return (NULL);
-			}
+			j++;
+			i++;
+			result[j] = ft_strdup(input[i]);
+			if (!result[j])
+				return (NULL);
 			j++;
 			i++;
 		}
+		else
+			i++;
 	}
 	result[j] = NULL;
 	return (result);
@@ -114,28 +145,6 @@ char	**filter_redirections(char **input)
 		else
 			i++;
 	}
-	result = malloc(sizeof(char *) * (count + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (input[i] != NULL)
-	{
-		if (is_redirection_n(input[i]))
-		{
-			result[j] = ft_strdup(input[i]);
-			if (!result[j])
-				return (NULL);
-			j++;
-			i++;
-			result[j] = ft_strdup(input[i]);
-			if (!result[j])
-				return (NULL);
-			j++;
-			i++;
-		}
-		else
-			i++;
-	}
-	result[j] = NULL;
+	result = ft_return_result_2(input, count, j);
 	return (result);
 }

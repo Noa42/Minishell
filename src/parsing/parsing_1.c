@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 00:02:28 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/22 20:27:41 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:47:11 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_init_parsing_struc(t_parsing *prs)
 	prs->arr_lexems = NULL;
 	prs->arr_toks = NULL;
 	prs->aux_ar_cmds = NULL;
-    prs->aux_redirs = NULL;
+	prs->aux_redirs = NULL;
 	prs->ar_of_ar = NULL;
 	prs->init_index = 0;
 	prs->end_index = 0;
@@ -86,7 +86,7 @@ void	ft_start_parsing(char *str, t_parsing *prs, int top)
 	if (prs->flag != 0)
 		ft_print_prs_err('u', prs);
 	else
-		ft_create_arr_lexem(prs->ptrdata->in_ax, prs);	
+		ft_create_arr_lexem(prs->ptrdata->in_ax, prs);
 }
 
 /*es una extensión de la función how_mux_lem:  cuando llegamos a las comillas,

@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:31:03 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/22 20:13:00 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:39:48 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_create_arr_lexem(char *str, t_parsing *prs)
 	prs->arr_lexems = malloc(sizeof(char *) * (prs->how_much + 1));
 	if (!prs->arr_lexems)
 	{
-		printf("The array has not been created (Error).");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	prs->arr_lexems[prs->how_much] = 0;
@@ -79,7 +79,7 @@ void	ft_split_strings(char *str, t_parsing *prs)
 	prs->arr_lexems[prs->index_arr] = malloc(sizeof(char) * prs->len);
 	if (!prs->arr_lexems[prs->index_arr])
 	{
-		printf("String has not been created (Error)");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	while (prs->init_index <= prs->end_index)

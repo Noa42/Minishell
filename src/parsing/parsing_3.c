@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:32:01 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/13 14:55:42 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:39:04 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_create_a_space_lexem(t_parsing *prs)
 	prs->arr_lexems[prs->index_arr] = malloc(sizeof(char) * len);
 	if (!prs->arr_lexems[prs->index_arr])
 	{
-		printf("String has not been created (Error)");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	prs->arr_lexems[prs->index_arr][0] = 32;
@@ -85,7 +85,7 @@ void	ft_print_prs_err(char flag, t_parsing *prs)
 	if (flag == 'u')
 	{
 		prs->ptrdata->exit_status = 2;
-		ft_putstr_fd("Minishell does not work with unclosed quotes\n", 2);
+		ft_putstr_fd("MiniShell does not work with unclosed quotes\n", 2);
 	}
 	if (flag == 's')
 		prs->flag_space = 's';

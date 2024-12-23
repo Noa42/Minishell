@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 23:27:49 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/21 12:35:01 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:30:23 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_create_three_ptr(t_parsing *prs, int pipes)
 	prs->ar_of_ar = malloc(sizeof(char **) * (pipes + 2));
 	if (!prs->ar_of_ar)
 	{
-		printf("Array has not been created (Error).");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	while (prs->arr_lexems[end] != NULL)
@@ -52,17 +52,15 @@ void	ft_send_if_pipe(t_parsing *prs, int pipes, int i)
 	{
 		prs->aux_ar_cmds = filter_strings(prs->ar_of_ar[count]);
 		if (prs->aux_ar_cmds == NULL)
-			node = new_cmd(copy_alloc_array((char *[]){" ", NULL}), prs->ptrdata);
+			node = new_cmd(copy_alloc_array((char *[]){" ", NULL}),
+					prs->ptrdata);
 		else
 			node = new_cmd(copy_alloc_array(prs->aux_ar_cmds), prs->ptrdata);
 		prs->aux_redirs = filter_redirections(prs->ar_of_ar[count]);
 		prs->ptrdata->cmd_list = add_cmd(prs->ptrdata->cmd_list, node);
 		i = 0;
 		while (prs->aux_redirs && prs->aux_redirs[i] != NULL)
-		{
-			ft_send_rd(prs, prs->ptrdata, i);
-			i++;
-		}
+			ft_send_rd(prs, prs->ptrdata, i++);
 		count++;
 		free_array(prs->aux_ar_cmds);
 		free_array(prs->aux_redirs);

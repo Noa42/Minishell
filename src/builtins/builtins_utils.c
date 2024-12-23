@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:15 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/23 01:08:48 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 02:00:46 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_var_value(char *name_value)
 		i++;
 	return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
+
 char	*remove_brackets(char *var_name)
 {
 	char	*temp;

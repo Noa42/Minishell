@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:16:22 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:14:05 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:47:31 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_realloc_prs_o(t_parsing *prs)
 	prs->arr_lexems[prs->index_arr] = malloc(sizeof(char) * 3);
 	if (!prs->arr_lexems[prs->index_arr])
 	{
-		printf("String has not been created (Error).");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	prs->arr_lexems[prs->index_arr][1] = ' ';
@@ -90,7 +90,7 @@ void	ft_realloc_prs_t(t_parsing *prs)
 	prs->arr_lexems[prs->index_arr] = malloc(sizeof(char) * 4);
 	if (!prs->arr_lexems[prs->index_arr])
 	{
-		printf("String has not been created (Error).");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	prs->arr_lexems[prs->index_arr][2] = ' ';

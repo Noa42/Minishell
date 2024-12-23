@@ -6,7 +6,7 @@
 /*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:31:20 by alvapari          #+#    #+#             */
-/*   Updated: 2024/12/13 14:55:48 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:46:28 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // esta función nos dirá si un carácter concreto (index) de una string está o
 // no está en estado de comillas. Si está FUERA de comillas devolverá 1, si
 // está dentro de comillas devolverá 0
-// en general todo este archivo consigue que se separen los carácteres 
+// en general todo este archivo consigue que se separen los carácteres
 // especiales de otros lexemas.
 
 int	ft_is_spc_chr(char str)
@@ -58,13 +58,12 @@ int	ft_len(char *s, int k, int i, int add)
 		return (0);
 	while (s[i] != '\0')
 	{
-		if (((i > 0 && ((s[i] == '>' && s[i + 1] == '>')
-						|| (s[i] == '<' && s[i + 1] == '<')))
-				&& ft_tell_if_oq(s, i, k, 0) == 0
+		if (((i > 0 && ((s[i] == '>' && s[i + 1] == '>') || (s[i] == '<' && s[i
+								+ 1] == '<'))) && ft_tell_if_oq(s, i, k, 0) == 0
 				&& s[i - 1] != ' ') || (i > 0 && ft_is_spc_chr(s[i]) == 1
 				&& ft_tell_if_oq(s, i, k, 0) == 0 && s[i - 1] != ' ') || (i >= 2
-				&& s[i] != ' ' && ((s[i - 2] == '>' && s[i - 1] == '>')
-					|| (s[i - 2] == '<' && s[i - 1] == '<')) && s[i] != '\0'
+				&& s[i] != ' ' && ((s[i - 2] == '>' && s[i - 1] == '>') || (s[i
+							- 2] == '<' && s[i - 1] == '<')) && s[i] != '\0'
 				&& ft_tell_if_oq(s, i - 2, k, 0) == 0) || (i >= 1 && s[i] != ' '
 				&& ft_is_spc_chr(s[i - 1]) == 1 && s[i] != '\0'
 				&& ft_tell_if_oq(s, i - 1, k, 0) == 0))
@@ -89,7 +88,7 @@ char	*ft_new_input(char *s, int len)
 	new_str = malloc(sizeof(char) * len + 1);
 	if (!new_str)
 	{
-		printf("String has not been created (Error)");
+		ft_putstr_fd("MiniShell: String has not been created.\n", 2);
 		exit(0);
 	}
 	new_str = ft_new_input_aux(s, new_str, i, cnt_ns);
@@ -101,13 +100,12 @@ char	*ft_new_input_aux(char *s, char *new_str, int i, int cnt_ns)
 {
 	while (s[i] != '\0')
 	{
-		if (((i > 0 && ((s[i] == '>' && s[i + 1] == '>')
-						|| (s[i] == '<' && s[i + 1] == '<')))
-				&& ft_tell_if_oq(s, i, 0, 0) == 0
+		if (((i > 0 && ((s[i] == '>' && s[i + 1] == '>') || (s[i] == '<' && s[i
+								+ 1] == '<'))) && ft_tell_if_oq(s, i, 0, 0) == 0
 				&& s[i - 1] != ' ') || (i > 0 && ft_is_spc_chr(s[i]) == 1
 				&& ft_tell_if_oq(s, i, 0, 0) == 0 && s[i - 1] != ' ') || (i >= 2
-				&& s[i] != ' ' && ((s[i - 2] == '>' && s[i - 1] == '>')
-					|| (s[i - 2] == '<' && s[i - 1] == '<')) && s[i] != '\0'
+				&& s[i] != ' ' && ((s[i - 2] == '>' && s[i - 1] == '>') || (s[i
+							- 2] == '<' && s[i - 1] == '<')) && s[i] != '\0'
 				&& ft_tell_if_oq(s, i - 2, 0, 0) == 0) || (i >= 1 && s[i] != ' '
 				&& ft_is_spc_chr(s[i - 1]) == 1 && s[i] != '\0'
 				&& ft_tell_if_oq(s, i - 1, 0, 0) == 0))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/23 00:29:58 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 02:06:16 by alvapari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ char					*ft_var_value(char *name_value);
 char					*ft_getenv(char *var_name, char **env, t_data *data);
 char					**insert_var(char **array, \
 							char *var_name, char *var_value);
+char					*remove_brackets(char *var_name);
 ////// BUILTINS_EXECUTION
 int						is_a_builtin(t_cmd *cmd);
 void					exec_builtin(t_cmd *cmd);
@@ -352,13 +353,15 @@ t_cmd					*new_empty_cmd(t_parsing *prs);
 // PARSING-EXPANS
 void					ft_if_doub_quote_exp(t_parsing *prs);
 void					ft_if_single_quote_exp(t_parsing *prs);
-//int						ft_tell_if_dllr_qt(t_parsing *prs, int index);
 void					ft_start_expas(t_parsing *prs);
 void					ft_expan_n_times(t_parsing *prs, int times);
 void					ft_dollar_by_dollar(t_parsing *prs, int count);
-char    				*ft_take_name_var(t_parsing *prs, int cnt_str);
-char        			*ft_look_for_var_value(char **env, const char *var_name);
-char 					*ft_strjoin_insert(const char *s1, const char *add, size_t insrt_indx, size_t del_len);
-
+char					*ft_take_name_var(t_parsing *prs, int cnt_str);
+char					*ft_look_for_var_value(char **env,
+							const char *var_name);
+char					*ft_strjoin_insert(const char *s1, const char *add,
+							size_t insrt_indx, size_t del_len);
+char					*ft_return_aux(t_parsing *prs, int count);
+int						ft_condition(t_parsing *prs, int count);
 
 #endif

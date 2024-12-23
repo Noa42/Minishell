@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+         #
+#    By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:43:09 by achacon-          #+#    #+#              #
-#    Updated: 2024/12/22 11:42:35 by achacon-         ###   ########.fr        #
+#    Updated: 2024/12/23 00:51:52 by alvapari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ src/execution/multiple_cmd.c\
 src/execution/one_cmd.c\
 src/execution/path.c\
 src/expansion/expan_1.c\
+src/expansion/expan_2.c\
 src/lists/cmd_list_utils_1.c\
 src/lists/cmd_list_utils_2.c\
 src/lists/redir_list_utils.c\
@@ -75,6 +76,7 @@ src/parsing/parsing_5.c\
 src/send/sending_1.c\
 src/send/sending_2.c\
 src/send/sending_3.c\
+src/send/sending_4.c\
 src/tokenization/tokens_1.c\
 
 OBJ_DIR = obj

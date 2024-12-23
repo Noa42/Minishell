@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:22:15 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 11:26:17 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 01:08:48 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,43 @@ char	*ft_var_value(char *name_value)
 		i++;
 	return (ft_substr(name_value, i + 1, ft_strlen(name_value) - i));
 }
-
-char	*ft_getenv(char *var_name, char **env)
+char	*remove_brackets(char *var_name)
 {
-	int		i;
-	char	*temp_var_name;
+	char	*temp;
 
-	temp_var_name = NULL;
 	if (var_name[0] == '{' && var_name[ft_strlen(var_name) - 1] == '}')
 	{
-		temp_var_name = ft_substr(var_name, 1, ft_strlen(var_name) - 2);
-		var_name = temp_var_name;
+		temp = ft_substr(var_name, 1, ft_strlen(var_name) - 2);
+		var_name = ft_strdup(temp);
+		free(temp);
 	}
+	else
+		var_name = ft_strdup(var_name);
+	return (var_name);
+}
+
+char	*ft_getenv(char *var_name, char **env, t_data *data)
+{
+	int		i;
+
+	var_name = remove_brackets(var_name);
 	i = 0;
+	if (ft_strcmp(var_name, "?") == 0)
+	{
+		free(var_name);
+		return (ft_itoa(data->exit_status));
+	}
 	while (env[i])
 	{
 		if ((ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0)
 			&& env[i][ft_strlen(var_name)] == '=')
 		{
-			if (temp_var_name)
-				free(temp_var_name);
+			free(var_name);
 			return (ft_var_value(env[i]));
 		}
 		i++;
 	}
-	if (temp_var_name)
-		free(temp_var_name);
+	free(var_name);
 	return (ft_strdup(""));
 }
 

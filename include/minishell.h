@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:40:24 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 21:40:56 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:29:58 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_data
 ////// BUILTINS_UTILS
 char					*ft_var_name(char *name_value);
 char					*ft_var_value(char *name_value);
-char					*ft_getenv(char *var_name, char **env);
+char					*ft_getenv(char *var_name, char **env, t_data *data);
 char					**insert_var(char **array, \
 							char *var_name, char *var_value);
 ////// BUILTINS_EXECUTION
@@ -242,8 +242,8 @@ void					apply_every_heredoc(t_data *data);
 char					*append_char(char *str, char c);
 char					*hd_var_name(char *line, int i);
 char					*append_var_value(char *expand_line, \
-							char *line, int *i, char **env);
-char					*expand_vars_hd(char *line, char **env);
+							char *line, int *i, t_data *data);
+char					*expand_vars_hd(char *line, t_data *data);
 
 //////INPUT REDIR
 void					apply_input_redir(t_cmd *cmd, t_redir *redir);

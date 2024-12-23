@@ -3,28 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvapari <alvapari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:41:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 21:59:17 by alvapari         ###   ########.fr       */
+/*   Updated: 2024/12/22 23:57:00 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 int	g_signal_flag = 0;
-
-void	ft_printf_proofs_split_prs(t_data data)
-{
-	int	count;
-
-	count = 0;
-	while (count < data.prs.how_much)
-	{
-		printf("string número %i es: %s\n", count, data.prs.arr_lexems[count]);
-		count++;
-	}
-}
 
 void	header(void)
 {
@@ -79,7 +67,6 @@ int	main(int argc, char **argv, char **env)
 		ft_parsing(&data);
 		if (data.parsing_error == 0 && data.prs.flag_space == 'g')
 			execution(&data);
-		//ft_printf_proofs_split_prs(data);
 		reboot_data(&data);
 	}
 	exit_status = data.exit_status;

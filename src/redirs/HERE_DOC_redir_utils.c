@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:23 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 12:42:27 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:43:10 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ char	*hd_var_name(char *line, int i)
 
 	j = i + 1;
 	while (ft_isalnum(line[j]) == 1 || line[j] == '{'\
-		|| line[j] == '}' || line[j] == '_')
+		|| line[j] == '}' || line[j] == '_' || line[j] == '?')
 		j++;
 	var_name = ft_substr(line, i + 1, j - i - 1);
 	return (var_name);
 }
 
-char	*append_var_value(char *expand_line, char *line, int *i, char **env)
+char	*append_var_value(char *expand_line, char *line, int *i, t_data *data)
 {
 	char	*var_name;
 	char	*var_value;
@@ -49,7 +49,7 @@ char	*append_var_value(char *expand_line, char *line, int *i, char **env)
 
 	j = 0;
 	var_name = hd_var_name(line, *i);
-	var_value = ft_getenv(var_name, env);
+	var_value = ft_getenv(var_name, data->env, data);
 	while (var_value[j] != '\0')
 	{
 		expand_line = append_char(expand_line, var_value[j]);
@@ -61,7 +61,7 @@ char	*append_var_value(char *expand_line, char *line, int *i, char **env)
 	return (expand_line);
 }
 
-char	*expand_vars_hd(char *line, char **env)
+char	*expand_vars_hd(char *line, t_data *data)
 {
 	int		i;
 	char	*expand_line;
@@ -71,7 +71,7 @@ char	*expand_vars_hd(char *line, char **env)
 	while (line[i] != '\0')
 	{
 		if (line[i] == '$' && line[i + 1] != '\0')
-			expand_line = append_var_value(expand_line, line, &i, env);
+			expand_line = append_var_value(expand_line, line, &i, data);
 		else
 		{
 			expand_line = append_char(expand_line, line[i]);

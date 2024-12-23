@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 12:21:59 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/21 12:22:57 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:24:41 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_shlvl(t_data *data)
 	int		shlvl_int;
 	char	*shlvl_str;
 
-	shlvl_str = ft_getenv("SHLVL", data->env);
+	shlvl_str = ft_getenv("SHLVL", data->env, data);
 	shlvl_int = ft_atoi(shlvl_str);
 	shlvl_int ++;
 	free(shlvl_str);

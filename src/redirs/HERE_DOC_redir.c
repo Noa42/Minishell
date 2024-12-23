@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:58:26 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 11:32:46 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:28:56 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	prompt_loop(int here_doc_fd, t_redir *redir)
 		}
 		i++;
 		if (has_variable(line) != 0)
-			line = expand_vars_hd(line, redir->data->env);
+			line = expand_vars_hd(line, redir->data);
 		if (ft_strcmp(line, redir->delim) == 0)
 			break ;
 		write(here_doc_fd, line, ft_strlen(line));

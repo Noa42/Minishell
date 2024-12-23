@@ -6,7 +6,7 @@
 /*   By: achacon- <achacon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:56:44 by achacon-          #+#    #+#             */
-/*   Updated: 2024/12/22 13:58:48 by achacon-         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:24:06 by achacon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_cd_home(t_data *data, char *oldpwd, char *pwd)
 {
 	char	*home;
 
-	home = ft_getenv("HOME", data->env);
+	home = ft_getenv("HOME", data->env, data);
 	if (chdir(home) != 0)
 	{
 		free_dirs(oldpwd, pwd);
